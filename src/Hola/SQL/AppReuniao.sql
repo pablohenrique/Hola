@@ -14,11 +14,11 @@ CREATE TABLE Evento(
 	evento_endereco VARCHAR(70),
 	evento_complemento VARCHAR(30),
 	evento_cidade VARCHAR(50),
-	evento_uf VARCHAR(2)
-	evento_tipo INTEGER NOT NULL
+	evento_uf VARCHAR(2),
+	evento_tipo INTEGER NOT NULL,
 	evento_usuario INTEGER NOT NULL,
 	CONSTRAINT pk_evento_id PRIMARY KEY (evento_id),
-	CONSTRAINT fk_evento_usuario FOREIGN KEY (evento_usuario) REFERENCES usuario(usuario_id)
+	CONSTRAINT fk_evento_usuario FOREIGN KEY (evento_usuario) REFERENCES usuario(usuario_id),
 	CONSTRAINT fk_evento_tipo FOREIGN KEY (evento_tipo) REFERENCES tipo(tipo_id)
 );
 
