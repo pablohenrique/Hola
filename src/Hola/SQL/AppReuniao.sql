@@ -9,7 +9,7 @@ CREATE TABLE Evento(
 	evento_nome VARCHAR(20) NOT NULL,
 	evento_descricao VARCHAR(140),
 	evento_data DATE,
-	evento_hora TIME,
+	evento_hora TIMESTAMP,
 	evento_cep VARCHAR(8),
 	evento_endereco VARCHAR(70),
 	evento_complemento VARCHAR(30),
