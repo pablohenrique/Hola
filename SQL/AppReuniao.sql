@@ -10,7 +10,11 @@ CREATE TABLE Evento(
 	evento_descricao VARCHAR(140),
 	evento_data DATE,
 	evento_hora TIME,
-	evento_mapa VARCHAR(60) NOT NULL, --URL do googleMaps OU o mapa msm
+	evento_cep VARCHAR(8),
+	evento_endereco VARCHAR(70),
+	evento_complemento VARCHAR(30),
+	evento_cidade VARCHAR(50),
+	evento_uf VARCHAR(2)
 	evento_tipo INTEGER NOT NULL
 	evento_usuario INTEGER NOT NULL,
 	CONSTRAINT pk_evento_id PRIMARY KEY (evento_id),
