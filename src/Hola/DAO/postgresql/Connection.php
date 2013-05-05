@@ -4,9 +4,14 @@ namespace Hola\DAO\postgresql;
 
 class Connection {
     
+    /*
     private static $DSN = 'pgsql:dbname=holadatabase;host=54.232.93.172';
     private static $USERNAME = 'root';
     private static $PASSWORD = '7V6EbwVC7F42984';
+    */
+    private static $DSN = 'pgsql:dbname=holadatabase;host=localhost';
+    private static $USERNAME = 'postgres';
+    private static $PASSWORD = 'postgres';
     private static $instance = null;
     private $con = null;
 

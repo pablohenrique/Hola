@@ -80,6 +80,7 @@ CREATE TABLE Convidados(
 	convidados_sms VARCHAR(11),
 	convidados_email VARCHAR(30),
 	convidados_facebook VARCHAR(30),
+	convidados_twitter VARCHAR(30),
 	CONSTRAINT pk_convidados_id PRIMARY KEY (convidados_id),
 	CONSTRAINT fk_convidados_evento FOREIGN KEY (convidados_evento) REFERENCES evento(evento_id)
 	ON DELETE CASCADE

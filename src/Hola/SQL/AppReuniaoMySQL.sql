@@ -16,6 +16,19 @@ CREATE TABLE Tipo(
 	CONSTRAINT pk_tipo_id PRIMARY KEY (tipo_id)
 );
 
+CREATE TABLE Usuario(
+	usuario_id INT(11) AUTO_INCREMENT,
+	usuario_login VARCHAR(20) UNIQUE,
+	oauth_uid VARCHAR(200),
+	oauth_provider VARCHAR(200),
+	twitter_oauth_token VARCHAR(200), 
+	twitter_oauth_token_secret VARCHAR(200),
+	usuario_senha VARCHAR(15),
+	usuario_email VARCHAR(70) UNIQUE,
+	usuario_celular VARCHAR(11) UNIQUE,
+	CONSTRAINT pk_usuario_id PRIMARY KEY (usuario_id)
+);
+
 CREATE TABLE Evento(
 	evento_id INT(11) AUTO_INCREMENT,
 	evento_nome VARCHAR(20) NOT NULL,
@@ -60,19 +73,6 @@ CREATE TABLE TipagemItem(
 	ON UPDATE CASCADE
 );
 
-CREATE TABLE Usuario(
-	usuario_id INT(11) AUTO_INCREMENT,
-	usuario_login VARCHAR(20) UNIQUE,
-	oauth_uid VARCHAR(200),
-	oauth_provider VARCHAR(200),
-	twitter_oauth_token VARCHAR(200), 
-	twitter_oauth_token_secret VARCHAR(200),
-	usuario_senha VARCHAR(15),
-	usuario_email VARCHAR(70) UNIQUE,
-	usuario_celular VARCHAR(11) UNIQUE,
-	CONSTRAINT pk_usuario_id PRIMARY KEY (usuario_id)
-);
-
 CREATE TABLE Convidados(
 	convidados_id INT(11) AUTO_INCREMENT,
 	convidados_evento INT(11) NOT NULL,
@@ -80,6 +80,7 @@ CREATE TABLE Convidados(
 	convidados_sms VARCHAR(11),
 	convidados_email VARCHAR(30),
 	convidados_facebook VARCHAR(30),
+	convidados_twitter VARCHAR(30),
 	CONSTRAINT pk_convidados_id PRIMARY KEY (convidados_id),
 	CONSTRAINT fk_convidados_evento FOREIGN KEY (convidados_evento) REFERENCES evento(evento_id)
 	ON DELETE CASCADE
