@@ -1,8 +1,7 @@
 Hola
 ====
 
-Hola - Inspirado em Jury.
-Pablo -> boiola
+Hola - Inspirado em Yuri viadao.
 
 Alterar base de dados colocar um campo que define se o convidado confirmou ou não a 
 presença no evento tipo um confirmado_recusado_maybe
