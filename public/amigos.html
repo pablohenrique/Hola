@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+	<head>
+	<title>Reunião</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" type="text/css"href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css">
+    <style>
+    .livicon {
+  display: inline-block;
+  line-height: inherit;
+  vertical-align: middle;
+  height: 18px!important;
+}
+
+.container-fluid{
+	margin-top: 5%;
+	
+}
+	
+    </style>
+    </head>
+    <body>
+    
+    
+    
+    <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="navbar-inner">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">Reunião</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li class="active"><a href="#"><i class="livicon" data-n="home" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Home</a></li>
+                <li><a href="#contato"><i class="livicon" data-n="rocket" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Eventos</a></li>
+                <li><a href="#contato"><i class="livicon" data-n="bell" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Convites</a></li>
+                <li><a href="#contato"><i class="livicon" data-n="users" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Amigos</a></li>
+                <li><a href="#contato"><i class="livicon" data-n="list" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Lista de Compras</a></li>
+                <li><a href="#sobre"><i class="livicon" data-n="user" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Cadastro</a></li>
+                </ul>
+                <ul class="nav pull-right">
+                                <li><button type="submit" class="btn">@Usuario logout<span class="livicon shadowed" data-n="sign-out" data-s="15" data-c="black" data-hc="0" data-onparent="true"></span> </button></li>
+                </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span10">
+     <ul class="breadcrumb">
+  <li class="active">Home</a> <span class="divider">/</span></li>
+</ul>
+<div class="hero-unit">
+<div class="well">
+<strong>Seus Amigos</strong><a href="#cadastrar"  class="btn btn-success pull-right " data-toggle="modal" ><span class="livicon shadowed" data-n="plus-alt" data-s="15" data-c="white" data-hc="0" data-onparent="true"></span>
+      Adicionar Amigo
+    </a>
+<table class="table table-hover">
+<tr>
+<th>Amigo</th>
+<th><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></th>
+</tr>
+<tr>
+<td>Amigo 1</td>
+<td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+</tr>
+<tr>
+<td>Amigo 2</td>
+<td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+</table>
+</div>
+
+<div class="well">
+<strong>Solicitações Pendentes</strong>
+<table class="table table-hover">
+<tr>
+<th>Amigo</th>
+<th><i class="livicon" data-n="checked-on" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></th>
+<th><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></th>
+</tr>
+<tr>
+<td>Amigo 1</td>
+<td><i class="livicon" data-n="checked-on" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+<td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+</tr>
+<tr>
+<td>Amigo 2</td>
+<td><i class="livicon" data-n="checked-on" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+<td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+</table>
+</div>
+</div>
+
+    </div>
+        <div class="span2">
+      <p>Side-bar destinada a ADS</p>
+    </div>
+  </div>
+</div>
+
+<div id="mais" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<h3 id="myModalLabel">Mais Informações</h3>
+</div>
+<div class="modal-body">
+<legend>Nome do Evento 
+	<div class="btn-group pull-right">
+                <button class="btn dropdown-toggle" data-toggle="dropdown">Opções <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Editar</a></li>
+                  <li><a href="#">Apagar</a></li>
+
+                </ul>
+              </div><!-- /btn-group -->
+		<div class="btn-group pull-right">
+                <button class="btn dropdown-toggle" data-toggle="dropdown">Irá comparecer? <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Sim</a></li>
+                  <li><a href="#">Não</a></li>
+                  <li><a href="#">Talvez</a></li>
+                </ul>
+              </div>
+	
+</legend>
+<p>Data Início: 10/10/2010</p>
+<p>Hora Início: 22:30</p>
+<p>Data Fim: 10/10/2010</p>
+<p>Hora Fim: 22:30</p>
+<address>
+  Endereço<br>
+  795 Folsom Ave, Suite 600<br>
+  San Francisco, CA 94107<br>
+</address>
+</div>
+<div class="modal-footer">
+<button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+</div>
+</div>
+        
+
+       
+    
+   
+
+    <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="js/bootstrap.js" type="text/javascript"></script>
+    <script src="js/raphael.js" type="text/javascript"></script>
+    <script src="js/livicons-1.1.js" type="text/javascript"></script>
+    <!--[if lt IE 8]>
+	    <script src="json2.min.js" type="text/javascript"></script>
+	<![endif]-->
+    </body>
