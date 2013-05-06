@@ -2,6 +2,8 @@
 
 namespace Hola\DAO\postgresql;
 
+use \PDO;
+
 class Connection {
     
     /*
