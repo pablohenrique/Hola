@@ -90,9 +90,8 @@ class EventoDAO implements IEventoDAO{
 			$stm->execute();
 			$Array = array();
 
-			while($result = $stm->fetch(PDO::FETCH_ASSOC)){
+			while($result = $stm->fetch(PDO::FETCH_ASSOC))
 				$Array[] = self::createObjectTemplate($result);
-			}
 
 			unset($stm,$result);
 			return $Array;
@@ -109,9 +108,8 @@ class EventoDAO implements IEventoDAO{
 			$stm->execute();
 			$Array = array();
 
-			while($result = $stm->fetch(PDO::FETCH_ASSOC)){
+			while($result = $stm->fetch(PDO::FETCH_ASSOC))
 				$Array[] = self::createObjectTemplate($result);
-			}
 			
 			unset($stm,$result);
 			return $Array;
@@ -128,9 +126,8 @@ class EventoDAO implements IEventoDAO{
 			$stm->execute();
 			$Array = array();
 
-			while($result = $stm->fetch(PDO::FETCH_ASSOC)){
+			while($result = $stm->fetch(PDO::FETCH_ASSOC))
 				$Array[] = self::createObjectTemplate($result);
-			}
 
 			unset($stm,$result);
 			return $Array;
@@ -182,7 +179,7 @@ class EventoDAO implements IEventoDAO{
 		$evento->setEndereco($resultSet['evento_endereco']);
 		$evento->setComplemento($resultSet['evento_complemento']);
 		$evento->setCidade($resultSet['evento_cidade']);
-		$evento->setUf($resultSet['evento_uf']);
+		$evento->setEstado($resultSet['evento_uf']);
 		$this->tipodao = new TipoDAO();
 		$evento->setTipo($this->tipodao->get($resultSet['evento_tipo']));
 		$this->usuariodao = new UsuarioDAO();
@@ -203,10 +200,10 @@ class EventoDAO implements IEventoDAO{
 			':evento_endereco' => $input->getEndereco(),
 			':evento_complemento' => $input->getComplemento(),
 			':evento_cidade' => $input->getCidade(),
-			':evento_uf' => $input->getUf()
+			':evento_uf' => $input->getEstado()
 		);
 		if(!is_null($input->getId()))
-			$Array[':evento_id'] = $input->getId();)
+			$Array[':evento_id'] = $input->getId();
 		if(!is_null($input->getTipo()))
 			$Array[':evento_tipo'] = $input->getTipo()->getId();
 		if(!is_null($input->getUsuario()))

@@ -11,7 +11,7 @@ use \PDO,
 class ConvidadoDAO implements IConvidadoDAO{
 
 	/*DEFINITIONS FOR IDAO*/
-	const SQL_POST = 'INSERT INTO Convidado VALUES(
+	const SQL_POST = 'INSERT INTO Convidados VALUES(
 					DEFAULT,
 					:convidado_evento,
 					:convidado_usuario,
@@ -20,11 +20,11 @@ class ConvidadoDAO implements IConvidadoDAO{
 					:convidado_facebook,
 					:convidado_twitter
 					);';
-	const SQL_GET = 'SELECT * FROM Convidado WHERE convidado_id = :convidado_id;';
-	const SQL_GETALL = 'SELECT * FROM Convidado;';
-	const SQL_READ = 'SELECT * FROM Convidado WHERE convidado_evento = :convidado_evento;';
-	const SQL_SEEK = 'SELECT * FROM Convidado WHERE convidad_usuario = :convidado_usuario;';
-	const SQL_UPDATE = 'UPDATE Convidado SET 
+	const SQL_GET = 'SELECT * FROM Convidados WHERE convidado_id = :convidado_id;';
+	const SQL_GETALL = 'SELECT * FROM Convidados;';
+	const SQL_READ = 'SELECT * FROM Convidados WHERE convidado_evento = :convidado_evento;';
+	const SQL_SEEK = 'SELECT * FROM Convidados WHERE convidad_usuario = :convidado_usuario;';
+	const SQL_UPDATE = 'UPDATE Convidados SET 
 					convidado_evento = :convidado_evento,
 					convidado_usuario = :convidado_usuario,
 					convidado_sms = :convidado_sms,
@@ -32,7 +32,7 @@ class ConvidadoDAO implements IConvidadoDAO{
 					convidado_facebook = :convidado_facebook,
 					convidado_twitter = :convidado_twitter
 					WHERE convidado_id = :convidado_id;';
-	const SQL_DELETE = 'DELETE FROM Convidado WHERE convidado_id = :convidado_id;';
+	const SQL_DELETE = 'DELETE FROM Convidados WHERE convidado_id = :convidado_id;';
 
 	/*MORE DEFINITIONS*/
 	private $eventodao;
@@ -42,7 +42,7 @@ class ConvidadoDAO implements IConvidadoDAO{
 	public function post(Convidado $input){
 		try {
             $stm = Connection::Instance()->get()->prepare(self::SQL_POST);
-            $result = $stm->execute(setObjectTemplate($input));
+            $result = $stm->execute(self::setObjectTemplate($input));
             
             if(!$result)
                 throw new Exception("Convidado não foi criado:\t"

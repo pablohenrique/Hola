@@ -2,7 +2,7 @@
 
 namespace Hola\DAO\postgresql;
 
-class Factory extends \RADUFU\DAO\Factory {
+class Factory extends \Hola\DAO\Factory {
 
     public function getTipoDAO() { return new TipoDAO(); }
     public function getEventoDAO() { return new EventoDAO(); }

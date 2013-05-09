@@ -34,7 +34,7 @@ class ItemDAO implements IItemDAO{
             unset($stm,$result);
 
         } catch (PDOException $ex) {
-            throw new Exception("Ao criar : " . $ex->getMessage());
+            throw new Exception("Ao criar Item:" . $ex->getMessage());
         }
 	}
 
@@ -46,14 +46,15 @@ class ItemDAO implements IItemDAO{
 
 			$result = $stm->fetch(PDO::FETCH_ASSOC);
 
+			$this->usuariodao = new UsuarioDAO();
 			if($result)
-				return createObjectTemplate($result);
+				return self::createObjectTemplate($result);
 
 			unset($stm,$result);
 			throw new NotFoundException();
 
 		} catch(PDOException $ex){
-			throw new Exception("Ao procurar [GET] : " . $ex->getMessage());
+			throw new Exception("Ao procurar [GET] Item: " . $ex->getMessage());
 		}
 	}
 
@@ -63,14 +64,15 @@ class ItemDAO implements IItemDAO{
 			$stm->execute();
 			$Array = array();
 
+			$this->usuariodao = new UsuarioDAO();
 			while($result = $stm->fetch(PDO::FETCH_ASSOC))
-				$Array[] = createObjectTemplate($result);
+				$Array[] = self::createObjectTemplate($result);
 
-			unset($,$stm,$result);
+			unset($stm,$result);
 			return $Array;
 
 		} catch(PDOException $ex){
-			throw new Exception("Ao procurar [GETALL] : " . $ex->getMessage());
+			throw new Exception("Ao procurar [GETALL] Item: " . $ex->getMessage());
 		}
 	}
 
@@ -82,14 +84,15 @@ class ItemDAO implements IItemDAO{
 
 			$result = $stm->fetch(PDO::FETCH_ASSOC);
 
+			$this->usuariodao = new UsuarioDAO();
 			if($result)
-				return createObjectTemplate($result);
+				return self::createObjectTemplate($result);
 
 			unset($stm,$result);
 			throw new NotFoundException();
 
 		} catch(PDOException $ex){
-			throw new Exception("Ao procurar [READ] : " . $ex->getMessage());
+			throw new Exception("Ao procurar [READ] Item: " . $ex->getMessage());
 		}
 	}
 
@@ -99,10 +102,10 @@ class ItemDAO implements IItemDAO{
 			$stm->execute(self::setObjectTemplate($input));
 
 			if(!$stm->rowCount() > 0)
-                throw new Exception(" não foi atualizado:\t"
+                throw new Exception("Item não foi atualizado:\t"
                     . $stm->errorInfo()[2]);
 		} catch(PDOException $ex){
-			throw new Exception("Ao atualizar : " . $ex->getMessage());
+			throw new Exception("Ao atualizar Item: " . $ex->getMessage());
 		}
 	}
 
@@ -113,13 +116,13 @@ class ItemDAO implements IItemDAO{
 			$stm->execute();
 
 			if(!$stm->rowCount() > 0)
-                throw new Exception(" não foi deletado:\t"
+                throw new Exception("Item não foi deletado:\t"
                     . $stm->errorInfo()[2]);
 
 			unset($stm,$result);
 
 		} catch(PDOException $ex){
-			throw new Exception("Ao deletar : " . $ex->getMessage());
+			throw new Exception("Ao deletar Item: " . $ex->getMessage());
 		}
 	}
 

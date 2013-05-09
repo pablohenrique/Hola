@@ -13,7 +13,7 @@ use \PDO,
 class TipoItemDAO implements ITipoItemDAO{
 
 	/*DEFINITIONS FOR IDAO*/
-	const SQL_POST = 'INSERT INTO TipagemItem VALUES(:tipo_id,:item_id);';
+	const SQL_POST = 'INSERT INTO TipagemItem VALUES(:tipagemitem_item,:tipagemitem_tipo);';
 	const SQL_GET = 'SELECT * FROM TipoItem WHERE tipo_id = :tipo_id AND item_id = :item_id;';
 	const SQL_GETALL = 'SELECT * FROM TipoItem;';
 	const SQL_READ = 'SELECT * FROM TipoItem WHERE tipo_nome = :tipo_nome AND item_nome = :item_nome;';
@@ -27,8 +27,8 @@ class TipoItemDAO implements ITipoItemDAO{
 		try {
             $stm = Connection::Instance()->get()->prepare(self::SQL_POST);
             $result = $stm->execute(array(
-            			':tipo_id' => $input->getTipo()->getId(),
-            			':item_id' => $input->getItem()->getId()
+            			':tipagemitem_item' => $input->getItem()->getId(),
+            			':tipagemitem_tipo' => $input->getTipo()->getId()
             			));
             
             if(!$result)
@@ -50,9 +50,13 @@ class TipoItemDAO implements ITipoItemDAO{
 						':item_id' => $param
 						));
 
-			$result = $stm->fetch(PDO::FETCH_ASSOC);
+			$Array = array();
+			$this->usuariodao = new UsuarioDAO();
+			while($result = $stm->fetch(PDO::FETCH_ASSOC))
+				$Array[] = self::createObjectTemplate($result);
 
-			return createObjectTemplate($result);
+			unset($this->usuariodao);
+			return $Array;
 
 		} catch(PDOException $ex){
 			throw new Exception("Ao procurar [GET] TipoItem: " . $ex->getMessage());
@@ -63,9 +67,14 @@ class TipoItemDAO implements ITipoItemDAO{
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_GETALL);
 			$stm->execute();
-			$result = $stm->fetch(PDO::FETCH_ASSOC)
 
-			return createObjectTemplate($result);
+			$Array = array();
+			$this->usuariodao = new UsuarioDAO();
+			while($result = $stm->fetch(PDO::FETCH_ASSOC))
+				$Array[] = self::createObjectTemplate($result);
+
+			unset($this->usuariodao);
+			return $Array;
 
 		} catch(PDOException $ex){
 			throw new Exception("Ao procurar [GETALL] TipoItem: " . $ex->getMessage());
@@ -80,9 +89,13 @@ class TipoItemDAO implements ITipoItemDAO{
 						':item_nome' => $param
 						));
 
-			$result = $stm->fetch(PDO::FETCH_ASSOC);
+			$Array = array();
+			$this->usuariodao = new UsuarioDAO();
+			while($result = $stm->fetch(PDO::FETCH_ASSOC))
+				$Array[] = self::createObjectTemplate($result);
 
-			return createObjectTemplate($result);
+			unset($this->usuariodao);
+			return $Array;
 
 		} catch(PDOException $ex){
 			throw new Exception("Ao procurar [READ] TipoItem: " . $ex->getMessage());
@@ -95,9 +108,13 @@ class TipoItemDAO implements ITipoItemDAO{
 			$stm->bindParam(':item_usuario',$input);
 			$stm->execute();
 
-			$result = $stm->fetch(PDO::FETCH_ASSOC);
+			$Array = array();
+			$this->usuariodao = new UsuarioDAO();
+			while($result = $stm->fetch(PDO::FETCH_ASSOC))
+				$Array[] = self::createObjectTemplate($result);
 
-			return createObjectTemplate($result);
+			unset($this->usuariodao);
+			return $Array;
 
 		} catch(PDOException $ex){
 			throw new Exception("Ao procurar [SEEK] TipoItem: " . $ex->getMessage());
@@ -106,30 +123,24 @@ class TipoItemDAO implements ITipoItemDAO{
 
 	/*FUNCTIONS*/
 	private function createObjectTemplate($resultSet){
-		$Array = array();
-		$this->usuariodao = new UsuarioDAO();
-		
-		while($resultSet){
-			$tipoitem = new TipoItem();
+		$tipoitem = new TipoItem();
 
-			$tipo = new Tipo();
-			$tipo->setId($resultSet['tipo_id']);
-			$tipo->setNome($resultSet['tipo_nome']);
+		$tipo = new Tipo();
+		$tipo->setId($resultSet['tipo_id']);
+		$tipo->setNome($resultSet['tipo_nome']);
 
-			$item = new Item();
-			$item->setId($resultSet['item_id']);
-			$item->setNome($resultSet['item_nome']);
+		$item = new Item();
+		$item->setId($resultSet['item_id']);
+		$item->setNome($resultSet['item_nome']);
 
-			if(!is_null($resultSet['item_usuario']))
-				$item->setUsuario($this->usuariodao->get($resultSet['item_usuario']));
+		if(!is_null($resultSet['item_usuario']))
+			$item->setUsuario($this->usuariodao->get($resultSet['item_usuario']));
 
-			$tipoitem->setTipo($tipo);
-			$tipoitem->setItem($item);
-			$Array[] = $tipoitem;
-		}
+		$tipoitem->setTipo($tipo);
+		$tipoitem->setItem($item);
 
-		unset($tipo,$item,$resultSet,$this->usuariodao);
-		return $Array;
+		unset($tipo,$item);
+		return $tipoitem;
 	}
 
 }
