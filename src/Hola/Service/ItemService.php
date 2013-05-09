@@ -6,18 +6,17 @@ use	Hola\DAO\postgresql\Factory,
 	Hola\DAO\postgresql\ItemDAO,
 	Hola\Model\Item;
 
-require_once(__DIR__ . '/../Autoloader.php');
-
 class ItemService {
 
 	private $dao;
-	private $uservice;
+	private $usuarioservice;
 	private $item;
 
 	private function createObject($nome, $usuario, $id = null){
+		$this->usuarioservice = new UsuarioService();
 		$this->item = new Item();
 		$this->item->setNome($nome);
-		$this->item->setUsuario($this->uservice->get($usuario));
+		$this->item->setUsuario($this->usuarioservice->search($usuario));
 		if(!is_null($id))
 			$this->item->setId($id);
 		return $this->item;
@@ -25,12 +24,11 @@ class ItemService {
 
 	public function __construct(){
 		$this->dao = Factory::getFactory(FACTORY::PGSQL)->getItemDAO();
-		$this->uservice = new UsuarioService();
 	}
 
 	public function post($nome, $usuario, $id = null){
-		$this->dao->post(self::createObject($nome, $id));
-		unset($this->item);
+		$this->dao->post(self::createObject($nome, $usuario, $id));
+		unset($this->item,$this->usuarioservice);
 	}
 
 	public function search($input = null){
@@ -43,8 +41,8 @@ class ItemService {
 	}
 
 	public function update($nome, $usuario, $id){
-		return $this->dao->update(self::createObject($nome,$id));
-		unset($this->item);
+		$this->dao->update(self::createObject($nome, $usuario, $id));
+		unset($this->item,$this->usuarioservice);
 	}
 
 	public function delete($input){

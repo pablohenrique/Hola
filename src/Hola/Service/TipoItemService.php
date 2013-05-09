@@ -6,8 +6,6 @@ use	Hola\DAO\postgresql\Factory,
 	Hola\DAO\postgresql\TipoItemDAO,
 	Hola\Model\TipoItem;
 
-require_once(__DIR__ . '/../Autoloader.php');
-
 class TipoItemService {
 
 	private $dao;
@@ -19,8 +17,8 @@ class TipoItemService {
 		$this->tipoitem = new TipoItem();
 		$this->tiposervice = new TipoService();
 		$this->itemservice = new ItemService();
-		$this->tipoitem->setTipo($this->tiposervice->get($tipo));
-		$this->tipoitem->setItem($this->tiposervice->get($item));
+		$this->tipoitem->setTipo($this->tiposervice->search($tipo));
+		$this->tipoitem->setItem($this->itemservice->search($item));
 		return $this->tipoitem;
 	}
 
@@ -33,12 +31,12 @@ class TipoItemService {
 		unset($this->tipoitem,$this->tiposervice,$this->itemservice);
 	}
 
-	public function search($input1, $input2 = null){
-		if(is_numeric($input))
+	public function search($input1 = null, $input2 = null){
+		if(is_numeric($input1) && is_numeric($input2))
 			return $this->dao->get($input1,$input2);
 		if(!is_null($input1) && !is_null($input2))
 			return $this->dao->read($input1,$input2);
-		if(!is_null($input2))
+		if(is_numeric($input1) && is_null($input2))
 			return $this->dao->seek($input1);
 		else
 			return $this->dao->getAll();

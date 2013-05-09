@@ -4,11 +4,11 @@
 DROP RULE rule_view_tipoitem ON TipoItem;
 DROP FUNCTION insert_or_nothing(argn VARCHAR(20), argusuario INTEGER, argselect INTEGER);
 DROP VIEW TipoItem;
-DROP TABLE IF EXISTS convidados, tipagemitem, item, evento, usuario, tipo
+DROP TABLE IF EXISTS convidado, tipagemitem, item, evento, usuario, tipo
  *
  */
 
-
+SET datestyle TO 'dmy';
 
 CREATE TABLE Tipo(
 	tipo_id INT(11) AUTO_INCREMENT,
@@ -34,7 +34,7 @@ CREATE TABLE Evento(
 	evento_nome VARCHAR(20) NOT NULL,
 	evento_descricao VARCHAR(140),
 	evento_data DATE,
-	evento_hora TIMESTAMP,
+	evento_hora TIME,
 	evento_cep VARCHAR(8),
 	evento_endereco VARCHAR(70),
 	evento_complemento VARCHAR(30),
@@ -73,19 +73,19 @@ CREATE TABLE TipagemItem(
 	ON UPDATE CASCADE
 );
 
-CREATE TABLE Convidados(
-	convidados_id INT(11) AUTO_INCREMENT,
-	convidados_evento INT(11) NOT NULL,
-	convidados_usuario INT(11) NOT NULL,
-	convidados_sms VARCHAR(11),
-	convidados_email VARCHAR(30),
-	convidados_facebook VARCHAR(30),
-	convidados_twitter VARCHAR(30),
-	CONSTRAINT pk_convidados_id PRIMARY KEY (convidados_id),
-	CONSTRAINT fk_convidados_evento FOREIGN KEY (convidados_evento) REFERENCES evento(evento_id)
+CREATE TABLE Convidado(
+	convidado_id INT(11) AUTO_INCREMENT,
+	convidado_evento INT(11) NOT NULL,
+	convidado_usuario INT(11) NOT NULL,
+	convidado_sms VARCHAR(11),
+	convidado_email VARCHAR(30),
+	convidado_facebook VARCHAR(30),
+	convidado_twitter VARCHAR(30),
+	CONSTRAINT pk_convidado_id PRIMARY KEY (convidado_id),
+	CONSTRAINT fk_convidado_evento FOREIGN KEY (convidado_evento) REFERENCES evento(evento_id)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE,
-	CONSTRAINT fk_convidados_usuario FOREIGN KEY (convidados_usuario) REFERENCES usuario(usuario_id)
+	CONSTRAINT fk_convidado_usuario FOREIGN KEY (convidado_usuario) REFERENCES usuario(usuario_id)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE
 );
@@ -102,8 +102,8 @@ CREATE INDEX index_tipagemitem_tipo ON tipagemitem USING BTREE (tipagemitem_tipo
 CREATE INDEX index_usuario_login ON usuario USING HASH (usuario_login);
 CREATE INDEX index_usuario_oauth_uid ON usuario USING HASH (oauth_uid);
 CREATE INDEX index_usuario_oauth_provider ON usuario USING HASH (oauth_provider);
-CREATE INDEX index_convidados_evento ON convidados USING BTREE (convidados_evento);
-CREATE INDEX index_convidados_usuario ON convidados USING BTREE (convidados_usuario);
+CREATE INDEX index_convidado_evento ON convidado USING BTREE (convidado_evento);
+CREATE INDEX index_convidado_usuario ON convidado USING BTREE (convidado_usuario);
 
 
 CREATE OR REPLACE VIEW TipoItem(

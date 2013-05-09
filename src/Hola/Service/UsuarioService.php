@@ -6,8 +6,6 @@ use	Hola\DAO\postgresql\Factory,
 	Hola\DAO\postgresql\UsuarioDAO,
 	Hola\Model\Usuario;
 
-require_once(__DIR__ . '/../Autoloader.php');
-
 class UsuarioService {
 
 	private $dao;
@@ -47,7 +45,7 @@ class UsuarioService {
 	}
 
 	public function update($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret, $id = null){
-		return $this->dao->update(self::createObject($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret, $id));
+		$this->dao->update(self::createObject($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret, $id));
 		unset($this->usuario);
 	}
 

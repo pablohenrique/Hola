@@ -171,7 +171,7 @@ class EventoDAO implements IEventoDAO{
 	private function createObjectTemplate($resultSet){
 		$evento = new Evento();
 		$evento->setId($resultSet['evento_id']);
-		$evento->setId($resultSet['evento_nome']);
+		$evento->setNome($resultSet['evento_nome']);
 		$evento->setDescricao($resultSet['evento_descricao']);
 		$evento->setData($resultSet['evento_data']);
 		$evento->setHora($resultSet['evento_hora']);

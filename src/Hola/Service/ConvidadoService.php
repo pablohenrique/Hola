@@ -6,8 +6,6 @@ use	Hola\DAO\postgresql\Factory,
 	Hola\DAO\postgresql\ConvidadoDAO,
 	Hola\Model\Convidado;
 
-require_once(__DIR__ . '/../Autoloader.php');
-
 class ConvidadoService {
 
 	private $dao;
@@ -25,8 +23,8 @@ class ConvidadoService {
 		$this->convidado->setEmail($email);
 		$this->convidado->setTwitter($twitter);
 		$this->convidado->setFacebook($facebook);
-		$this->convidado->setEvento($this->eventoservice->get($evento));
-		$this->convidado->setUsuario($this->usuarioservice->get($usuario));
+		$this->convidado->setEvento($this->eventoservice->search($evento));
+		$this->convidado->setUsuario($this->usuarioservice->search($usuario));
 		return $this->convidado;
 	}
 
@@ -40,20 +38,22 @@ class ConvidadoService {
 	}
 
 	public function search($input = null){
-		if(is_numeric($input))
+		if(is_numeric($input)) //busca por id
 			return $this->dao->get($input);
-		if(!is_null($input))
-			return $this->dao->read($input);
-		else
+		else //busca todos
 			return $this->dao->getAll();
 	}
 
-	public function seek($input){
+	public function getEvento($input){
+		return $this->dao->read($input);
+	}
+
+	public function getUsuario($input){ // busca por usuario
 		return $this->dao->seek($input);
 	}
 
 	public function update($sms, $email, $evento, $usuario, $twitter, $facebook, $id){
-		return $this->dao->update(self::createObject($sms, $email, $evento, $usuario, $twitter, $facebook, $id));
+		$this->dao->update(self::createObject($sms, $email, $evento, $usuario, $twitter, $facebook, $id));
 		unset($this->convidado,$this->eventoservice,$this->usuarioservice);
 	}
 

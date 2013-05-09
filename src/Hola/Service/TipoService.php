@@ -38,7 +38,7 @@ class TipoService {
 	}
 
 	public function update($nome, $id){
-		return $this->dao->update(self::createObject($nome,$id));
+		$this->dao->update(self::createObject($nome,$id));
 		unset($this->tipo);
 	}
 

@@ -7,9 +7,9 @@ class Factory extends \Hola\DAO\Factory {
     public function getTipoDAO() { return new TipoDAO(); }
     public function getEventoDAO() { return new EventoDAO(); }
     public function getItemDAO() { return new ItemDAO(); }
-    public function getTipagemItemDAO() { return new TipagemItemDAO(); }
+    public function getTipoItemDAO() { return new TipoItemDAO(); }
     public function getUsuarioDAO() { return new UsuarioDAO(); }
-    public function getConvidadosDAO() { return new ConvidadosDAO(); }
+    public function getConvidadoDAO() { return new ConvidadoDAO(); }
 
 }
 

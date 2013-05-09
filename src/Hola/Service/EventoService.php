@@ -6,8 +6,6 @@ use	Hola\DAO\postgresql\Factory,
 	Hola\DAO\postgresql\EventoDAO,
 	Hola\Model\Evento;
 
-require_once(__DIR__ . '/../Autoloader.php');
-
 class EventoService {
 
 	private $dao;
@@ -30,9 +28,10 @@ class EventoService {
 		$this->evento->setCidade($cidade);
 		$this->evento->setEstado($estado);
 		$this->evento->setCep($cep);
-		$this->evento->setTipo($this->tiposervice->get($tipo));
-		$this->evento->setUsuario($this->usuarioservice->get($usuario));
+		$this->evento->setTipo($this->tiposervice->search($tipo));
+		$this->evento->setUsuario($this->usuarioservice->search($usuario));
 		return $this->evento;
+	}
 
 	public function __construct(){
 		$this->dao = Factory::getFactory(FACTORY::PGSQL)->getEventoDAO();
@@ -44,20 +43,20 @@ class EventoService {
 	}
 
 	public function search($input = null){
-		if(is_numeric($input))
+		if(is_numeric($input)) // busca por id
 			return $this->dao->get($input);
-		if(!is_null($input))
+		if(!is_null($input)) // busca por nome
 			return $this->dao->read($input);
-		else
+		else //busca todos
 			return $this->dao->getAll();
 	}
 
-	public function seek($input){
+	public function getUsuario($input){ // busca por usuario
 		return $this->dao->seek($input);
 	}
 
 	public function update($nome, $descricao, $data, $hora, $endereco, $complemento, $cidade, $estado, $cep, $tipo, $usuario, $id){
-		return $this->dao->update(self::createObject($nome, $descricao, $data, $hora, $endereco, $complemento, $cidade, $estado, $cep, $tipo, $usuario, $id));
+		$this->dao->update(self::createObject($nome, $descricao, $data, $hora, $endereco, $complemento, $cidade, $estado, $cep, $tipo, $usuario, $id));
 		unset($this->evento,$this->usuarioservice,$this->tiposervice);
 	}
 

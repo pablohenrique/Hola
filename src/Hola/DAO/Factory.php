@@ -12,11 +12,11 @@ abstract class Factory {
 
     public abstract function getItemDAO();
 
-    public abstract function getTipagemItemDAO();
+    public abstract function getTipoItemDAO();
 
     public abstract function getUsuarioDAO();
 
-    public abstract function getConvidadosDAO();
+    public abstract function getConvidadoDAO();
 
     public static function getFactory($factory) {
         switch ($factory){

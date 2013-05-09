@@ -11,7 +11,7 @@ use \PDO,
 class ConvidadoDAO implements IConvidadoDAO{
 
 	/*DEFINITIONS FOR IDAO*/
-	const SQL_POST = 'INSERT INTO Convidados VALUES(
+	const SQL_POST = 'INSERT INTO Convidado VALUES(
 					DEFAULT,
 					:convidado_evento,
 					:convidado_usuario,
@@ -20,11 +20,11 @@ class ConvidadoDAO implements IConvidadoDAO{
 					:convidado_facebook,
 					:convidado_twitter
 					);';
-	const SQL_GET = 'SELECT * FROM Convidados WHERE convidado_id = :convidado_id;';
-	const SQL_GETALL = 'SELECT * FROM Convidados;';
-	const SQL_READ = 'SELECT * FROM Convidados WHERE convidado_evento = :convidado_evento;';
-	const SQL_SEEK = 'SELECT * FROM Convidados WHERE convidad_usuario = :convidado_usuario;';
-	const SQL_UPDATE = 'UPDATE Convidados SET 
+	const SQL_GET = 'SELECT * FROM Convidado WHERE convidado_id = :convidado_id;';
+	const SQL_GETALL = 'SELECT * FROM Convidado;';
+	const SQL_READ = 'SELECT * FROM Convidado WHERE convidado_evento = :convidado_evento;';
+	const SQL_SEEK = 'SELECT * FROM Convidado WHERE convidado_usuario = :convidado_usuario;';
+	const SQL_UPDATE = 'UPDATE Convidado SET 
 					convidado_evento = :convidado_evento,
 					convidado_usuario = :convidado_usuario,
 					convidado_sms = :convidado_sms,
@@ -32,7 +32,7 @@ class ConvidadoDAO implements IConvidadoDAO{
 					convidado_facebook = :convidado_facebook,
 					convidado_twitter = :convidado_twitter
 					WHERE convidado_id = :convidado_id;';
-	const SQL_DELETE = 'DELETE FROM Convidados WHERE convidado_id = :convidado_id;';
+	const SQL_DELETE = 'DELETE FROM Convidado WHERE convidado_id = :convidado_id;';
 
 	/*MORE DEFINITIONS*/
 	private $eventodao;
@@ -187,7 +187,7 @@ class ConvidadoDAO implements IConvidadoDAO{
 
 		return $convidado;
 	}
-
+	
 	private function setObjectTemplate($input){
 		$Array = array(
 			':convidado_evento' => $input->getEvento()->getId(),

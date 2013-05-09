@@ -50,7 +50,6 @@ class ItemDAO implements IItemDAO{
 			if($result)
 				return self::createObjectTemplate($result);
 
-			unset($stm,$result);
 			throw new NotFoundException();
 
 		} catch(PDOException $ex){
@@ -68,7 +67,6 @@ class ItemDAO implements IItemDAO{
 			while($result = $stm->fetch(PDO::FETCH_ASSOC))
 				$Array[] = self::createObjectTemplate($result);
 
-			unset($stm,$result);
 			return $Array;
 
 		} catch(PDOException $ex){
@@ -88,7 +86,6 @@ class ItemDAO implements IItemDAO{
 			if($result)
 				return self::createObjectTemplate($result);
 
-			unset($stm,$result);
 			throw new NotFoundException();
 
 		} catch(PDOException $ex){
@@ -134,8 +131,6 @@ class ItemDAO implements IItemDAO{
 
 		if(!is_null($resultSet['item_usuario']))
 			$item->setUsuario($this->usuariodao->get($resultSet['item_usuario']));
-		
-		unset($this->usuariodao);
 		return $item;
 	}
 

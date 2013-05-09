@@ -6,7 +6,7 @@ class Item implements IModel{
 
 	private $id;
 	private $nome;
-	private $usuario;
+	private $usuario = null;
 
 	/*GETTERS*/
 	public function getId(){ return $this->id; }
