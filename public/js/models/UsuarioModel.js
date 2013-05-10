@@ -9,7 +9,7 @@ var UsuarioModel = Backbone.Model.extend({
         if (attrs.login == '')
             return 'O nome é obrigatório';
         if (attrs.senha == '')
-            return 'A descrição é obrigatória';
+            return 'A senha é obrigatória';
         if (attrs.email == '')
         	return 'A data é obrigatória';
         if (attrs.celular == '')
