@@ -1,234 +1,234 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<meta charset="utf-8">
-	<head>
-	<title>Reunião</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="stylesheet" type="text/css"href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css">
-    <link type="text/css" href="css/bootstrap-timepicker.css" />
-    <link href="css/datepicker.css" rel="stylesheet">
-    <style>
-    .livicon {
-  display: inline-block;
-  line-height: inherit;
-  vertical-align: middle;
-  height: 18px!important;
-}
+    <meta charset="utf-8">
+    <head>
+        <title>Reunião</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="stylesheet" type="text/css"href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css">
+        <link type="text/css" href="css/bootstrap-timepicker.css" />
+        <link href="css/datepicker.css" rel="stylesheet">
+        <style>
+            .livicon {
+                display: inline-block;
+                line-height: inherit;
+                vertical-align: middle;
+                height: 18px!important;
+            }
 
-.container-fluid{
-	margin-top: 5%;
-	
-}
-	
-    </style>
+            .container-fluid{
+                margin-top: 5%;
+
+            }
+
+        </style>
     </head>
     <body>
-    
-    
-    
-    <div class="navbar navbar-inverse navbar-fixed-top">
-          <div class="navbar-inner">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="#">Reunião</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="home.html"><i class="livicon" data-n="home" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Home</a></li>
-                <li class="active"><a href="eventos.html"><i class="livicon" data-n="rocket" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Eventos</a></li>
-                <li><a href="convites.html"><i class="livicon" data-n="bell" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Convites</a></li>
-                <li><a href="amigos.html"><i class="livicon" data-n="users" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Amigos</a></li>
-                <li><a href="listaCompras"><i class="livicon" data-n="list" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Lista de Compras</a></li>
-                <li><a href="meuCadastro.html"><i class="livicon" data-n="user" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Cadastro</a></li>
-                </ul>
-                <ul class="nav pull-right">
-                                <li><button type="submit" class="btn">@Usuario logout<span class="livicon shadowed" data-n="sign-out" data-s="15" data-c="black" data-hc="0" data-onparent="true"></span> </button></li>
-                </ul>
+
+
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="#">Reunião</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="home.html"><i class="livicon" data-n="home" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Home</a></li>
+                        <li class="active"><a href="eventos.html"><i class="livicon" data-n="rocket" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Eventos</a></li>
+                        <li><a href="convites.html"><i class="livicon" data-n="bell" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Convites</a></li>
+                        <li><a href="amigos.html"><i class="livicon" data-n="users" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Amigos</a></li>
+                        <li><a href="listaCompras"><i class="livicon" data-n="list" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Lista de Compras</a></li>
+                        <li><a href="meuCadastro.html"><i class="livicon" data-n="user" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Cadastro</a></li>
+                    </ul>
+                    <ul class="nav pull-right">
+                        <li><button type="submit" class="btn">@Usuario logout<span class="livicon shadowed" data-n="sign-out" data-s="15" data-c="black" data-hc="0" data-onparent="true"></span> </button></li>
+                    </ul>
+                </div>
             </div>
-          </div>
         </div>
-        
+
         <div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span10">
-<ul class="breadcrumb">
-  <li><a href="home.html">Home</a> <span class="divider">/</span></li>
-  <li class="active">Eventos</a> <span class="divider">/</span></li>
-</ul>
-<div class="hero-unit">
-<div class="well">
-<strong>Seus eventos</strong>
-<a href="#cadastrar"  class="btn btn-success pull-right " data-toggle="modal" ><span class="livicon shadowed" data-n="plus-alt" data-s="15" data-c="white" data-hc="0" data-onparent="true"></span>
-      Cadastrar Evento
-    </a>
-<table class="table table-hover">
-<tr>
-<th>Evento</th>
-<th>Confirmações</th>
-<th><i class="livicon" data-n="edit" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></th>
-<th><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></th>
-<th><i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></th>
-</tr>
-<tr>
-<td>Evento 1</td>
-<td><div class="progress">
-  <div class="bar bar-success" style="width: 35%;"></div>
-  <div class="bar bar-warning" style="width: 20%;"></div>
-  <div class="bar bar-danger" style="width: 10%;"></div>
-</div></td>
-<td><i class="livicon" data-n="edit" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-<td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-<td><i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-</tr>
-<tr>
-<td>Evento 2</td>
-<td><div class="progress">
-  <div class="bar bar-success" style="width: 50%;"></div>
-  <div class="bar bar-warning" style="width: 22%;"></div>
-  <div class="bar bar-danger" style="width: 15%;"></div>
-</div></td>
-<td><i class="livicon" data-n="edit" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-<td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-<td><i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-</tr>
-</table>
-</div>
+            <div class="row-fluid">
+                <div class="span10">
+                    <ul class="breadcrumb">
+                        <li><a href="home.html">Home</a> <span class="divider">/</span></li>
+                        <li class="active">Eventos</a> <span class="divider">/</span></li>
+                    </ul>
+                    <div class="hero-unit">
+                        <div class="well">
+                            <strong>Seus eventos</strong>
+                            <a href="#cadastrar"  class="btn btn-success pull-right " data-toggle="modal" ><span class="livicon shadowed" data-n="plus-alt" data-s="15" data-c="white" data-hc="0" data-onparent="true"></span>
+                                Cadastrar Evento
+                            </a>
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>Evento</th>
+                                    <th>Confirmações</th>
+                                    <th><i class="livicon" data-n="edit" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></th>
+                                    <th><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></th>
+                                    <th><i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></th>
+                                </tr>
+                                <tr>
+                                    <td>Evento 1</td>
+                                    <td><div class="progress">
+                                            <div class="bar bar-success" style="width: 35%;"></div>
+                                            <div class="bar bar-warning" style="width: 20%;"></div>
+                                            <div class="bar bar-danger" style="width: 10%;"></div>
+                                        </div></td>
+                                    <td><i class="livicon" data-n="edit" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+                                    <td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+                                    <td><i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Evento 2</td>
+                                    <td><div class="progress">
+                                            <div class="bar bar-success" style="width: 50%;"></div>
+                                            <div class="bar bar-warning" style="width: 22%;"></div>
+                                            <div class="bar bar-danger" style="width: 15%;"></div>
+                                        </div></td>
+                                    <td><i class="livicon" data-n="edit" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+                                    <td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+                                    <td><i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+                                </tr>
+                            </table>
+                        </div>
 
-</div>
+                    </div>
 
-    </div>
-        <div class="span2">
-      <p>Side-bar destinada a ADS</p>
-    </div>
-  </div>
-</div>
-
-        
-
-       <div id="cadastrar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-  </div>
-  <div class="modal-body">
-    <form>
-  <fieldset>
-    <legend>Cadastrar Evento</legend>
-    <label>Nome</label>
-    <input type="text" placeholder="Entre com nome do evento…">
-    <label>Data Início</label>
-<input type="text" class="span2"  id="dp1" >
-<label>Hora Início</label>
- <div class="input-append bootstrap-timepicker">
-<input id="timepicker1" type="text" class="input-small">
-<span class="add-on"><i class="icon-time"></i></span></div>
-<script type="text/javascript">
-$('#timepicker1').timepicker();
-</script>
-    <label>Data Fim</label>
-<input type="text" class="span2"  id="dp2" >
- <div class="input-append bootstrap-timepicker"></div>
- <label>Hora Fim</label>
- <div class="input-append bootstrap-timepicker">
-<input id="timepicker2" type="text" class="input-small">
-<span class="add-on"><i class="icon-time"></i></span></div>
-<script type="text/javascript">
-$('#timepicker2').timepicker();
-</script>
-<label>CEP</label>
-<input type="text" placeholder="Entre com o CEP…">
-<label>UF</label>
-<input type="text" placeholder="Entre com o estado…">
-<label>Cidade</label>
-<input type="text" placeholder="Entre com a cidade…">
-<label>Endereço</label>
-<input type="text" placeholder="Entre com o endereço…">
-<label>Complemento</label>
-<input type="text" placeholder="Entre com o complemento…">
-  </fieldset>
-</form>
-
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
-    <button class="btn btn-primary">Próximo Passo</button>
-  </div>
-</div>
-    
-   
-
-    <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
-    <script src="js/bootstrap.js" type="text/javascript"></script>
-    <script src="js/raphael.js" type="text/javascript"></script>
-    <script src="js/livicons-1.1.js" type="text/javascript"></script>
-     <script src="js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="js/bootstrap-timepicker.js"></script>
-    <script>
-		$(function(){
-			window.prettyPrint && prettyPrint();
-			$('#dp1').datepicker({
-				format: 'dd-mm-yyyy'
-			});
-						$('#dp2').datepicker({
-				format: 'dd-mm-yyyy'
-			});
-
-			$('#dpYears').datepicker();
-			$('#dpMonths').datepicker();
-			
-
-			
-
-        // disabling dates
-        var nowTemp = new Date();
-        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-
-        var checkin = $('#dpd1').datepicker({
-          onRender: function(date) {
-            return date.valueOf() < now.valueOf() ? 'disabled' : '';
-          }
-        }).on('changeDate', function(ev) {
-          if (ev.date.valueOf() > checkout.date.valueOf()) {
-            var newDate = new Date(ev.date)
-            newDate.setDate(newDate.getDate() + 1);
-            checkout.setValue(newDate);
-          }
-          checkin.hide();
-          $('#dpd2')[0].focus();
-        }).data('datepicker');
-        var checkout = $('#dpd2').datepicker({
-          onRender: function(date) {
-            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-          }
-        }).on('changeDate', function(ev) {
-          checkout.hide();
-        }).data('datepicker');
-		});
-	</script>
-	<script type="text/javascript">
-        $(document).ready(function () { 
+                </div>
+                <div class="span2">
+                    <p>Side-bar destinada a ADS</p>
+                </div>
+            </div>
+        </div>
 
 
-            $('#timepicker1').timepicker({
-                minuteStep: 5,
-                showInputs: false,
-                disableFocus: true
+
+        <div id="cadastrar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <fieldset>
+                        <legend>Cadastrar Evento</legend>
+                        <label>Nome</label>
+                        <input type="text" placeholder="Entre com nome do evento…">
+                        <label>Data Início</label>
+                        <input type="text" class="span2"  id="dp1" >
+                        <label>Hora Início</label>
+                        <div class="input-append bootstrap-timepicker">
+                            <input id="timepicker1" type="text" class="input-small">
+                            <span class="add-on"><i class="icon-time"></i></span></div>
+                        <script type="text/javascript">
+                            $('#timepicker1').timepicker();
+                        </script>
+                        <label>Data Fim</label>
+                        <input type="text" class="span2"  id="dp2" >
+                        <div class="input-append bootstrap-timepicker"></div>
+                        <label>Hora Fim</label>
+                        <div class="input-append bootstrap-timepicker">
+                            <input id="timepicker2" type="text" class="input-small">
+                            <span class="add-on"><i class="icon-time"></i></span></div>
+                        <script type="text/javascript">
+                            $('#timepicker2').timepicker();
+                        </script>
+                        <label>CEP</label>
+                        <input type="text" placeholder="Entre com o CEP…">
+                        <label>UF</label>
+                        <input type="text" placeholder="Entre com o estado…">
+                        <label>Cidade</label>
+                        <input type="text" placeholder="Entre com a cidade…">
+                        <label>Endereço</label>
+                        <input type="text" placeholder="Entre com o endereço…">
+                        <label>Complemento</label>
+                        <input type="text" placeholder="Entre com o complemento…">
+                    </fieldset>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+                <button class="btn btn-primary">Próximo Passo</button>
+            </div>
+        </div>
+
+
+
+        <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="js/raphael.js" type="text/javascript"></script>
+        <script src="js/livicons-1.1.js" type="text/javascript"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="js/bootstrap-timepicker.js"></script>
+        <script>
+                            $(function() {
+                                window.prettyPrint && prettyPrint();
+                                $('#dp1').datepicker({
+                                    format: 'dd-mm-yyyy'
+                                });
+                                $('#dp2').datepicker({
+                                    format: 'dd-mm-yyyy'
+                                });
+
+                                $('#dpYears').datepicker();
+                                $('#dpMonths').datepicker();
+
+
+
+
+                                // disabling dates
+                                var nowTemp = new Date();
+                                var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+                                var checkin = $('#dpd1').datepicker({
+                                    onRender: function(date) {
+                                        return date.valueOf() < now.valueOf() ? 'disabled' : '';
+                                    }
+                                }).on('changeDate', function(ev) {
+                                    if (ev.date.valueOf() > checkout.date.valueOf()) {
+                                        var newDate = new Date(ev.date)
+                                        newDate.setDate(newDate.getDate() + 1);
+                                        checkout.setValue(newDate);
+                                    }
+                                    checkin.hide();
+                                    $('#dpd2')[0].focus();
+                                }).data('datepicker');
+                                var checkout = $('#dpd2').datepicker({
+                                    onRender: function(date) {
+                                        return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+                                    }
+                                }).on('changeDate', function(ev) {
+                                    checkout.hide();
+                                }).data('datepicker');
+                            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+
+                $('#timepicker1').timepicker({
+                    minuteStep: 5,
+                    showInputs: false,
+                    disableFocus: true
+                });
+
+                $('#timepicker2').timepicker({
+                    minuteStep: 5,
+                    showInputs: false,
+                    disableFocus: true
+                });
+
             });
-            
-            $('#timepicker2').timepicker({
-                minuteStep: 5,
-                showInputs: false,
-                disableFocus: true
-            });
+        </script>
 
-        });
-    </script>
-
-    <!--[if lt IE 8]>
-	    <script src="json2.min.js" type="text/javascript"></script>
-	<![endif]-->
+        <!--[if lt IE 8]>
+                <script src="json2.min.js" type="text/javascript"></script>
+            <![endif]-->
     </body>
