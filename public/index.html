@@ -158,11 +158,7 @@
         salvarUsuario: function (ev){
             var dadosUsuario = $(ev.currentTarget).serializeObject();
             var usuario = new Usuario();
-            usuario.save(dadosUsuario,{
-                success: function(usuario){
-                    console.log(usuario.toJson());
-                }
-            })
+            console.log(dadosUsuario);
         }
     });
 
