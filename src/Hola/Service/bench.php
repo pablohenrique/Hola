@@ -19,19 +19,32 @@ echo "<br/>";
 $tipo->delete(2);
 /*DAO TIPO*/
 
-/*DAO USUARIO/
+/*DAO USUARIO*/
+
+
 $usuario = new UsuarioService();
 //$usuario->post('fulano','senha','email@email.com','3412344321','oauthid','oauthprovider','toauthtoken','toauthtokensecret');
 echo "<br/>";
-print_r($usuario->search(1));
+
+
+
+print_r($usuario->search(1)->JsonSerialize());
 echo "<br/>";
-print_r($usuario->search('fulano'));
+
+
+//print_r($usuario->search('root'));
 echo "<br/>";
-print_r($usuario->search());
+
+
+
+//print_r($usuario->search());
 echo "<br/>";
 //$usuario->update('fulano','senha','email@email.com','3412344321','oauthid','oauthprovider','toauthtoken','toauthtokensecret',1);
+
+
+
 echo "<br/>";
-$usuario->delete(1);
+//$usuario->delete(1);
 echo "<br/>";
 /*DAO USUARIO*/
 

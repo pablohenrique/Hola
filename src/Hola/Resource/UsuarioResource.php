@@ -21,6 +21,9 @@ class UsuarioResource extends Resource {
      */
     public function buscar($id = null) {
         try {
+            if(is_null($id))
+                return new Response(Response::BADREQUEST);
+            
             $this->usuarioService = new UsuarioService();
             return new Response(Response::OK, $this->usuarioService->search($id));
 

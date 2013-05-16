@@ -37,7 +37,7 @@ class Usuario implements IModel{
 	public function setTwitterOauthTokenSecret($input){ $this->twitter_oauth_token_secret = $input; }
 
 	/*OTHERS*/
-
+/*
 	public function JsonSerialize() {
         return [
             'id' => $this->getId(),
@@ -51,6 +51,22 @@ class Usuario implements IModel{
             'twitter_oauth_token_secret' => $this->getTwitterOauthTokenSecret()
         	];
     }
+*/
+
+    public function JsonSerialize() {
+        return array(
+            'id' => $this->getId(),
+            'login' => $this->getLogin(),
+            'senha' => $this->getSenha(),
+            'email' => $this->getEmail(),
+            'celular' => $this->getCelular(),
+            'oauth_uid' => $this->getOauthId(),
+            'oauth_provider' => $this->getOauthProvider(),
+            'twitter_oauth_token' => $this->getTwitterOauthToken(),
+            'twitter_oauth_token_secret' => $this->getTwitterOauthTokenSecret()
+        	);
+    }
+
 }
 
 ?>
