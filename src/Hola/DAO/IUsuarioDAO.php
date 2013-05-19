@@ -6,46 +6,48 @@ use Hola\Model\Usuario;
 
 interface IUsuarioDAO{
 	/**
-	 *Insere um objeto no banco de dados
-	 *@param
-	 *@throws 
-	 */
-	public function post(Usuario $input);
+     * Insere o novo Usuario no BD
+     * @param Usuario $Usuario
+     * @throws DAOException
+     */
+    public function post(Usuario $input);
 
-	/**
-	 *Busca um objeto no banco de dados
-	 *@param
-	 *@throws 
-	 */
-	public function get($input);
+    /**
+     * Recupera o Usuario a partir do id
+     * @param type $id
+     * @return Usuario
+     * @throws DAOException
+     */
+    public function get($id);
 
-	/**
-	 *Busca todos os objetos no banco de dados
-	 *@param
-	 *@throws 
-	 */
-	public function getAll();
+    /**
+     * Recupera o Usuario a partir do login
+     * @param type $login
+     * @return Usuario
+     * @throws DAOException
+     */
+    public function read($login);
 
-	/**
-	 *Busca um objeto no banco de dados
-	 *@param
-	 *@throws 
-	 */
-	public function read($input);
+    /**
+     * Recupera todas as Usuarioes
+     * @return array Usuario
+     * @throws DAOException
+     */
+    public function getAll();
 
-	/**
-	 *Atualiza um objeto no banco de dados
-	 *@param
-	 *@throws 
-	 */
-	public function update(Usuario $input);
+    /**
+     * Atualiza os atributos do Usuario no BD
+     * @param Usuario $usuario
+     * @throws DAOException
+     */
+    public function update(Usuario $usuario);
 
-	/**
-	 *Deleta um objeto no banco de dados
-	 *@param
-	 *@throws 
-	 */
-	public function delete($input);
+    /**
+     * Remove o Usuario do BD
+     * @param type $id
+     * @throws DAOException
+     */
+    public function delete($id);
 }
 
 ?>

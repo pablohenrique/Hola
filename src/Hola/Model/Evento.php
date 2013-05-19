@@ -2,7 +2,9 @@
 
 namespace Hola\Model;
 
-class Evento implements IModel{
+use \JsonSerializable;
+
+class Evento implements JsonSerializable{
 
 	private $id;
 	private $nome;

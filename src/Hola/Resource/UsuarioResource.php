@@ -21,16 +21,17 @@ class UsuarioResource extends Resource {
      */
     public function buscar($id = null) {
         try {
-            if(is_null($id))
-                return new Response(Response::BADREQUEST);
-            
             $this->usuarioService = new UsuarioService();
-            return new Response(Response::OK, $this->usuarioService->search($id));
+            if(is_null($id))
+                return new Response(Response::OK, $this->usuarioService->search());
+            else
+                return new Response(Response::OK, $this->usuarioService->search($id));
 
         } catch (RADUFU\DAO\NotFoundException $e) {
             throw new Tonic\NotFoundException();
         }
     }
+
 
     /**
      * @method POST
@@ -133,6 +134,7 @@ class UsuarioResource extends Resource {
     /**
      * Transforma as requisições json para array e as repostas array para json
      */
+
     protected function json() {
 
         $this->before(function ($request) {

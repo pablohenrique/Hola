@@ -72,9 +72,8 @@ class UsuarioDAO implements IUsuarioDAO{
 			$stm->execute();
 			$usuarioArray = array();
 
-			while($result = $stm->fetch(PDO::FETCH_ASSOC)){
+			while($result = $stm->fetch(PDO::FETCH_ASSOC))
 				$usuarioArray[] = self::createObjectTemplate($result);
-			}
 
 			unset($usuario,$stm,$result);
 			return $usuarioArray;

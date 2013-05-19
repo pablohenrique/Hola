@@ -2,7 +2,9 @@
 
 namespace Hola\Model;
 
-class Convidado implements IModel{
+use \JsonSerializable;
+
+class Convidado implements JsonSerializable{
 
 	private $id;
 	private $sms;

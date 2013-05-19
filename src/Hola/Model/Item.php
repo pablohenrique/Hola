@@ -2,7 +2,9 @@
 
 namespace Hola\Model;
 
-class Item implements IModel{
+use \JsonSerializable;
+
+class Item implements JsonSerializable{
 
 	private $id;
 	private $nome;
