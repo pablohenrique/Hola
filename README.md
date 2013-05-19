@@ -1,7 +1,14 @@
 Hola
 ====
 
-Hola - Inspirado em Yuri viadao.
+Hola (oh.la) - Sera um aplicativo web que facilitara o convite de pessoas para um evento, assim como a partilha de itens necessarios para que isso aconteca.
+Um exemplo seria um evento de churrasco. O provedor do churrasco convidara as pessoas e tambem, automaticamente, ja pedira as pessoas o que elas devem levar para o churrasco. O programa procura repartir as quantidades de cada item para o churrasco de forma igualitaria entre os convidados, assim como rastreia o numero de convites que foram enviados e quem aceitou, recusou ou esta como pendente uma resposta se vai ou nao para o evento.
+
+Melhorar esse trem...
+
+
+Futuras Ideias
+====
 
 Alterar base de dados colocar um campo que define se o convidado confirmou ou não a 
 presença no evento tipo um confirmado_recusado_maybe
