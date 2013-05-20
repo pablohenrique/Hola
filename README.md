@@ -1,7 +1,7 @@
 Hola
 ====
 
-Hola (oh.la) - Sera um aplicativo web que facilitara o convite de pessoas para um evento, assim como a partilha de itens necessarios para que isso aconteca.
+ho-la [oh-lah] - Sera um aplicativo web que facilitara o convite de pessoas para um evento, assim como a partilha de itens necessarios para que isso aconteca.
 Um exemplo seria um evento de churrasco. O provedor do churrasco convidara as pessoas e tambem, automaticamente, ja pedira as pessoas o que elas devem levar para o churrasco. O programa procura repartir as quantidades de cada item para o churrasco de forma igualitaria entre os convidados, assim como rastreia o numero de convites que foram enviados e quem aceitou, recusou ou esta como pendente uma resposta se vai ou nao para o evento.
 
 Melhorar esse trem...
