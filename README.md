@@ -1,26 +1,24 @@
 Hola
 ====
+<p align="justify">
+ho-la [oh-lah] <br/>
 
-ho-la [oh-lah] - Sera um aplicativo web que facilitara o convite de pessoas para um evento, assim como a partilha de itens necessarios para que isso aconteca.
-Um exemplo seria um evento de churrasco. O provedor do churrasco convidara as pessoas e tambem, automaticamente, ja pedira as pessoas o que elas devem levar para o churrasco. O programa procura repartir as quantidades de cada item para o churrasco de forma igualitaria entre os convidados, assim como rastreia o numero de convites que foram enviados e quem aceitou, recusou ou esta como pendente uma resposta se vai ou nao para o evento.
+1. (used as an informal greeting.)
+2. (an informal exclamation of enthusiasm, joy, etc.)
 
-Melhorar esse trem...
-
-
-Instalacao
-===
-Baixar o projeto: git clone https://github.com/pablohenrique/Hola.git <br/>
-Abrir a pasta do projeto (linux: /var/www/Hola/) <br/>
-Baixar o composer: curl -sS https://getcomposer.org/installer | php <br/>
-Instalar o Tonic: php composer.phar install --dev <br/>
-Abra o arquivo .htaccess e copie o que esta comentado ( ' # ' e usado para comentar codigo) <br/>
-Va ate a pasta sites-available do apache e modifique o arquivo default: sudo nano /etc/apache2/sites-available/default <br/>
-Agora, cole o que voce copiou do .htaccess neste arquivo default e retire os comentarios. <br/>
-Pronto! Pode testar agora.
+Setup
+----
+1. Download the project: $git clone https://github.com/pablohenrique/Hola.git <br/>
+2. Open project directory (on linux: $/var/www/Hola/) <br/>
+3. Download the composer: $curl -sS https://getcomposer.org/installer | php <br/>
+4. Download peej/Tonic through composer: $php composer.phar install --dev <br/>
+5. Open the .htaccess file which is inside the Hola folder and copy the commented code <br/>
+6. Add the code to this file (and, of course, remove commentaries): $sudo nano /etc/apache2/sites-available/default <br/>
+7. Pronto! Test the project using this URL: localhost/Hola
 
 
 Futuras Ideias
-===
+----
 
 Alterar base de dados colocar um campo que define se o convidado confirmou ou não a 
 presença no evento tipo um confirmado_recusado_maybe
@@ -30,3 +28,4 @@ para criar lá também e convidar amigos lá
 
 
 precisaremos de um observer para notificar convidados.
+</p>
