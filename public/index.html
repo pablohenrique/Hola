@@ -70,7 +70,7 @@
     <!-- FIM DA DIV PARA CAROUSEL -->
     <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
     <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-<!-- DIV PARA CADASTRO DE USUARIO -->
+<!-- DIV PARA CADASTRO DE USUARIO 
 <div id="cadastrar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -92,7 +92,7 @@
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
     </div>
-</div>
+</div> -->
 <!-- FIM DA DIV PARA CADASTRO DE USUARIO -->
 
 
@@ -108,7 +108,7 @@
     <![endif]-->
     <!-- INICIO SCRIPT CADASTRO USUARIO USANDO BACKBONE -->
  <script type="text/template" id="cadastrar-usuario-template">
-    <form class="cadastrar-usuario-form">
+    <form class="cadastrar-usuario-form" method="post" action="api/usuario">
       <legend>Cadastrar Usuarios</legend>
         <label>Login</label>
         <input name="login" type="text">
