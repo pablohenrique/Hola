@@ -11,13 +11,13 @@ ho-la [oh-lah] <br/>
 Setup
 ----
 <p align="justify">
-1. Download the project: $git clone https://github.com/pablohenrique/Hola.git <br/>
-2. Open project directory (on linux: $/var/www/Hola/) <br/>
-3. Download the composer: $curl -sS https://getcomposer.org/installer | php <br/>
-4. Download peej/Tonic through composer: $php composer.phar install --dev <br/>
-5. Open the .htaccess file which is inside the Hola folder and copy the commented code <br/>
-6. Add the code to this file (and, of course, remove commentaries): $sudo nano /etc/apache2/sites-available/default <br/>
-7. Pronto! Test the project using this URL: localhost/Hola
+1.	Download the project: $git clone https://github.com/pablohenrique/Hola.git <br/>
+2.	Open project directory (on linux: $/var/www/Hola/) <br/>
+3.	Download the composer: $curl -sS https://getcomposer.org/installer | php <br/>
+4.	Download peej/Tonic through composer: $php composer.phar install --dev <br/>
+5.	Open the .htaccess file which is inside the Hola folder and copy the commented code <br/>
+6.	Add the code to this file (and, of course, remove commentaries): $sudo nano /etc/apache2/sites-available/default <br/>
+7.	Pronto! Test the project using this URL: localhost/Hola
 </p>
 
 Futuras Ideias
