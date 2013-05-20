@@ -141,9 +141,26 @@
       return o;
     };
 
+
     var Usuario = Backbone.Model.extend({
-        urlRoot: '/usuario'
-    })
+        urlRoot: '/api/usuario',
+    defaults: {
+        login: "",
+        senha: "",
+        email: "",
+        celular: ""
+    },
+    validate: function(attrs) {
+        if (attrs.login == '')
+            return 'O nome é obrigatório';
+        if (attrs.senha == '')
+            return 'A senha é obrigatória';
+        if (attrs.email == '')
+            return 'A data é obrigatória';
+        if (attrs.celular == '')
+            return 'A hora é obrigatória'
+    }
+});
 
     var CadastrarUsuario = Backbone.View.extend({
         el:'.page',
@@ -155,9 +172,10 @@
             'submit .cadastrar-usuario-form':'salvarUsuario',
         },
         salvarUsuario: function (ev){
-            var dadosUsuario = $(ev.currentTarget).serializeObject();
             var usuario = new Usuario();
+            var dadosUsuario = $(ev.currentTarget).serializeObject();
             console.log(dadosUsuario);
+            //return false;
         }
     });
 
