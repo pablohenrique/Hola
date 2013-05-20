@@ -9,13 +9,13 @@ Melhorar esse trem...
 
 Instalacao
 ===
-Baixar o projeto: git clone https://github.com/pablohenrique/Hola.git
-Abrir a pasta do projeto (linux: /var/www/Hola/)
-Baixar o composer: curl -sS https://getcomposer.org/installer | php
-Instalar o Tonic: php composer.phar install --dev
-Abra o arquivo .htaccess e copie o que esta comentado ( ' # ' e usado para comentar codigo)
-Va ate a pasta sites-available do apache e modifique o arquivo default: sudo nano /etc/apache2/sites-available/default
-Agora, cole o que voce copiou do .htaccess neste arquivo default e retire os comentarios.
+Baixar o projeto: git clone https://github.com/pablohenrique/Hola.git <br/>
+Abrir a pasta do projeto (linux: /var/www/Hola/) <br/>
+Baixar o composer: curl -sS https://getcomposer.org/installer | php <br/>
+Instalar o Tonic: php composer.phar install --dev <br/>
+Abra o arquivo .htaccess e copie o que esta comentado ( ' # ' e usado para comentar codigo) <br/>
+Va ate a pasta sites-available do apache e modifique o arquivo default: sudo nano /etc/apache2/sites-available/default <br/>
+Agora, cole o que voce copiou do .htaccess neste arquivo default e retire os comentarios. <br/>
 Pronto! Pode testar agora.
 
 
