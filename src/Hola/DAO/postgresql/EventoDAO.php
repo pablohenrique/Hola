@@ -26,9 +26,9 @@ class EventoDAO implements IEventoDAO{
 						:evento_usuario
 						);';
 	const SQL_GET = 'SELECT * FROM Evento WHERE evento_id = :evento_id;';
-	const SQL_GETALL = 'SELECT * FROM Evento;';
-	const SQL_READ = 'SELECT * FROM Evento WHERE evento_nome = :evento_nome;';
-	const SQL_SEEK = 'SELECT * FROM Evento WHERE evento_usuario = :evento_usuario;';
+	const SQL_GETALL = 'SELECT * FROM Evento WHERE evento_usuario = :evento_usuario;';
+	const SQL_READ = 'SELECT * FROM Evento WHERE evento_usuario = :evento_usuario AND evento_nome = :evento_nome;';
+	const SQL_SEEK = 'SELECT * FROM Evento WHERE evento_usuario = :evento_usuario AND evento_id = :evento_id';
 	const SQL_UPDATE = 'UPDATE Evento SET
 						evento_nome = :evento_nome,
 						evento_descricao = :evento_descricao,
@@ -84,9 +84,10 @@ class EventoDAO implements IEventoDAO{
 		}
 	}
 
-	public function getAll(){
+	public function getAll($input){
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_GETALL);
+			$stm->bindParam(':evento_usuario',$input);
 			$stm->execute();
 			$Array = array();
 
@@ -101,11 +102,13 @@ class EventoDAO implements IEventoDAO{
 		}
 	}
 
-	public function read($input){
+	public function read($usuario, $input){
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_READ);
-			$stm->bindParam(':evento_nome',$input);
-			$stm->execute();
+			$stm->execute(array(
+					':evento_usuario'=> $usuario,
+					':evento_nome' => $input
+					));
 			$Array = array();
 
 			while($result = $stm->fetch(PDO::FETCH_ASSOC))
@@ -119,15 +122,18 @@ class EventoDAO implements IEventoDAO{
 		}
 	}
 
-	public function seek($input){
+	public function seek($usuario, $input){
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_SEEK);
-			$stm->bindParam(':evento_usuario',$input);
-			$stm->execute();
-			$Array = array();
+			$stm->execute(array(
+					':evento_usuario'=> $usuario,
+					':evento_id' => $input
+					));
 
-			while($result = $stm->fetch(PDO::FETCH_ASSOC))
-				$Array[] = self::createObjectTemplate($result);
+			$result = $stm->fetch(PDO::FETCH_ASSOC);
+
+			if($result)
+				return self::createObjectTemplate($result);
 
 			unset($stm,$result);
 			return $Array;

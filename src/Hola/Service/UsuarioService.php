@@ -44,7 +44,7 @@ class UsuarioService {
 			return $this->dao->getAll();
 	}
 
-	public function update($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret, $id = null){
+	public function update($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret, $id){
 		$this->dao->update(self::createObject($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret, $id));
 		unset($this->usuario);
 	}

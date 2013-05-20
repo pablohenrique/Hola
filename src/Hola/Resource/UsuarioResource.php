@@ -55,15 +55,12 @@ class UsuarioResource extends Resource {
                     $this->request->data->oauth_uid,
                     $this->request->data->oauth_provider,
                     $this->request->data->twitter_oauth_token,
-                    $this->request->data->twitter_oauth_token_secret,
-                    $id
+                    $this->request->data->twitter_oauth_token_secret
                     );
             $criada = $this->usuarioService->search($this->request->data->login)->getId();
 
             unset($this->usuarioService);
-            return new Response(Response::CREATED, array(
-                'id' => $criada
-                ));
+            return new Response(Response::CREATED, array('id' => $criada));
 
         } catch (RADUFU\DAO\Exception $e) {
             throw new Tonic\Exception($e->getMessage());

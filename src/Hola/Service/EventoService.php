@@ -42,17 +42,13 @@ class EventoService {
 		unset($this->evento,$this->usuarioservice,$this->tiposervice);
 	}
 
-	public function search($input = null){
-		if(is_numeric($input)) // busca por id
-			return $this->dao->get($input);
-		if(!is_null($input)) // busca por nome
-			return $this->dao->read($input);
-		else //busca todos
-			return $this->dao->getAll();
-	}
-
-	public function getUsuario($input){ // busca por usuario
-		return $this->dao->seek($input);
+	public function search($usuario, $input = null){
+		if(is_null($input))
+			return $this->dao->getAll($usuario);
+		if(is_numeric($input))
+			return $this->dao->seek($usuario, $input);
+		if(is_string($input))
+			return $this->dao->read($usuario, $input);
 	}
 
 	public function update($nome, $descricao, $data, $hora, $endereco, $complemento, $cidade, $estado, $cep, $tipo, $usuario, $id){

@@ -24,21 +24,21 @@ interface IEventoDAO{
 	 *@param
 	 *@throws 
 	 */
-	public function getAll();
+	public function getAll($input);
 
 	/**
 	 *Busca um objeto no banco de dados
 	 *@param
 	 *@throws 
 	 */
-	public function read($input);
+	public function read($usuario,$input);
 
 	/**
 	 *Busca um objeto no banco de dados
 	 *@param
 	 *@throws 
 	 */
-	public function seek($input);
+	public function seek($usuario,$input);
 
 	/**
 	 *Atualiza um objeto no banco de dados
