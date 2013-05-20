@@ -3,8 +3,8 @@ Hola
 <p align="justify">
 ho-la [oh-lah] <br/>
 
-1. used as an informal greeting.
-2. an informal exclamation of enthusiasm, joy, etc.
+1.	used as an informal greeting.
+2.	an informal exclamation of enthusiasm, joy, etc.
 </p>
 
 
