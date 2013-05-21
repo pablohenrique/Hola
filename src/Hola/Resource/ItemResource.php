@@ -1,16 +1,16 @@
 <?php
 namespace Hola\Resource;
 
-use Hola\Service\UsuarioService,
+use Hola\Service\ItemService,
     Tonic\Resource,
     Tonic\Response;
 /**
- * @uri /usuario
- * @uri /usuario/:id
+ * @uri /item
+ * @uri /item/:id
  */
-class UsuarioResource extends Resource {
+class ItemResource extends Resource {
 
-    private $usuarioService = null;
+    private $itemService = null;
 
     /**
      * @method GET
@@ -21,8 +21,11 @@ class UsuarioResource extends Resource {
      */
     public function buscar($id = null) {
         try {
-            $this->usuarioService = new UsuarioService();
-            return new Response(Response::OK, $this->usuarioService->search($id));
+            $this->itemService = new ItemService();
+            if(is_null($id))
+                return new Response(Response::OK, $this->itemService->search());
+            else
+                return new Response(Response::OK, $this->itemService->search($id));
 
         } catch (RADUFU\DAO\NotFoundException $e) {
             throw new Tonic\NotFoundException();
@@ -37,26 +40,19 @@ class UsuarioResource extends Resource {
      * @return Tonic\Response
      */
     public function criar($id = null) {
-        if(!(isset($this->request->data->login)
-            &&isset($this->request->data->email)
-            &&isset($this->request->data->senha)))
+        if(!(isset($this->request->data->nome)))
             return new Response(Response::BADREQUEST);
 
         try {
-            $this->usuarioService = new UsuarioService();
-            $this->usuarioService->post(
-                    $this->request->data->login,
-                    $this->request->data->senha,
-                    $this->request->data->email,
-                    $this->request->data->celular,
-                    $this->request->data->oauth_uid,
-                    $this->request->data->oauth_provider,
-                    $this->request->data->twitter_oauth_token,
-                    $this->request->data->twitter_oauth_token_secret
+            $this->itemService = new ItemService();
+            $this->itemService->post(
+                    $this->request->data->nome,
+                    $this->request->data->usuario
                     );
-            $criada = $this->usuarioService->search($this->request->data->login)->getId();
+            
+            $criada = $this->itemService->search($this->request->data->nome)[0]->getId();
 
-            unset($this->usuarioService);
+            unset($this->itemService);
             return new Response(Response::CREATED, array('id' => $criada));
 
         } catch (RADUFU\DAO\Exception $e) {
@@ -73,26 +69,16 @@ class UsuarioResource extends Resource {
     public function atualizar($id = null) {
         if(is_null($id))
             throw new Tonic\MethodNotAllowedException();
-        if(!(isset($this->request->data->login)
-            &&isset($this->request->data->email)
-            &&isset($this->request->data->senha)))
-            return new Response(Response::BADREQUEST);
-
+        
         try {
-            $this->usuarioService = new UsuarioService();
-            $this->usuarioService->update(
-                    $this->request->data->login,
-                    $this->request->data->senha,
-                    $this->request->data->email,
-                    $this->request->data->celular,
-                    $this->request->data->oauth_uid,
-                    $this->request->data->oauth_provider,
-                    $this->request->data->twitter_oauth_token,
-                    $this->request->data->twitter_oauth_token_secret,
+            $this->itemService = new ItemService();
+            $this->itemService->update(
+                    $this->request->data->nome,
+                    $this->request->data->usuario,
                     $id
                     );
 
-            unset($this->usuarioService);
+            unset($this->itemService);
             return new Response(Response::OK);
 
         } catch (RADUFU\DAO\NotFoundException $e) {
@@ -114,10 +100,10 @@ class UsuarioResource extends Resource {
             throw new Tonic\MethodNotAllowedException();
 
         try {
-            $this->usuarioService = new UsuarioService();
-            $this->usuarioService->delete($id);
+            $this->itemService = new ItemService();
+            $this->itemService->delete($id);
 
-            unset($this->usuarioService);
+            unset($this->itemService);
             return new Response(Response::OK);
 
         } catch (RADUFU\DAO\NotFoundException $e) {

@@ -11,10 +11,8 @@ class UsuarioService {
 	private $dao;
 	private $usuario;
 
-	private function createObject($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret, $id = null){
+	private function createObject($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret){
 		$this->usuario = new Usuario();
-		if(!is_null($id))
-			$this->usuario->setId($id);
 		$this->usuario->setLogin($login);
 		$this->usuario->setSenha($senha);
 		$this->usuario->setEmail($email);
@@ -30,22 +28,20 @@ class UsuarioService {
 		$this->dao = Factory::getFactory(FACTORY::PGSQL)->getUsuarioDAO();
 	}
 
-	public function post($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret, $id = null){
-		$this->dao->post(self::createObject($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret, $id));
+	public function post($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret){
+		$this->dao->post(self::createObject($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret));
 		unset($this->usuario);
 	}
 
 	public function search($input = null){
-		if(is_numeric($input))
-			return $this->dao->get($input);
 		if(!is_null($input))
-			return $this->dao->read($input);
+			return $this->dao->get($input);
 		else
 			return $this->dao->getAll();
 	}
 
-	public function update($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret, $id){
-		$this->dao->update(self::createObject($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret, $id));
+	public function update($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret){
+		$this->dao->update(self::createObject($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret));
 		unset($this->usuario);
 	}
 

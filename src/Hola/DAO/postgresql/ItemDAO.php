@@ -14,7 +14,9 @@ class ItemDAO implements IItemDAO{
 	const SQL_POST = 'INSERT INTO Item VALUES(DEFAULT,:item_nome,:item_usuario);';
 	const SQL_GET = 'SELECT * FROM Item WHERE item_id = :item_id;';
 	const SQL_GETALL = 'SELECT * FROM Item;';
+	const SQL_READALL = 'SELECT * FROM Item WHERE item_usuario = :item_usuario;';
 	const SQL_READ = 'SELECT * FROM Item WHERE item_nome = :item_nome;';
+	const SQL_SEEK = 'SELECT * FROM Item WHERE item_nome = :item_nome AND item_usuario = :item_usuario;';
 	const SQL_UPDATE = 'UPDATE Item SET item_nome = :item_nome, item_usuario = :item_usuario WHERE item_id = :item_id;';
 	const SQL_DELETE = 'DELETE FROM Item WHERE item_id = :item_id;';
 
@@ -47,9 +49,11 @@ class ItemDAO implements IItemDAO{
 			$result = $stm->fetch(PDO::FETCH_ASSOC);
 
 			$this->usuariodao = new UsuarioDAO();
+			
 			if($result)
 				return self::createObjectTemplate($result);
 
+			unset($this->usuariodao);
 			throw new NotFoundException();
 
 		} catch(PDOException $ex){
@@ -67,6 +71,26 @@ class ItemDAO implements IItemDAO{
 			while($result = $stm->fetch(PDO::FETCH_ASSOC))
 				$Array[] = self::createObjectTemplate($result);
 
+			unset($this->usuariodao);
+			return $Array;
+
+		} catch(PDOException $ex){
+			throw new Exception("Ao procurar [GETALL] Item: " . $ex->getMessage());
+		}
+	}
+
+	public function readAll($input){
+		try{
+			$stm = Connection::Instance()->get()->prepare(self::SQL_READALL);
+			$stm->bindParam(':item_usuario',$input);
+			$stm->execute();
+			$Array = array();
+
+			$this->usuariodao = new UsuarioDAO();
+			while($result = $stm->fetch(PDO::FETCH_ASSOC))
+				$Array[] = self::createObjectTemplate($result);
+
+			unset($this->usuariodao);
 			return $Array;
 
 		} catch(PDOException $ex){
@@ -79,6 +103,27 @@ class ItemDAO implements IItemDAO{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_READ);
 			$stm->bindParam(':item_nome',$input);
 			$stm->execute();
+			$Array = array();
+
+			$this->usuariodao = new UsuarioDAO();
+			while($result = $stm->fetch(PDO::FETCH_ASSOC))
+				$Array[] = self::createObjectTemplate($result);
+
+			unset($this->usuariodao);
+			return $Array;
+
+		} catch(PDOException $ex){
+			throw new Exception("Ao procurar [READ] Item: " . $ex->getMessage());
+		}
+	}
+
+	public function seek($usuario, $input){
+		try{
+			$stm = Connection::Instance()->get()->prepare(self::SQL_SEEK);
+			$stm->execute(array(
+						':item_id' => $input,
+						':item_usuario' => $usuario
+						));
 
 			$result = $stm->fetch(PDO::FETCH_ASSOC);
 
@@ -86,6 +131,7 @@ class ItemDAO implements IItemDAO{
 			if($result)
 				return self::createObjectTemplate($result);
 
+			unset($this->usuariodao);
 			throw new NotFoundException();
 
 		} catch(PDOException $ex){

@@ -6,6 +6,7 @@ use \JsonSerializable;
 
 class Usuario implements JsonSerializable{
 
+	private $id;
 	private $login;
 	private $senha;
 	private $email;
@@ -16,6 +17,7 @@ class Usuario implements JsonSerializable{
 	private $twitter_oauth_token_secret;
 
 	/*GETTERS*/
+	public function getId(){ return $this->id; }
 	public function getLogin(){ return $this->login; }
 	public function getSenha(){ return $this->senha; }
 	public function getEmail(){ return $this->email; }
@@ -26,6 +28,7 @@ class Usuario implements JsonSerializable{
 	public function getTwitterOauthTokenSecret(){ return $this->twitter_oauth_token_secret; }
 
 	/*SETTERS*/
+	public function setId($input){ $this->id = $input; }
 	public function setLogin($input){ $this->login = $input; }
 	public function setSenha($input){ $this->senha = $input; }
 	public function setEmail($input){ $this->email = $input; }
@@ -38,6 +41,7 @@ class Usuario implements JsonSerializable{
 	/*OTHERS*/
 	public function JsonSerialize() {
         return [
+            'id' => $this->getId(),
             'login' => $this->getLogin(),
             'senha' => $this->getSenha(),
             'email' => $this->getEmail(),

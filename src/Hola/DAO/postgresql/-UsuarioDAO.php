@@ -11,10 +11,12 @@ use \PDO,
 class UsuarioDAO implements IUsuarioDAO{
 
 	/*DEFINITIONS FOR IDAO*/
-	const SQL_POST = 'INSERT INTO Usuario VALUES(:usuario_login,:oauth_uid,:oauth_provider,:twitter_oauth_token,:twitter_oauth_token_secret,:usuario_senha,:usuario_email,:usuario_celular);';
-	const SQL_GET = 'SELECT * FROM Usuario WHERE usuario_login = :usuario_login;';
+	const SQL_POST = 'INSERT INTO Usuario VALUES(DEFAULT,:usuario_login,:oauth_uid,:oauth_provider,:twitter_oauth_token,:twitter_oauth_token_secret,:usuario_senha,:usuario_email,:usuario_celular);';
+	const SQL_GET = 'SELECT * FROM Usuario WHERE usuario_id = :usuario_id;';
 	const SQL_GETALL = 'SELECT * FROM Usuario;';
+	const SQL_READ = 'SELECT * FROM Usuario WHERE usuario_login = :usuario_login;';
 	const SQL_UPDATE = 'UPDATE Usuario SET 
+						usuario_login = :usuario_login,
 						oauth_uid = :oauth_uid,
 						oauth_provider = :oauth_provider,
 						twitter_oauth_token = :twitter_oauth_token,
@@ -22,8 +24,8 @@ class UsuarioDAO implements IUsuarioDAO{
 						usuario_senha = :usuario_senha,
 						usuario_email = :usuario_email,
 						usuario_celular = :usuario_celular
-						WHERE usuario_login = :usuario_login;';
-	const SQL_DELETE = 'DELETE FROM Usuario WHERE usuario_login = :usuario_login;';
+						WHERE usuario_id = :usuario_id;';
+	const SQL_DELETE = 'DELETE FROM Usuario WHERE usuario_id = :usuario_id;';
 
 	/*MORE DEFINITIONS*/
 
@@ -48,7 +50,7 @@ class UsuarioDAO implements IUsuarioDAO{
 	public function get($input){
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_GET);
-			$stm->bindParam(':usuario_login',$input);
+			$stm->bindParam(':usuario_id',$input);
 			$stm->execute();
 
 			$result = $stm->fetch(PDO::FETCH_ASSOC);
@@ -81,6 +83,25 @@ class UsuarioDAO implements IUsuarioDAO{
 		}
 	}
 
+	public function read($input){
+		try{
+			$stm = Connection::Instance()->get()->prepare(self::SQL_READ);
+			$stm->bindParam(':usuario_login',$input);
+			$stm->execute();
+
+			$result = $stm->fetch(PDO::FETCH_ASSOC);
+
+			if($result)
+				return self::createObjectTemplate($result);
+
+			unset($stm,$result);
+			throw new NotFoundException();
+
+		} catch(PDOException $ex){
+			throw new Exception("Ao procurar [READ] Usuario: " . $ex->getMessage());
+		}
+	}
+
 	public function update(Usuario $input){
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_UPDATE);
@@ -98,7 +119,7 @@ class UsuarioDAO implements IUsuarioDAO{
 	public function delete($input){
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_DELETE);
-			$stm->bindParam(':usuario_login',$input);
+			$stm->bindParam(':usuario_id',$input);
 			$stm->execute();
 
 			if(!$stm->rowCount() > 0)
@@ -115,6 +136,7 @@ class UsuarioDAO implements IUsuarioDAO{
 	/*FUNCTIONS*/
 	private function createObjectTemplate($resultSet){
 		$usuario = new Usuario();
+		$usuario->setId($resultSet['usuario_id']);
 		$usuario->setLogin($resultSet['usuario_login']);
 		$usuario->setOauthId($resultSet['oauth_uid']);
 		$usuario->setOauthProvider($resultSet['oauth_provider']);
@@ -137,6 +159,8 @@ class UsuarioDAO implements IUsuarioDAO{
 			':usuario_email' => $input->getEmail(),
 			':usuario_celular' => $input->getCelular()
 		);
+		if(!is_null($input->getId()))
+			$Array[':usuario_id'] = $input->getId();
 
 		return $Array;
 	}

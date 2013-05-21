@@ -13,12 +13,20 @@ interface IUsuarioDAO{
     public function post(Usuario $input);
 
     /**
+     * Recupera o Usuario a partir do id
+     * @param type $id
+     * @return Usuario
+     * @throws DAOException
+     */
+    public function get($id);
+
+    /**
      * Recupera o Usuario a partir do login
      * @param type $login
      * @return Usuario
      * @throws DAOException
      */
-    public function get($login);
+    public function read($login);
 
     /**
      * Recupera todas as Usuarioes

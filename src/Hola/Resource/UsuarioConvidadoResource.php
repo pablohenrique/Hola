@@ -1,17 +1,16 @@
 <?php
 namespace Hola\Resource;
 
-use Hola\Service\EventoService,
+use Hola\Service\ConvidadoService,
     Tonic\Resource,
     Tonic\Response;
 
 /**
- * @uri /usuario/:id/evento
- * @uri /usuario/:id/evento/:id_evento
+ * @uri /usuario/:id/convidado
  */
-class UsuarioEventoResource extends Resource {
+class UsuarioConvidadoResource extends Resource {
 
-    private $eventoService = null;
+    private $convidadoService = null;
 
     /**
      * @method GET
@@ -20,15 +19,12 @@ class UsuarioEventoResource extends Resource {
      * @param int $id
      * @return Tonic\Response
      */
-    public function buscar($id = null, $id_evento = null) {
+    public function buscar($id = null) {
         if(is_null($id))
             throw new \Tonic\MethodNotAllowedException();
         try {
-            $this->eventoService = new EventoService();
-            if(is_null($id_evento))
-                return new Response( Response::OK, $this->eventoService->search($id) );
-            else
-                return new Response( Response::OK, $this->eventoService->search($id,$id_evento) );
+            $this->convidadoService = new ConvidadoService();
+            return new Response( Response::OK, $this->convidadoService->getUsuario($id) );
 
         } catch (\RADUFU\DAO\NotFoundException $e) {
             throw new \Tonic\NotFoundException();
@@ -48,23 +44,19 @@ class UsuarioEventoResource extends Resource {
             return new Response(Response::BADREQUEST);
 
         try {
-            $this->eventoService = new EventoService();
-            $this->eventoService->post(
+            $this->convidadoService = new ConvidadoService();
+            $this->convidadoService->post(
                     $this->request->data->nome,
-                    $this->request->data->descricao,
-                    $this->request->data->data,
-                    $this->request->data->hora,
-                    $this->request->data->endereco,
-                    $this->request->data->complemento,
-                    $this->request->data->cidade,
-                    $this->request->data->estado,
-                    $this->request->data->cep,
-                    $this->request->data->tipo,
+                    $this->request->data->sms,
+                    $this->request->data->email,
+                    $this->request->data->twitter,
+                    $this->request->data->facebook,
+                    $this->request->data->evento,
                     $this->request->data->usuario
                     );
-            $criada = $this->eventoService->search($this->request->data->usuario, $this->request->data->nome, $this->request->data->usuario)[0]->getId();
+            $criada = $this->convidadoService->search($this->request->data->usuario, $this->request->data->nome, $this->request->data->usuario)[0]->getId();
 
-            unset($this->eventoService);
+            unset($this->convidadoService);
             return new Response(Response::CREATED, array('id' => $criada));
 
         } catch (RADUFU\DAO\Exception $e) {
@@ -82,23 +74,19 @@ class UsuarioEventoResource extends Resource {
         if(is_null($id))
             throw new Tonic\MethodNotAllowedException();
         try {
-            $this->eventoService = new EventoService();
-            $this->eventoService->update(
+            $this->convidadoService = new ConvidadoService();
+            $this->convidadoService->update(
                     $this->request->data->nome,
-                    $this->request->data->descricao,
-                    $this->request->data->data,
-                    $this->request->data->hora,
-                    $this->request->data->endereco,
-                    $this->request->data->complemento,
-                    $this->request->data->cidade,
-                    $this->request->data->estado,
-                    $this->request->data->cep,
-                    $this->request->data->tipo,
+                    $this->request->data->sms,
+                    $this->request->data->email,
+                    $this->request->data->twitter,
+                    $this->request->data->facebook,
+                    $this->request->data->evento,
                     $this->request->data->usuario,
                     $id
                     );
 
-            unset($this->eventoService);
+            unset($this->convidadoService);
             return new Response(Response::OK);
 
         } catch (RADUFU\DAO\NotFoundException $e) {
@@ -120,10 +108,10 @@ class UsuarioEventoResource extends Resource {
             throw new Tonic\MethodNotAllowedException();
 
         try {
-            $this->eventoService = new EventoService();
-            $this->eventoService->delete($id);
+            $this->convidadoService = new ConvidadoService();
+            $this->convidadoService->delete($id);
 
-            unset($this->eventoService);
+            unset($this->convidadoService);
             return new Response(Response::OK);
 
         } catch (RADUFU\DAO\NotFoundException $e) {

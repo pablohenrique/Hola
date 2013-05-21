@@ -27,11 +27,25 @@ interface IItemDAO{
 	public function getAll();
 
 	/**
+	 *Busca todos os objetos no banco de dados
+	 *@param
+	 *@throws 
+	 */
+	public function readAll($usuario);
+
+	/**
 	 *Busca um objeto no banco de dados
 	 *@param
 	 *@throws 
 	 */
 	public function read($input);
+
+	/**
+	 *Busca um objeto no banco de dados
+	 *@param
+	 *@throws 
+	 */
+	public function seek($usuario, $input);
 
 	/**
 	 *Atualiza um objeto no banco de dados

@@ -31,10 +31,17 @@ class ItemService {
 		unset($this->item,$this->usuarioservice);
 	}
 
+	public function searchUser($usuario, $input = null){
+		if(is_null($input))
+			return $this->dao->readAll($usuario);
+		if(is_numeric($input))
+			return $this->dao->seek($usuario, $input);
+	}
+
 	public function search($input = null){
 		if(is_numeric($input))
 			return $this->dao->get($input);
-		if(!is_null($input))
+		if(is_string($input))
 			return $this->dao->read($input);
 		else
 			return $this->dao->getAll();

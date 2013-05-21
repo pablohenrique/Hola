@@ -163,4 +163,25 @@ TO TipoItem DO INSTEAD(
 		insert_or_nothing(NEW.item_nome,NEW.item_usuario,0),
 		insert_or_nothing(NEW.tipo_nome,NEW.item_usuario,1)
 		));
-/**/
+
+
+/*INSERTS*/
+
+
+select * from tipoitem
+select * from item
+select * from tipo
+
+INSERT INTO tipo VALUES(DEFAULT,'churrasco');
+INSERT INTO tipo VALUES(DEFAULT,'jantar arabe');
+INSERT INTO tipo VALUES(DEFAULT,'jantar adams');
+INSERT INTO usuario VALUES(DEFAULT,'root','ouid','oprovider','totoken','totsecret','toor','root@root.com','3443211234');
+INSERT INTO evento VALUES(DEFAULT,'Caiolas Bar','Abertura do Bar mais locura do universo!','2013-08-22','15:00','34567123','Na minha casa, uai','Perto das moca de pipiu','Berlandia','MG','1','root');
+INSERT INTO item VALUES(DEFAULT,'Coca-Cola',NULL);
+INSERT INTO item VALUES(DEFAULT,'Guarana Antartica',NULL);
+INSERT INTO item VALUES(DEFAULT,'Mafufo Defumado',1);
+INSERT INTO item VALUES(DEFAULT,'Bolinhas de Cabelo',1);
+INSERT INTO tipagemitem VALUES(1,1);
+INSERT INTO tipagemitem VALUES(2,1);
+INSERT INTO tipagemitem VALUES(4,2);
+INSERT INTO tipagemitem VALUES(5,3);

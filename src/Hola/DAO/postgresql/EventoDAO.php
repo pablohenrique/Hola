@@ -25,10 +25,10 @@ class EventoDAO implements IEventoDAO{
 						:evento_tipo,
 						:evento_usuario
 						);';
-	const SQL_GET = 'SELECT * FROM Evento WHERE evento_id = :evento_id;';
-	const SQL_GETALL = 'SELECT * FROM Evento WHERE evento_usuario = :evento_usuario;';
-	const SQL_READ = 'SELECT * FROM Evento WHERE evento_usuario = :evento_usuario AND evento_nome = :evento_nome;';
-	const SQL_SEEK = 'SELECT * FROM Evento WHERE evento_usuario = :evento_usuario AND evento_id = :evento_id';
+	const SQL_GET = 'SELECT * FROM Evento WHERE evento_id = :evento_id ORDER BY evento_data DESC;';
+	const SQL_GETALL = 'SELECT * FROM Evento WHERE evento_usuario = :evento_usuario ORDER BY evento_data DESC;';
+	const SQL_READ = 'SELECT * FROM Evento WHERE evento_usuario = :evento_usuario AND evento_nome = :evento_nome ORDER BY evento_data DESC;';
+	const SQL_SEEK = 'SELECT * FROM Evento WHERE evento_usuario = :evento_usuario AND evento_id = :evento_id ORDER BY evento_data DESC;';
 	const SQL_UPDATE = 'UPDATE Evento SET
 						evento_nome = :evento_nome,
 						evento_descricao = :evento_descricao,

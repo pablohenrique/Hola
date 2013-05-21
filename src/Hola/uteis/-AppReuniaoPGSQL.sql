@@ -17,6 +17,7 @@ CREATE TABLE Tipo(
 );
 
 CREATE TABLE Usuario(
+	usuario_id SERIAL,
 	usuario_login VARCHAR(20) UNIQUE,
 	oauth_uid VARCHAR(200),
 	oauth_provider VARCHAR(200),
@@ -25,7 +26,7 @@ CREATE TABLE Usuario(
 	usuario_senha VARCHAR(15),
 	usuario_email VARCHAR(70) UNIQUE,
 	usuario_celular VARCHAR(11) UNIQUE,
-	CONSTRAINT pk_usuario_login PRIMARY KEY (usuario_login)
+	CONSTRAINT pk_usuario_id PRIMARY KEY (usuario_id)
 );
 
 CREATE TABLE Evento(
@@ -40,9 +41,9 @@ CREATE TABLE Evento(
 	evento_cidade VARCHAR(30),
 	evento_uf VARCHAR(2),
 	evento_tipo INTEGER NOT NULL,
-	evento_usuario VARCHAR(20) NOT NULL,
+	evento_usuario INTEGER NOT NULL,
 	CONSTRAINT pk_evento_id PRIMARY KEY (evento_id),
-	CONSTRAINT fk_evento_usuario FOREIGN KEY (evento_usuario) REFERENCES usuario(usuario_login)
+	CONSTRAINT fk_evento_usuario FOREIGN KEY (evento_usuario) REFERENCES usuario(usuario_id)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE,
 	CONSTRAINT fk_evento_tipo FOREIGN KEY (evento_tipo) REFERENCES tipo(tipo_id)
@@ -53,9 +54,9 @@ CREATE TABLE Evento(
 CREATE TABLE Item(
 	item_id SERIAL,
 	item_nome VARCHAR(20),
-	item_usuario VARCHAR(20),
+	item_usuario INTEGER,
 	CONSTRAINT pk_item_id PRIMARY KEY (item_id),
-	CONSTRAINT fk_item_usuario FOREIGN KEY (item_usuario) REFERENCES usuario(usuario_login)
+	CONSTRAINT fk_item_usuario FOREIGN KEY (item_usuario) REFERENCES usuario(usuario_id)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE
 );
@@ -75,7 +76,7 @@ CREATE TABLE TipagemItem(
 CREATE TABLE Convidado(
 	convidado_id SERIAL,
 	convidado_evento INTEGER NOT NULL,
-	convidado_usuario VARCHAR(20) NOT NULL,
+	convidado_usuario INTEGER NOT NULL,
 	convidado_sms VARCHAR(11),
 	convidado_email VARCHAR(30),
 	convidado_facebook VARCHAR(30),
@@ -84,7 +85,7 @@ CREATE TABLE Convidado(
 	CONSTRAINT fk_convidado_evento FOREIGN KEY (convidado_evento) REFERENCES evento(evento_id)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE,
-	CONSTRAINT fk_convidado_usuario FOREIGN KEY (convidado_usuario) REFERENCES usuario(usuario_login)
+	CONSTRAINT fk_convidado_usuario FOREIGN KEY (convidado_usuario) REFERENCES usuario(usuario_id)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE
 );
@@ -98,6 +99,7 @@ CREATE INDEX index_item_nome ON item USING HASH (item_nome);
 CREATE INDEX index_item_usuario ON item USING BTREE (item_usuario);
 CREATE INDEX index_tipagemitem_item ON tipagemitem USING BTREE (tipagemitem_item);
 CREATE INDEX index_tipagemitem_tipo ON tipagemitem USING BTREE (tipagemitem_tipo);
+CREATE INDEX index_usuario_login ON usuario USING HASH (usuario_login);
 CREATE INDEX index_usuario_oauth_uid ON usuario USING HASH (oauth_uid);
 CREATE INDEX index_usuario_oauth_provider ON usuario USING HASH (oauth_provider);
 CREATE INDEX index_convidado_evento ON convidado USING BTREE (convidado_evento);
@@ -114,7 +116,7 @@ CREATE OR REPLACE VIEW TipoItem(
 			FROM ((tipagemitem AS ti INNER JOIN item AS i ON ti.tipagemitem_item = i.item_id) 
 			INNER JOIN tipo AS t ON t.tipo_id = ti.tipagemitem_tipo));
 
-CREATE OR REPLACE FUNCTION insert_or_nothing(argn VARCHAR(20), argusuario VARCHAR(20), argselect INTEGER)
+CREATE OR REPLACE FUNCTION insert_or_nothing(argn VARCHAR(20), argusuario INTEGER, argselect INTEGER)
 RETURNS INTEGER AS
 $search_tipo$
 DECLARE
@@ -162,7 +164,6 @@ TO TipoItem DO INSTEAD(
 		insert_or_nothing(NEW.tipo_nome,NEW.item_usuario,1)
 		));
 
-
 /*INSERTS*/
 
 
@@ -173,12 +174,12 @@ select * from tipo
 INSERT INTO tipo VALUES(DEFAULT,'churrasco');
 INSERT INTO tipo VALUES(DEFAULT,'jantar arabe');
 INSERT INTO tipo VALUES(DEFAULT,'jantar adams');
-INSERT INTO usuario VALUES('root','ouid','oprovider','totoken','totsecret','toor','root@root.com','3443211234');
+INSERT INTO usuario VALUES(DEFAULT,'root','ouid','oprovider','totoken','totsecret','toor','root@root.com','3443211234');
 INSERT INTO evento VALUES(DEFAULT,'Caiolas Bar','Abertura do Bar mais locura do universo!','2013-08-22','15:00','34567123','Na minha casa, uai','Perto das moca de pipiu','Berlandia','MG','1','root');
 INSERT INTO item VALUES(DEFAULT,'Coca-Cola',NULL);
 INSERT INTO item VALUES(DEFAULT,'Guarana Antartica',NULL);
-INSERT INTO item VALUES(DEFAULT,'Mafufo Defumado','root');
-INSERT INTO item VALUES(DEFAULT,'Bolinhas de Cabelo','root');
+INSERT INTO item VALUES(DEFAULT,'Mafufo Defumado',1);
+INSERT INTO item VALUES(DEFAULT,'Bolinhas de Cabelo',1);
 INSERT INTO tipagemitem VALUES(1,1);
 INSERT INTO tipagemitem VALUES(2,1);
 INSERT INTO tipagemitem VALUES(4,2);

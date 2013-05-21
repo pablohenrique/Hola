@@ -36,14 +36,14 @@ class ConvidadoService {
 		$this->dao->post(self::createObject($sms, $email, $evento, $usuario, $twitter, $facebook, $id));
 		unset($this->convidado,$this->eventoservice,$this->usuarioservice);
 	}
-
+/*
 	public function search($input = null){
 		if(is_numeric($input)) //busca por id
 			return $this->dao->get($input);
 		else //busca todos
 			return $this->dao->getAll();
 	}
-
+*/
 	public function getEvento($input){
 		return $this->dao->read($input);
 	}
