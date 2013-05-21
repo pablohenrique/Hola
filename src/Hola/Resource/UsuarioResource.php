@@ -5,8 +5,8 @@ use Hola\Service\UsuarioService,
     Tonic\Resource,
     Tonic\Response;
 /**
- * @uri /usuario
- * @uri /usuario/:id
+ * @uri /
+ * @uri /:id
  */
 class UsuarioResource extends Resource {
 
@@ -71,8 +71,6 @@ class UsuarioResource extends Resource {
      * @return Tonic\Response
      */
     public function atualizar($id = null) {
-        if(is_null($id))
-            throw new Tonic\MethodNotAllowedException();
         if(!(isset($this->request->data->login)
             &&isset($this->request->data->email)
             &&isset($this->request->data->senha)))
@@ -88,8 +86,7 @@ class UsuarioResource extends Resource {
                     $this->request->data->oauth_uid,
                     $this->request->data->oauth_provider,
                     $this->request->data->twitter_oauth_token,
-                    $this->request->data->twitter_oauth_token_secret,
-                    $id
+                    $this->request->data->twitter_oauth_token_secret
                     );
 
             unset($this->usuarioService);

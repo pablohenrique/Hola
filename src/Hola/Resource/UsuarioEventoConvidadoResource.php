@@ -6,7 +6,7 @@ use Hola\Service\ConvidadoService,
     Tonic\Response;
 
 /**
- * @uri /usuario/:id/evento/:$id_evento/convidado
+ * @uri /:id/evento/:$id_evento/convidado
  */
 class UsuarioEventoConvidadoResource extends Resource {
 

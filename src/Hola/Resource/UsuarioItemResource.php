@@ -6,8 +6,8 @@ use Hola\Service\ItemService,
     Tonic\Response;
 
 /**
- * @uri /usuario/:id/item
- * @uri /usuario/:id/item/:$id_item
+ * @uri /:id/item
+ * @uri /:id/item/:$id_item
  */
 class UsuarioItemResource extends Resource {
 
