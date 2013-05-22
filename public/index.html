@@ -116,14 +116,6 @@
             <input name="email" id="email" type="text">
             <label>Celular</label>
             <input name="celular" id="celular" type="text">
-            <label>oauth_uid</label>
-            <input name="oauth_uid" id="oauth_uid" type="text">
-            <label>oauth_provider</label>
-            <input name="oauth_provider" id="oauth_provider" type="text">
-            <label>twitter_oauth_token</label>
-            <input name="twitter_oauth_token" id="twitter_oauth_token" type="text">
-            <label>twitter_oauth_token_secret</label>
-            <input name="twitter_oauth_token_secret" id="twitter_oauth_token_secret" type="text">
             <label>Senha</label>
             <input name="senha" id="senha" type="password">
             <hr />
@@ -133,50 +125,43 @@
         <!-- FIM DO SCRIPT CADASTRO USUARIO USANDO BACKBONE -->
         <script>
 
-            $.fn.serializeObject = function() {
-                var o = {};
-                var a = this.serializeArray();
-                $.each(a, function() {
-                    if (o[this.name] !== undefined) {
-                        if (!o[this.name].push) {
-                            o[this.name] = [o[this.name]];
-                        }
-                        o[this.name].push(this.value || '');
-                    } else {
-                        o[this.name] = this.value || '';
-                    }
-                });
-                return o;
-            };
-
-            $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-                options.url = 'http://54.232.93.172/Hola/api/' + options.url;
-            });
 
 
-            var Usuario = Backbone.Model.extend({
-                urlRoot: 'usuario',
-            });
+            Usuario = Backbone.Model.extend({
+             urlRoot:"/api/usuario",
+             defaults:{
+                "login":"",
+                "senha":"",
+                "email":"",
+                "celular":"",
+                "oauth_uid":null,
+                "oauth_provider":null,
+                "twitter_oauth_token":null,
+                "twitter_oauth_token_secret":null
 
-            var CadastrarUsuario = Backbone.View.extend({
+    }
+});
+
+
+            CadastrarUsuario = Backbone.View.extend({
                 el: '.page',
                 render: function() {
                     var template = _.template($('#cadastrar-usuario-template').html(), {});
                     this.$el.html(template);
+                    $(this.el).html(this.template(this.model.toJSON()));
+                    return this;    
                 },
                 events: {
                     'submit .cadastrar-usuario-form': 'salvarUsuario',
                 },
                 salvarUsuario: function(ev) {
-                    var dadosUsuario = $(ev.currentTarget).serializeObject();
-                    var usuario = new Usuario();
-                    console.log(dadosUsuario);
-                    usuario.save(dadosUsuario, {
-                        success: function(usuario) {
-                            router.navigate('', {trigger: true});
-                        }
-                    });
-                    return false;
+                            this.model.set({
+               login:$('#login').val(),
+               senha:$('#senha').val(),
+               email:$('#email').val(),
+               celular:$('#celular').val(),
+                });
+                 this.model.save();
                 }
             });
 
