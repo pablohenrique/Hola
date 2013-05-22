@@ -160,10 +160,14 @@
             'submit .cadastrar-usuario-form':'salvarUsuario',
         },
         salvarUsuario: function (ev){
-            var usuario = new Usuario();
             var dadosUsuario = $(ev.currentTarget).serializeObject();
+            var usuario = new Usuario();
             console.log(dadosUsuario);
-            return false;
+            usuario.save(dadosUsuario, {
+          success: function (usuario) {
+            router.navigate('', {trigger:true});
+          }
+        });
         }
     });
 
