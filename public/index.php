@@ -97,31 +97,6 @@
         <div class="page">
         </div>
 
-        <!-- DIV PARA CADASTRO DE USUARIO 
-        <div id="cadastrar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-                <form class="cadastrar-usuario-form">
-                        <legend>Cadastrar Usuário</legend>
-                        <label>Login</label>
-                        <input type="text" placeholder="Entre o login" name="login"/>
-                        <label>E-mail</label>
-                        <input type="text" placeholder="Entre com o e-mail" name="email"/>
-                        <label>Celular</label>
-                        <input type="text" placeholder="Entre com o celular" name="celular"/>
-                        <label>Senha</label>
-                        <input type="password" placeholder="Entre com a senha" name="senha"/>
-                        <p><button type="submit" class="btn btn-primary">Próximo Passo</button></p>
-                        </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
-            </div>
-        </div> -->
-        <!-- FIM DA DIV PARA CADASTRO DE USUARIO -->
-
 
         <script src="js/jquery-2.0.0.js" type="text/javascript"></script>
         <script src="js/underscore.js" type="text/javascript"></script>
@@ -246,7 +221,7 @@
             };
 
             $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-                options.url = 'http://54.232.93.172/Hola/api/' + options.url;
+                options.url = '/Hola/api/' + options.url;
             });
 
 
