@@ -8,7 +8,7 @@ use Hola\Service\UsuarioService,
  * @uri /
  * @uri /:id
  */
-class TestResource extends Resource {
+class UsuarioResource extends Resource {
 
     private $usuarioService = null;
 
@@ -26,41 +26,6 @@ class TestResource extends Resource {
 
         } catch (RADUFU\DAO\NotFoundException $e) {
             throw new Tonic\NotFoundException();
-        }
-    }
-
-
-    /**
-     * @method POST
-     * @provides application/json
-     * @json
-     * @return Tonic\Response
-     */
-    public function criar($login = null) {
-        if(!(isset($login)
-            &&isset($this->request->data->email)
-            &&isset($this->request->data->senha)))
-            return new Response(Response::BADREQUEST);
-
-        try {
-            $this->usuarioService = new UsuarioService();
-            $this->usuarioService->post(
-                    $login,
-                    $this->request->data->senha,
-                    $this->request->data->email,
-                    $this->request->data->celular,
-                    $this->request->data->oauthUid,
-                    $this->request->data->oauthProvider,
-                    $this->request->data->twitterOauthToken,
-                    $this->request->data->twitterOauthTokenSecret
-                    );
-            $criada = $this->usuarioService->search($login)->getLogin();
-
-            unset($this->usuarioService);
-            return new Response(Response::CREATED, array('login' => $criada));
-
-        } catch (RADUFU\DAO\Exception $e) {
-            throw new Tonic\Exception($e->getMessage());
         }
     }
 

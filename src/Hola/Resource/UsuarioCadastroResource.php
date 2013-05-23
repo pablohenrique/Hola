@@ -8,7 +8,7 @@ use Hola\Service\UsuarioService,
  * @uri /usuario/
  * @uri /usuario/:login
  */
-class TestResource extends Resource {
+class UsuarioCadastroResource extends Resource {
 
     private $usuarioService = null;
 
