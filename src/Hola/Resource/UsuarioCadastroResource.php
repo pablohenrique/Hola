@@ -5,7 +5,7 @@ use Hola\Service\UsuarioService,
     Tonic\Resource,
     Tonic\Response;
 /**
- * @uri /usuario/
+ * @uri /usuario
  */
 class UsuarioCadastroResource extends Resource {
 
@@ -17,7 +17,7 @@ class UsuarioCadastroResource extends Resource {
      * @json
      * @return Tonic\Response
      */
-    public function criar($login = null) {
+    public function criar() {
         if(!(isset($this->request->data->login)
             &&isset($this->request->data->email)
             &&isset($this->request->data->senha)))
