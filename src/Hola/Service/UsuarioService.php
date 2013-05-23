@@ -49,6 +49,13 @@ class UsuarioService {
 		$this->dao->delete($input);
 	}
 
+	public function login($login,$senha){
+		if($this->dao->login($login,$senha) == 1)
+			return self::search($login);
+		else
+			return null;
+	}
+
 }
 
 ?>

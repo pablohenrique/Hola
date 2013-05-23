@@ -163,6 +163,27 @@ TO TipoItem DO INSTEAD(
 		));
 
 
+CREATE OR REPLACE FUNCTION login(arglogin character varying, argsenha character varying)
+  RETURNS integer AS
+$BODY$
+DECLARE
+	consulta RECORD;
+BEGIN
+	SELECT COUNT(DISTINCT usuario_login) AS contagem, usuario_login AS login, usuario_senha AS senha INTO consulta
+	FROM usuario WHERE usuario_login = arglogin AND usuario_senha = argsenha
+	GROUP BY usuario_login, usuario_senha;
+
+	IF (consulta.contagem = 1 AND consulta.login = arglogin AND consulta.senha = argsenha) THEN
+		RETURN  1;
+	ELSE
+		RETURN -1;
+	END IF;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+
+
 /*INSERTS*/
 
 

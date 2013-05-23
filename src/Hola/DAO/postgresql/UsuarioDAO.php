@@ -24,6 +24,7 @@ class UsuarioDAO implements IUsuarioDAO{
 						usuario_celular = :usuario_celular
 						WHERE usuario_login = :usuario_login;';
 	const SQL_DELETE = 'DELETE FROM Usuario WHERE usuario_login = :usuario_login;';
+	const SQL_LOGIN = 'SELECT login(:usuario_login,:usuario_senha)';
 
 	/*MORE DEFINITIONS*/
 
@@ -109,6 +110,24 @@ class UsuarioDAO implements IUsuarioDAO{
 
 		} catch(PDOException $ex){
 			throw new Exception("Ao deletar Usuario: " . $ex->getMessage());
+		}
+	}
+
+	public function login($login,$senha){
+		try{
+			$stm = Connection::Instance()->get()->prepare(self::SQL_LOGIN);
+			$stm->execute(array(
+					':usuario_login' => $login, 
+					':usuario_senha' => $senha
+					));
+
+			$result = $stm->fetch(PDO::FETCH_ASSOC);
+			return $result;
+
+			unset($stm,$result);
+
+		} catch(PDOException $ex){
+			throw new Exception("Ao procurar [GET] Usuario: " . $ex->getMessage());
 		}
 	}
 

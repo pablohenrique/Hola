@@ -40,6 +40,13 @@ interface IUsuarioDAO{
      * @throws DAOException
      */
     public function delete($id);
+
+    /**
+     * Confere se o Usuario existe no BD
+     * @param type $login, type $senha
+     * @throws DAOException
+     */
+    public function login($login,$senha);
 }
 
 ?>

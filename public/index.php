@@ -1,3 +1,13 @@
+<?php
+  require_once (__DIR__ . '/../src/RADUFU/Autoloader.php');
+  require_once (__DIR__ . 'setSession.php');
+
+  if(!is_null($_SESSION['user'])){
+    header("Location: /api/" . $_SESSION['user']->getLogin());
+    exit();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
     <meta charset="utf-8">

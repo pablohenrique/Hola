@@ -1,3 +1,26 @@
+<?php
+    require_once (__DIR__ . '/../src/RADUFU/Autoloader.php');
+    require_once (__DIR__ . 'setSession.php');
+
+    $usuario = $_SESSION['user'];
+
+    if(!is_null($usuario)){
+        use RADUFU\Service\EventoService,
+            RADUFU\Service\ConvidadoService;
+
+        $eventoService = new EventoService();
+        $convidadoService = new ConvidadoService();
+
+        $user = json_encode($usuario);
+        $evento = json_encode($eventoService->search($usuario->getLogin()));
+        $convidado = json_encode($convidadoService->getUsuario($usuario->getLogin()));
+    }
+    else{
+        header("Location: index.php");
+        exit();
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
     <meta charset="utf-8">
