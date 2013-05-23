@@ -276,6 +276,9 @@
             var Usuario = Backbone.Model.extend({
                 urlRoot: 'usuario/',
             });
+            var UsuarioLogin = Backbone.Model.extend({
+                urlRoot: '/',
+            });
 
             var CadastrarUsuario = Backbone.View.extend({
                 el: '.page',
@@ -326,10 +329,18 @@
                     'submit .logar-usuario-form': 'logarUsuario',
                 },
                 logarUsuario: function(ev) {
-                    var dadosUsuario = $(ev.currentTarget).serializeObject();
-                    var usuario = new Usuario();
-                    console.log(dadosUsuario);
-                    return false;
+                    var dadosUsuarioLogin = $(ev.currentTarget).serializeObject();
+                    var usuario = new UsuarioLogin();
+                    usuario.set({id: dadosUsuarioLogin.login});
+                    console.log(dadosUsuarioLogin);
+                    console.log(usuario);
+                usuario.fetch({
+                success: function (usuario) {
+                console.log(usuario);
+        }
+    });
+                return false;
+                    
                 }
             });
 
