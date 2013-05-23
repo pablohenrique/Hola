@@ -1,11 +1,52 @@
 <?php
-  require_once (__DIR__ . '/../src/Hola/Autoloader.php');
-  require_once (__DIR__ . 'setSession.php');
+    require_once (__DIR__ . '/../src/Hola/Autoloader.php');    
+    require_once (__DIR__ . '/setSession.php');
 
-  if(!is_null($_SESSION['user'])){
-    header("Location: /api/" . $_SESSION['user']->getLogin());
-    exit();
-  }
+    use Hola\Service\EventoService,
+        Hola\Service\ConvidadoService,
+        Hola\Service\TipoItemService,
+        Hola\Service\TipoService,
+        Hola\Service\ItemService;
+
+    $usuario = $_SESSION['user'];
+
+    if(!is_null($usuario)){
+        $eventoService = new EventoService();
+        $convidadoService = new ConvidadoService();
+        $tipoService = new TipoService();
+        $itemService = new ItemService();
+
+        $user = json_encode($usuario);
+        $evento = json_encode($eventoService->search($usuario->getLogin()));
+        $convidado = json_encode($convidadoService->getUsuario($usuario->getLogin()));
+        $tipo = json_encode($tipoService->search());
+        $item = json_encode($itemService->search());
+
+        unset($eventoService,$convidadoService,$tipoService,$itemService);
+    }
+
+
+    #
+    #   @ ATENCAAAAAAAAAOO! @
+    #
+    #   Para usar essas variaveis , basta usar esse exemplo:
+    #
+
+    /*
+    <script type="text/javascript">
+        var require = {
+            config: {
+                "app": {
+                    loggedUser:   <?php echo($user);  ?>,
+                    evento:       <?php echo($evento); ?>,
+                    convidado:    <?php echo($convidado); ?>
+                    tipo:         <?php echo($tipo); ?>
+                    item:         <?php echo($item); ?>
+                }
+            }
+        }
+    </script>
+    */
 ?>
 
 <!DOCTYPE html>

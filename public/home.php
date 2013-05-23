@@ -1,10 +1,11 @@
 <?php
     require_once (__DIR__ . '/../src/Hola/Autoloader.php');
-    require_once (__DIR__ . 'setSession.php');
+    require_once (__DIR__ . '/setSession.php');
 
     $usuario = $_SESSION['user'];
 
     if(!is_null($usuario)){
+        /*
         use Hola\Service\EventoService,
             Hola\Service\ConvidadoService;
 
@@ -14,6 +15,7 @@
         $user = json_encode($usuario);
         $evento = json_encode($eventoService->search($usuario->getLogin()));
         $convidado = json_encode($convidadoService->getUsuario($usuario->getLogin()));
+        */
     }
     else{
         header("Location: index.php");
