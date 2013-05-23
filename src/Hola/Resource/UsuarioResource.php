@@ -8,7 +8,7 @@ use Hola\Service\UsuarioService,
  * @uri /
  * @uri /:id
  */
-class UsuarioResource extends Resource {
+class TestResource extends Resource {
 
     private $usuarioService = null;
 
@@ -36,8 +36,8 @@ class UsuarioResource extends Resource {
      * @json
      * @return Tonic\Response
      */
-    public function criar($id = null) {
-        if(!(isset($this->request->data->login)
+    public function criar($login = null) {
+        if(!(isset($login)
             &&isset($this->request->data->email)
             &&isset($this->request->data->senha)))
             return new Response(Response::BADREQUEST);
@@ -45,19 +45,19 @@ class UsuarioResource extends Resource {
         try {
             $this->usuarioService = new UsuarioService();
             $this->usuarioService->post(
-                    $this->request->data->login,
+                    $login,
                     $this->request->data->senha,
                     $this->request->data->email,
                     $this->request->data->celular,
-                    $this->request->data->oauth_uid,
-                    $this->request->data->oauth_provider,
-                    $this->request->data->twitter_oauth_token,
-                    $this->request->data->twitter_oauth_token_secret
+                    $this->request->data->oauthUid,
+                    $this->request->data->oauthProvider,
+                    $this->request->data->twitterOauthToken,
+                    $this->request->data->twitterOauthTokenSecret
                     );
-            $criada = $this->usuarioService->search($this->request->data->login)->getId();
+            $criada = $this->usuarioService->search($login)->getLogin();
 
             unset($this->usuarioService);
-            return new Response(Response::CREATED, array('id' => $criada));
+            return new Response(Response::CREATED, array('login' => $criada));
 
         } catch (RADUFU\DAO\Exception $e) {
             throw new Tonic\Exception($e->getMessage());
