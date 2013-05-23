@@ -82,9 +82,8 @@
                         <a href="#" role="button"><i class="livicon" data-n="facebook-alt" data-s="25" data-c="#777" data-hc="white" data-op="1"></i>
                             <a href="#" role="button"><i class="livicon" data-n="twitter-alt" data-s="25" data-c="#777" data-hc="white" data-op="1"></i>
                             </a>
-                            <input type="text" class="input" placeholder="Email">
-                            <input type="password" class="input-small" placeholder="Senha">
-                            <button type="submit" class="btn" href="#/cadastrar"><span class="livicon shadowed" data-n="sign-in" data-s="15" data-c="black" data-hc="0" data-onparent="true"></span>Login </button>
+                            
+                            <a href="#/logar"  class="btn" ><span class="livicon shadowed" data-n="sign-in" data-s="15" data-c="black" data-hc="0" data-onparent="true"></span>Login </a>
                             <a href="#/cadastrar"  class="btn" ><span class="livicon shadowed" data-n="pen" data-s="15" data-c="black" data-hc="0" data-onparent="true"></span>
                                 Cadastrar
                             </a>
@@ -197,6 +196,55 @@
 <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
         </script>
 
+        <script type="text/template" id="logar-usuario-template">
+<!-- DIV PARA CAROUSEL -->
+<div class="row">
+    <div class="span7 offset1">
+        <div id="myCarousel" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>Example headline.</h1>
+                            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            <a class="btn btn-large btn-primary" href="#">Sign up today</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>Another example headline.</h1>
+                            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            <a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</div>
+<div class = "row">
+    <div class="span3 offset10" style="margin-top : -35%; position:absolute;"><div class="pull-left">        <div class = "well">
+                <form class="logar-usuario-form" method="post">
+                    <legend>Logar Usuarios</legend>
+                    <label>Login</label>
+                    <input name="login" id="login" type="text">
+                    <label>Senha</label>
+                    <input name="senha" id="senha" type="password">
+                    <hr />
+                    <button type="submit" class="btn">Salvar</button>
+                </form>
+            </div></div> </div></div>
+<!-- FIM DA DIV PARA CAROUSEL -->
+
+<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </script>
+
         <!-- FIM DO SCRIPT CADASTRO USUARIO USANDO BACKBONE -->
 
         <script type="text/template" id="sucesso-template">
@@ -267,15 +315,25 @@
                 },
             });
 
+            var Logar = Backbone.View.extend({
+                el: '.page',
+                render: function() {
+                    var template = _.template($('#logar-usuario-template').html(), {});
+                    this.$el.html(template);
+                },
+            });
+
 
             var Router = Backbone.Router.extend({
                 routes: {
                     '': 'home',
                     'cadastrar': 'cadastrarUsuario',
                     'sucesso': 'sucesso',
+                    'logar': 'logarUsuario',
                 }
             });
             var cadastrarUsuario = new CadastrarUsuario();
+            var logarUsuario = new Logar();
             var sucesso = new Sucesso();
             var router = new Router();
             var home = new Home();
@@ -288,7 +346,9 @@
             router.on('route:cadastrarUsuario', function() {
                 cadastrarUsuario.render();
             });
-
+            router.on('route:logarUsuario', function() {
+                logarUsuario.render();
+            });
 
 
 
