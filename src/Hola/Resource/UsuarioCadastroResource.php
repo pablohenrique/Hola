@@ -6,12 +6,10 @@ use Hola\Service\UsuarioService,
     Tonic\Response;
 /**
  * @uri /usuario/
- * @uri /usuario/:login
  */
 class UsuarioCadastroResource extends Resource {
 
     private $usuarioService = null;
-
 
     /**
      * @method POST
@@ -20,7 +18,7 @@ class UsuarioCadastroResource extends Resource {
      * @return Tonic\Response
      */
     public function criar($login = null) {
-        if(!(isset($login)
+        if(!(isset($this->request->data->login)
             &&isset($this->request->data->email)
             &&isset($this->request->data->senha)))
             return new Response(Response::BADREQUEST);
@@ -28,7 +26,7 @@ class UsuarioCadastroResource extends Resource {
         try {
             $this->usuarioService = new UsuarioService();
             $this->usuarioService->post(
-                    $login,
+                    $this->request->data->login,
                     $this->request->data->senha,
                     $this->request->data->email,
                     $this->request->data->celular,
@@ -37,7 +35,7 @@ class UsuarioCadastroResource extends Resource {
                     $this->request->data->twitterOauthToken,
                     $this->request->data->twitterOauthTokenSecret
                     );
-            $criada = $this->usuarioService->search($login)->getLogin();
+            $criada = $this->usuarioService->search($this->request->data->login)->getLogin();
 
             unset($this->usuarioService);
             return new Response(Response::CREATED, array('login' => $criada));
