@@ -305,6 +305,7 @@
                     var template = _.template($('#sucesso-template').html(), {});
                     this.$el.html(template);
                 },
+
             });
 
             var Home = Backbone.View.extend({
@@ -321,6 +322,15 @@
                     var template = _.template($('#logar-usuario-template').html(), {});
                     this.$el.html(template);
                 },
+                events: {
+                    'submit .logar-usuario-form': 'logarUsuario',
+                },
+                logarUsuario: function(ev) {
+                    var dadosUsuario = $(ev.currentTarget).serializeObject();
+                    var usuario = new Usuario();
+                    console.log(dadosUsuario);
+                    return false;
+                }
             });
 
 
