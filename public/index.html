@@ -34,7 +34,7 @@
                             <input type="text" class="input" placeholder="Email">
                             <input type="password" class="input-small" placeholder="Senha">
                             <button type="submit" class="btn" href="#/cadastrar"><span class="livicon shadowed" data-n="sign-in" data-s="15" data-c="black" data-hc="0" data-onparent="true"></span>Login </button>
-                            <a href="#/login"  class="btn" ><span class="livicon shadowed" data-n="pen" data-s="15" data-c="black" data-hc="0" data-onparent="true"></span>
+                            <a href="#/cadastrar"  class="btn" ><span class="livicon shadowed" data-n="pen" data-s="15" data-c="black" data-hc="0" data-onparent="true"></span>
                                 Cadastrar
                             </a>
                             </ul>
@@ -225,13 +225,6 @@
                 }
             });
 
-            var loginUsuario = Backbone.View.extend({
-            events: {
-                    'submit .cadastrar-usuario-form': 'salvarUsuario',
-                },
-
-            });
-
             var Sucesso = Backbone.View.extend({
                 el: '.page',
                 render: function() {
@@ -254,7 +247,6 @@
                     '': 'home',
                     'cadastrar': 'cadastrarUsuario',
                     'sucesso': 'sucesso',
-                    'login': 'login',
                 }
             });
             var cadastrarUsuario = new CadastrarUsuario();
