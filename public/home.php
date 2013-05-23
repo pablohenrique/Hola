@@ -1,12 +1,12 @@
 <?php
-    require_once (__DIR__ . '/../src/RADUFU/Autoloader.php');
+    require_once (__DIR__ . '/../src/Hola/Autoloader.php');
     require_once (__DIR__ . 'setSession.php');
 
     $usuario = $_SESSION['user'];
 
     if(!is_null($usuario)){
-        use RADUFU\Service\EventoService,
-            RADUFU\Service\ConvidadoService;
+        use Hola\Service\EventoService,
+            Hola\Service\ConvidadoService;
 
         $eventoService = new EventoService();
         $convidadoService = new ConvidadoService();

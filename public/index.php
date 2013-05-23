@@ -1,5 +1,5 @@
 <?php
-  require_once (__DIR__ . '/../src/RADUFU/Autoloader.php');
+  require_once (__DIR__ . '/../src/Hola/Autoloader.php');
   require_once (__DIR__ . 'setSession.php');
 
   if(!is_null($_SESSION['user'])){
