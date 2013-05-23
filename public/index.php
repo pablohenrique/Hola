@@ -235,6 +235,89 @@
 <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
         </script>
 
+        <script type="text/template" id="logar-errado-usuario-template">
+                <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="#">Reunião</a>
+            
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="active"><a href="#"><i class="livicon" data-n="home" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Home</a></li>
+                        <li><a href="#contato"><i class="livicon" data-n="mail" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Contato</a></li>
+                        <li><a href="#sobre"><i class="livicon" data-n="doc-portrait" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Sobre</a></li>
+                    </ul>
+                    <!-- LOGIN DE USUARIO -->
+                    <form class="navbar-form pull-right">
+                        <a href="#" role="button"><i class="livicon" data-n="facebook-alt" data-s="25" data-c="#777" data-hc="white" data-op="1"></i>
+                            <a href="#" role="button"><i class="livicon" data-n="twitter-alt" data-s="25" data-c="#777" data-hc="white" data-op="1"></i>
+                            </a>
+                            
+                            <a href="#/logar"  class="btn" ><span class="livicon shadowed" data-n="sign-in" data-s="15" data-c="black" data-hc="0" data-onparent="true"></span>Login </a>
+                            <a href="#/cadastrar"  class="btn" ><span class="livicon shadowed" data-n="pen" data-s="15" data-c="black" data-hc="0" data-onparent="true"></span>
+                                Cadastrar
+                            </a>
+                            </ul>
+                    </form>
+                    <!-- FIM DO LOGIN -->
+                </div> 
+            </div>
+            </div>
+        </div>
+    </div>
+<!-- DIV PARA CAROUSEL -->
+<div class="row">
+    <div class="span7 offset1">
+        <div id="myCarousel" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>Example headline.</h1>
+                            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            <a class="btn btn-large btn-primary" href="#">Sign up today</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>Another example headline.</h1>
+                            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            <a class="btn btn-large btn-primary" href="#">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</div>
+<div class = "row">
+    <div class="span3 offset10" style="margin-top : -35%; position:absolute;"><div class="pull-left">        <div class = "well">
+                <form class="logar-usuario-form" method="post">
+                <p>Dados Incorretos</p>
+                    <legend>Logar Usuarios</legend>
+                    <label>Login</label>
+                    <input name="login" id="login" type="text">
+                    <label>Senha</label>
+                    <input name="senha" id="senha" type="password">
+                    <hr />
+                    <button type="submit" class="btn">Salvar</button>
+                </form>
+            </div></div> </div></div>
+<!-- FIM DA DIV PARA CAROUSEL -->
+
+<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </script>
+
         <script type="text/template" id="logar-usuario-template">
                 <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
@@ -384,7 +467,7 @@
 <div class = "row">
     <div class="span3 offset10" style="margin-top : -35%; position:absolute;"><div class="pull-left">        <div class = "well">
     <p>LOGADO COM SUCESSO!</p>
-    <p><?php print_r($user); ?></p>
+    <p><?php if(isset($user)) print_r($user); ?></p>
             </div></div> </div></div>
 <!-- FIM DA DIV PARA CAROUSEL -->
 
@@ -470,6 +553,14 @@
                 },
             });
 
+            var DadosErrados = Backbone.View.extend({
+                el: '.page',
+                render: function() {
+                    var template = _.template($('#logar-errado-usuario-template').html(), {});
+                    this.$el.html(template);
+                },
+            });            
+
             var Logar = Backbone.View.extend({
                 el: '.page',
                 render: function() {
@@ -492,6 +583,7 @@
         },
                 error: function(){
                 console.log('erro');
+                router.navigate('errado', {trigger: true});
                 }
     });
                 return false;
@@ -510,6 +602,7 @@
                     'sucesso': 'sucesso',
                     'logar': 'logarUsuario',
                     'logado': 'usuarioLogado',
+                    'errado': 'dadosErrados',
                 }
             });
             var cadastrarUsuario = new CadastrarUsuario();
@@ -518,6 +611,7 @@
             var sucesso = new Sucesso();
             var router = new Router();
             var home = new Home();
+            var dadosErrados = new DadosErrados();
             router.on('route:home', function() {
                 home.render();
             });
@@ -533,7 +627,9 @@
             router.on('route:usuarioLogado', function() {
                 usuarioLogado.render();
             });
-
+            router.on('route:dadosErrados', function() {
+                dadosErrados.render();
+            });
 
             Backbone.history.start();
         </script>
