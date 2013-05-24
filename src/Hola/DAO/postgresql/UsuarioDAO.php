@@ -122,7 +122,7 @@ class UsuarioDAO implements IUsuarioDAO{
 					));
 
 			$result = $stm->fetch(PDO::FETCH_ASSOC);
-			return $result;
+			return $result['login'];
 
 			unset($stm,$result);
 
