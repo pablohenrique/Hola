@@ -1,3 +1,8 @@
+function htmlEncode(value){
+      return $('<div/>').text(value).html();
+    }
+
+
 function require_template(templateName) {
     var template = $('#template_' + templateName);
     if (template.length === 0) {
@@ -108,7 +113,7 @@ require_template('LoginView');
             });
 
         
-
+             var u = new Usuario();
 
 
             var Router = Backbone.Router.extend({
@@ -128,6 +133,7 @@ require_template('LoginView');
             var home = new Home();
             var dadosErrados = new DadosErrados();
             router.on('route:home', function() {
+                    u = usrLog;
                 if(usrLog == "" || usrLog == null){
                     home.render();
                     console.log('erro');
