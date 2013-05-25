@@ -21,6 +21,10 @@
         session_start();
 
         $usuario = $service->login($_POST['login'],$_POST['senha']);
+        if(is_null($usuario)){
+            header("Location: /Hola/#/logar");
+            exit();
+        }
         $_SESSION['user'] = $usuario;
 
         $user = json_encode($usuario);
@@ -386,7 +390,7 @@
 </div>
 <div class = "row">
     <div class="span3 offset10" style="margin-top : -35%; position:absolute;"><div class="pull-left">        <div class = "well">
-                <form class="logar-usuario-form" method="POST" action="?">
+                <form class="logar-usuario-form" method="POST" action="index.php">
                     <legend>Logar Usuarios</legend>
                     <label>Login</label>
                     <input name="login" id="login" type="text">
