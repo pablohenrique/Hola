@@ -384,7 +384,7 @@
 </div>
 <div class = "row">
     <div class="span3 offset10" style="margin-top : -35%; position:absolute;"><div class="pull-left">        <div class = "well">
-                <form class="logar-usuario-form" method="post">
+                <form class="logar-usuario-form" method="POST" action="?">
                     <legend>Logar Usuarios</legend>
                     <label>Login</label>
                     <input name="login" id="login" type="text">
@@ -567,28 +567,6 @@
                     var template = _.template($('#logar-usuario-template').html(), {});
                     this.$el.html(template);
                 },
-                events: {
-                    'submit .logar-usuario-form': 'logarUsuario',
-                },
-                logarUsuario: function(ev) {
-                    var dadosUsuarioLogin = $(ev.currentTarget).serializeObject();
-                    var usuario = new UsuarioLogin();
-                    usuario.set({id: dadosUsuarioLogin.login});
-                usuario.fetch({
-                success: function (usuario) {
-                var usuarioMem = usuario.toJSON();
-                console.log(usuarioMem);
-                usuarioMem : <?php echo($user);  ?>;
-                router.navigate('logado', {trigger: true});
-        },
-                error: function(){
-                console.log('erro');
-                router.navigate('errado', {trigger: true});
-                }
-    });
-                return false;
-                    
-                }
             });
 
         
@@ -613,7 +591,13 @@
             var home = new Home();
             var dadosErrados = new DadosErrados();
             router.on('route:home', function() {
-                home.render();
+                var usr= "<?php echo $_POST['user']; ?>";
+                console.log(usr);
+                if(usr == "" || usr == null){
+                    home.render();
+                } else{
+                    sucesso.render();
+                }
             });
             router.on('route:sucesso', function() {
                 sucesso.render();
