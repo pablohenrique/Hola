@@ -27,9 +27,11 @@ function require_template(templateName) {
 
 require_template('IndexView');
 require_template('CadastroUsuarioView');
-require_template('ErroLoginView');
-require_template('HomeView');
 require_template('LoginView');
+require_template('HomeView');
+require_template('ErroLoginView');
+
+
 
             $.fn.serializeObject = function() {
                 var o = {};
@@ -57,6 +59,13 @@ require_template('LoginView');
             });
             var UsuarioLogin = Backbone.Model.extend({
                 urlRoot: '/',
+            });
+            var uid;
+            var EventosConvidado = Backbone.Collection.extend({
+                url : function() {
+                console.log ('UID E:'+uid);
+                return '/' + uid + '/evento/';
+             }
             });
 
             var CadastrarUsuario = Backbone.View.extend({
@@ -88,13 +97,27 @@ require_template('LoginView');
                 },
             });
 
+            
+
+
             var UsuarioLogado = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                    var template = _.template($('#template_HomeView').html(), {});
-                    this.$el.html(template);
+                var ec = new EventosConvidado();
+                var that = this;
+                uid = usrLog.login;
+                ec.fetch({
+                    success: function (ec) {
+                    console.log(ec.id);
+                    var template = _.template($('#template_HomeView').html(), {ec: ec.models});
+                    that.$el.html(template);
+                    console.log(ec.toJSON());
+          }
+        })
                 },
             });
+
+
 
             var DadosErrados = Backbone.View.extend({
                 el: '.page',
@@ -120,10 +143,14 @@ require_template('LoginView');
                 routes: {
                     '': 'home',
                     'cadastrar': 'cadastrarUsuario',
-                    'sucesso': 'sucesso',
                     'logar': 'logarUsuario',
                     'logado': 'usuarioLogado',
                     'errado': 'dadosErrados',
+                    'eventos': 'eventos',
+                    'convites': 'convites',
+                    'amigos': 'amigos',
+                    'listadecompras': 'listadecompras',
+                    'meucadastro': 'meucadastro',
                 }
             });
             var cadastrarUsuario = new CadastrarUsuario();
@@ -136,24 +163,26 @@ require_template('LoginView');
                     u = usrLog;
                 if(usrLog == "" || usrLog == null){
                     home.render();
-                    console.log('erro');
 
                 } else{
                     usuarioLogado.render();
-                    console.log('sucesso');
-                    console.log(usr);
                 }
             });
+
+
             router.on('route:cadastrarUsuario', function() {
                 cadastrarUsuario.render();
             });
             router.on('route:logarUsuario', function() {
+                
                 logarUsuario.render();
             });
             router.on('route:usuarioLogado', function() {
+                
                 home.render();
             });
             router.on('route:dadosErrados', function() {
+                
                 dadosErrados.render();
             });
 

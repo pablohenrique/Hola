@@ -64,7 +64,7 @@
                             </table>
                         </div>
                         <div class="well">
-                            <strong>Seus Convites</strong>
+                            <strong>Seus Convites!</strong>
                             <table class="table table-hover">
                                 <tr>
                                     <th>Evento</th>
@@ -73,40 +73,15 @@
                                     <th><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></th>
                                     <td> <a href="#mais" data-toggle="modal"> <i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></a></td>
                                 </tr>
+                                <% _.each(ec, function(ec) { %>
                                 <tr class="success">
-                                    <td>Evento 1</td>
+                                    <td><%= htmlEncode(ec['nome']) %></td>
                                     <td><i class="livicon" data-n="checked-on" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
                                     <td><i class="livicon" data-n="checked-off" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
                                     <td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
                                     <td> <a href="#mais" data-toggle="modal"> <i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></a></td>
                                 </tr>
-                                <tr class="warning">
-                                    <td>Evento 2</td>
-                                    <td><i class="livicon" data-n="checked-on" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-                                    <td><i class="livicon" data-n="checked-off" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-                                    <td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-                                    <td> <a href="#mais" data-toggle="modal"> <i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></a></td>
-                                <tr class="info">
-                                    <td>Evento 3</td>
-                                    <td><i class="livicon" data-n="checked-on" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-                                    <td><i class="livicon" data-n="checked-off" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-                                    <td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-                                    <td> <a href="#mais" data-toggle="modal"> <i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></a></td>
-                                </tr>
-                                <tr class="success">
-                                    <td>Evento 4</td>
-                                    <td><i class="livicon" data-n="checked-on" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-                                    <td><i class="livicon" data-n="checked-off" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-                                    <td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-                                    <td> <a href="#mais" data-toggle="modal"> <i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></a></td>
-                                </tr>
-                                <tr class="error">
-                                    <td>Evento 5</td>
-                                    <td><i class="livicon" data-n="checked-on" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-                                    <td><i class="livicon" data-n="checked-off" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-                                    <td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
-                                    <td> <a href="#mais" data-toggle="modal"> <i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></a></td>
-                                </tr>
+                                
                             </table>
                         </div>
                     </div>
