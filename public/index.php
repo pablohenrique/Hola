@@ -593,20 +593,18 @@
             var home = new Home();
             var dadosErrados = new DadosErrados();
             router.on('route:home', function() {
-                var usr = '<?php echo $usuario; ?>';
+                var usr = JSON.parse(<?php echo json_encode($user); ?>);
+
                 
                 if(usr == "" || usr == null){
                     home.render();
                     console.log('erro');
 
                 } else{
-                    sucesso.render();
+                    usuarioLogado.render();
                     console.log('sucesso');
                     console.log(usr);
                 }
-            });
-            router.on('route:sucesso', function() {
-                sucesso.render();
             });
             router.on('route:cadastrarUsuario', function() {
                 cadastrarUsuario.render();
