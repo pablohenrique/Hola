@@ -145,7 +145,7 @@ require_template('LoginView');
                 logarUsuario.render();
             });
             router.on('route:usuarioLogado', function() {
-                usuarioLogado.render();
+                home.render();
             });
             router.on('route:dadosErrados', function() {
                 dadosErrados.render();
