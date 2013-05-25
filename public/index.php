@@ -593,12 +593,16 @@
             var home = new Home();
             var dadosErrados = new DadosErrados();
             router.on('route:home', function() {
-                var usr= "<?php echo $_POST['user']; ?>";
-                console.log(usr);
+                var usr = '<?php echo $usuario; ?>';
+                
                 if(usr == "" || usr == null){
                     home.render();
+                    console.log('erro');
+
                 } else{
                     sucesso.render();
+                    console.log('sucesso');
+                    console.log(usr);
                 }
             });
             router.on('route:sucesso', function() {
