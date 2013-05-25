@@ -6,27 +6,29 @@
         Hola\Service\ConvidadoService,
         Hola\Service\TipoItemService,
         Hola\Service\TipoService,
-        Hola\Service\ItemService;
+        Hola\Service\ItemService,
+        #Hola\DAO\Exception,
+        Hola\Model\Usuario,
+        Hola\Service\UsuarioService;
 
-    $usuario = $_SESSION['user'];
-
-    if(!is_null($usuario)){
+    if( isset($_POST['login']) && isset($_POST['senha']) ) {
+        $service = new UsuarioService();
         $eventoService = new EventoService();
         $convidadoService = new ConvidadoService();
         $tipoService = new TipoService();
         $itemService = new ItemService();
+
+        session_start();
+
+        $usuario = $service->login($_POST['login'],$_POST['senha']);
+        $_SESSION['user'] = $usuario;
 
         $user = json_encode($usuario);
         $evento = json_encode($eventoService->search($usuario->getLogin()));
         $convidado = json_encode($convidadoService->getUsuario($usuario->getLogin()));
         $tipo = json_encode($tipoService->search());
         $item = json_encode($itemService->search());
-
-        unset($eventoService,$convidadoService,$tipoService,$itemService);
     }
-
-    
-
 
     #
     #   @ ATENCAAAAAAAAAOO! @
