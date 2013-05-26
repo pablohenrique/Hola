@@ -65,9 +65,16 @@ require_template('ErroLoginView');
 
             var EventosConvidado = Backbone.Collection.extend({
                 url : function() {
+                return '/' + uid + '/convidado/';
+             }
+            });
+
+            var EventosOrganizado = Backbone.Collection.extend({
+                url : function() {
                 return '/' + uid + '/evento/';
              }
             });
+
 
             var CadastrarUsuario = Backbone.View.extend({
                 el: '.page',
@@ -105,19 +112,15 @@ require_template('ErroLoginView');
                 el: '.page',
                 render: function() {
                 var ec = new EventosConvidado();
+                var eo = new EventosOrganizado();
                 var that = this;
                 uid = usrLog.login;
-                
-                ec.fetch({
-
-                    success: function (ec) {
-                    console.log(ec.toJSON());
-                    console.log(ec);
-                    var template = _.template($('#template_HomeView').html(), {ec: ec.models});
-                    that.$el.html(template);
-                    
-          }
-        })
+                ec.fetch({success: function() {
+                eo.fetch({success: function() {
+                            var template = _.template($('#template_HomeView').html(), {ec: ec.models, eo: eo.models});
+                            that.$el.html(template);    
+    }});
+}});
                 },
             });
 
