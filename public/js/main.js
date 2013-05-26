@@ -61,9 +61,10 @@ require_template('ErroLoginView');
                 urlRoot: '/',
             });
             var uid;
+
+
             var EventosConvidado = Backbone.Collection.extend({
                 url : function() {
-                console.log ('UID E:'+uid);
                 return '/' + uid + '/evento/';
              }
             });
@@ -109,7 +110,7 @@ require_template('ErroLoginView');
                 ec.fetch({
                     success: function (ec) {
                     console.log(ec.toJSON());
-                    var template = _.template($('#template_HomeView').html(), {ec: ec});
+                    var template = _.template($('#template_HomeView').html(), {ec: ec.models});
                     that.$el.html(template);
                     
           }

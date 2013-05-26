@@ -74,6 +74,8 @@
                                     <td> <a href="#mais" data-toggle="modal"> <i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></a></td>
                                 </tr>
                                 <% _.each(ec, function(ec) { %>
+                                <%= console.log('printando objeto direto da visao') %>
+                                <%= console.log(ec.toJSON()) %>
                                 <tr class="success">
                                     <td><%= htmlEncode(ec['nome']) %></td>
                                     <td><i class="livicon" data-n="checked-on" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
