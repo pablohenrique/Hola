@@ -103,7 +103,7 @@ require_template('ErroLoginView');
             var UsuarioLogado = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                var ec = new EventosConvidado();
+                ec = new EventosConvidado();
                 var that = this;
                 uid = usrLog.login;
                 ec.fetch({
