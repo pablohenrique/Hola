@@ -107,9 +107,12 @@ require_template('ErroLoginView');
                 var ec = new EventosConvidado();
                 var that = this;
                 uid = usrLog.login;
+                
                 ec.fetch({
+
                     success: function (ec) {
                     console.log(ec.toJSON());
+                    console.log(ec);
                     var template = _.template($('#template_HomeView').html(), {ec: ec.models});
                     that.$el.html(template);
                     
