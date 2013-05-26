@@ -103,15 +103,15 @@ require_template('ErroLoginView');
             var UsuarioLogado = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                ec = new EventosConvidado();
+                var ec = new EventosConvidado();
                 var that = this;
                 uid = usrLog.login;
                 ec.fetch({
                     success: function (ec) {
-                    console.log(ec.id);
-                    var template = _.template($('#template_HomeView').html(), {ec: ec.models});
-                    that.$el.html(template);
                     console.log(ec.toJSON());
+                    var template = _.template($('#template_HomeView').html(), {ec: ec});
+                    that.$el.html(template);
+                    
           }
         })
                 },

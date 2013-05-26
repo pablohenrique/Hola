@@ -65,9 +65,6 @@
         <script src="js/main.js" type="text/javascript"></script>
         <script type="text/javascript">
         </script>
-        <script type="text/javascript">
-        var ec;
-       </script>
 
 
 
