@@ -123,16 +123,32 @@ require_template('ListaComprasView');
             var Convites = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                    var template = _.template($('#template_ConvitesView').html(), {});
-                    this.$el.html(template);
+                    var ec = new EventosConvidado();
+                    var that = this;
+                    uid = usrLog.login;
+                    ec.fetch({success: function() {
+                    var template = _.template($('#template_ConvitesView').html(), {ec: ec.models});
+                    that.$el.html(template);
+
+    
+}});
+
+
                 },
             });
 
             var Eventos = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                    var template = _.template($('#template_EventosView').html(), {});
-                    this.$el.html(template);
+                    var eo = new EventosOrganizado();
+                    var that = this;
+                    uid = usrLog.login;
+                    eo.fetch({success: function() {
+                    var template = _.template($('#template_EventosView').html(), {eo: eo.models});
+                    that.$el.html(template);
+}});
+
+
                 },
             });
 
