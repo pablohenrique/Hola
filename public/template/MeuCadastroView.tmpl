@@ -39,7 +39,7 @@
                         <li class="meuCadastro.html"><a href="#sobre"><i class="livicon" data-n="user" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Cadastro</a></li>
                     </ul>
                     <ul class="nav pull-right">
-                        <li><button type="submit" class="btn">@Usuario logout<span class="livicon shadowed" data-n="sign-out" data-s="15" data-c="black" data-hc="0" data-onparent="true"></span> </button></li>
+                        <li><button type="submit" class="btn"><%= htmlEncode(usrLog['login']) %> logout<span class="livicon shadowed" data-n="sign-out" data-s="15" data-c="black" data-hc="0" data-onparent="true"></span> </button></li>
                     </ul>
                 </div>
             </div>
@@ -55,13 +55,13 @@
                     </ul>
                     <div class="hero-unit">
                         <div class="well">
-                            <form>
+                            <form class="atualizar-usuario-form" method="PUT">
                                 <fieldset>
                                     <legend>Meu Cadastro</legend>
-                                    <label>Nome</label>
-                                    <input type="text" placeholder="Entre com nome do evento…">
                                     <label>E-mail</label>
-                                    <input type="text" placeholder="Entre com o email…">
+                                    <input type="text" id="email" name="email" placeholder=""<%= htmlEncode(usrLog['email']) %>>
+                                    <label>Senha</label>
+                                    <input type="password" id="senha" name="senha" placeholder="Entre com o email…">
                                     <p><button type="submit" class="btn">Salvar</button></p>
                                 </fieldset>
                             </form>

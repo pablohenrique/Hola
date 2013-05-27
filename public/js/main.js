@@ -30,6 +30,7 @@ require_template('CadastroUsuarioView');
 require_template('LoginView');
 require_template('HomeView');
 require_template('ErroLoginView');
+require_template('MeuCadastroView');
 
 
 
@@ -55,7 +56,7 @@ require_template('ErroLoginView');
 
 
             var Usuario = Backbone.Model.extend({
-                urlRoot: 'usuario/',
+                urlRoot: 'usuario',
             });
             var UsuarioLogin = Backbone.Model.extend({
                 urlRoot: '/',
@@ -83,11 +84,13 @@ require_template('ErroLoginView');
                     this.$el.html(template);
                 },
                 events: {
-                    'submit .cadastrar-usuario-form': 'salvarUsuario',
+                    'submit .atualizar-usuario-form': 'salvarUsuario',
                 },
                 salvarUsuario: function(ev) {
                     var dadosUsuario = $(ev.currentTarget).serializeObject();
-                    var usuario = new Usuario();
+                    var usuario = new Usuario({id: usrLog.login});
+                    console.log(usuario);
+                    console.log(usuario.id);
                     usuario.save(dadosUsuario, {
                         success: function(usuario) {
                             router.navigate('', {trigger: true});
@@ -123,6 +126,30 @@ require_template('ErroLoginView');
 }});
                 },
             });
+
+                var MeuCadastro = Backbone.View.extend({
+                el: '.page',
+                render: function() {
+                    var template = _.template($('#template_MeuCadastroView').html(), {});
+                    this.$el.html(template);
+                },
+                events: {
+                    'submit .cadastrar-usuario-form': 'atualizarUsuario',
+                },
+                atualizarUsuario: function(ev) {
+                    var dadosUsuario = $(ev.currentTarget).serializeObject();
+                    console.log(dadosUsuario);
+                    var usuario = new Usuario();
+                    usuario.save(dadosUsuario, {
+                        success: function(usuario) {
+                            router.navigate('meucadastro', {trigger: true});
+                        }
+                    });
+                    return false;
+                }
+            });
+
+
 
 
 
@@ -162,6 +189,7 @@ require_template('ErroLoginView');
             });
             var cadastrarUsuario = new CadastrarUsuario();
             var logarUsuario = new Logar();
+            var meucadastro = new MeuCadastro();
             var usuarioLogado = new UsuarioLogado();
             var router = new Router();
             var home = new Home();
@@ -179,6 +207,9 @@ require_template('ErroLoginView');
 
             router.on('route:cadastrarUsuario', function() {
                 cadastrarUsuario.render();
+            });
+            router.on('route:meucadastro', function() {
+                meucadastro.render();
             });
             router.on('route:logarUsuario', function() {
                 
