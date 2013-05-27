@@ -31,6 +31,10 @@ require_template('LoginView');
 require_template('HomeView');
 require_template('ErroLoginView');
 require_template('MeuCadastroView');
+require_template('AmigosView');
+require_template('ConvitesView');
+require_template('EventosView');
+require_template('ListaComprasView');
 
 
 
@@ -104,6 +108,39 @@ require_template('MeuCadastroView');
                 el: '.page',
                 render: function() {
                     var template = _.template($('#template_IndexView').html(), {});
+                    this.$el.html(template);
+                },
+            });
+
+            var Amigos = Backbone.View.extend({
+                el: '.page',
+                render: function() {
+                    var template = _.template($('#template_AmigosView').html(), {});
+                    this.$el.html(template);
+                },
+            });
+
+            var Convites = Backbone.View.extend({
+                el: '.page',
+                render: function() {
+                    var template = _.template($('#template_ConvitesView').html(), {});
+                    this.$el.html(template);
+                },
+            });
+
+            var Eventos = Backbone.View.extend({
+                el: '.page',
+                render: function() {
+                    var template = _.template($('#template_EventosView').html(), {});
+                    this.$el.html(template);
+                },
+            });
+
+
+            var ListaCompras = Backbone.View.extend({
+                el: '.page',
+                render: function() {
+                    var template = _.template($('#template_ListaComprasView').html(), {});
                     this.$el.html(template);
                 },
             });
@@ -183,8 +220,9 @@ require_template('MeuCadastroView');
                     'eventos': 'eventos',
                     'convites': 'convites',
                     'amigos': 'amigos',
-                    'listadecompras': 'listadecompras',
                     'meucadastro': 'meucadastro',
+                    'listacompras':'listacompras',
+
                 }
             });
             var cadastrarUsuario = new CadastrarUsuario();
@@ -194,6 +232,10 @@ require_template('MeuCadastroView');
             var router = new Router();
             var home = new Home();
             var dadosErrados = new DadosErrados();
+            var amigos = new Amigos();
+            var convites = new Convites();
+            var eventos = new Eventos();
+            var listacompras = new ListaCompras();
             router.on('route:home', function() {
                     u = usrLog;
                 if(usrLog == "" || usrLog == null){
@@ -207,6 +249,18 @@ require_template('MeuCadastroView');
 
             router.on('route:cadastrarUsuario', function() {
                 cadastrarUsuario.render();
+            });
+            router.on('route:eventos', function() {
+                eventos.render();
+            });
+            router.on('route:amigos', function() {
+                amigos.render();
+            });
+            router.on('route:listacompras', function() {
+                listacompras.render();
+            });
+            router.on('route:convites', function() {
+                convites.render();
             });
             router.on('route:meucadastro', function() {
                 meucadastro.render();
