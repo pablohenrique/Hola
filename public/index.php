@@ -1,37 +1,56 @@
 <?php
-    require_once (__DIR__ . '/../src/Hola/Autoloader.php');    
-    require_once (__DIR__ . '/setSession.php');
+    require_once (__DIR__ . '/../src/Hola/Autoloader.php');
 
     use Hola\Service\EventoService,
         Hola\Service\ConvidadoService,
         Hola\Service\TipoItemService,
         Hola\Service\TipoService,
         Hola\Service\ItemService,
-        #Hola\DAO\Exception,
-        Hola\Model\Usuario,
-        Hola\Service\UsuarioService;
+        Hola\Service\UsuarioService,
+        Hola\Model\Usuario;
+
+    session_start();
+
+    function checkSession(Usuario $usuario){
+        if(is_null($usuario)){
+            session_destroy();
+            header("Location: /hola/#/logar");
+            exit();
+        }
+    }
+
+    function validateLogin($login,$senha){
+        $usuarioService = new UsuarioService();
+        $usuario = $usuarioService->login($login,$senha);
+        checkSession($usuario);
+        unset($usuarioService);
+        return $usuario;
+    }
+
+    if(!is_null($_SESSION['user']))
+        validateLogin($_SESSION['user']->getLogin(),$_SESSION['user']->getSenha());
 
     if( isset($_POST['login']) && isset($_POST['senha']) ) {
-        $service = new UsuarioService();
         $eventoService = new EventoService();
         $convidadoService = new ConvidadoService();
         $tipoService = new TipoService();
         $itemService = new ItemService();
 
-        session_start();
+        $usuario = validateLogin($_POST['login'],$_POST['senha']);
 
-        $usuario = $service->login($_POST['login'],$_POST['senha']);
-        if(is_null($usuario)){
-            header("Location: /Hola/#/logar");
-            exit();
-        }
         $_SESSION['user'] = $usuario;
+        $_SESSION['event'] = $eventoService->search($usuario->getLogin());
+        $_SESSION['invitation'] = $convidadoService->getUsuario($usuario->getLogin());
+        $_SESSION['type'] = $tipoService->search();
+        $_SESSION['items'] = $itemService->search();
 
-        $user = json_encode($usuario);
-        $evento = json_encode($eventoService->search($usuario->getLogin()));
-        $convidado = json_encode($convidadoService->getUsuario($usuario->getLogin()));
-        $tipo = json_encode($tipoService->search());
-        $item = json_encode($itemService->search());
+        unset($eventoService,$convidadoService,$tipoService,$itemService);
+
+        $user = json_encode($_SESSION['user']);
+        $evento = json_encode($_SESSION['event']);
+        $convidado = json_encode($_SESSION['invitation']);
+        $tipo = json_encode($_SESSION['type']);
+        $item = json_encode($_SESSION['items']);
     }
 
 ?>
@@ -54,7 +73,7 @@
         <div class="page">
         </div>
         <script type="text/javascript">
-        var usrLog = JSON.parse(<?php echo json_encode($user); ?>);
+        var usrLog = JSON.parse(<?php if(isset($user)) echo json_encode($user); ?>);
        </script>
         <script src="js/jquery-2.0.0.js" type="text/javascript"></script>
         <script src="js/underscore.js" type="text/javascript"></script>
