@@ -55,12 +55,12 @@ require_template('ListaComprasView');
             };
 
             $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-                options.url = '/Hola/api/' + options.url;
+                options.url = '/Hola/api' + options.url;
             });
 
 
             var Usuario = Backbone.Model.extend({
-                urlRoot: 'usuario',
+                urlRoot: '/usuario',
             });
             var UsuarioLogin = Backbone.Model.extend({
                 urlRoot: '/',
@@ -88,13 +88,12 @@ require_template('ListaComprasView');
                     this.$el.html(template);
                 },
                 events: {
-                    'submit .atualizar-usuario-form': 'salvarUsuario',
+                    'submit .cadastrar-usuario-form': 'salvarUsuarioNovo',
                 },
-                salvarUsuario: function(ev) {
+                salvarUsuarioNovo: function(ev) {
                     var dadosUsuario = $(ev.currentTarget).serializeObject();
-                    var usuario = new Usuario({id: usrLog.login});
-                    console.log(usuario);
-                    console.log(usuario.id);
+                    console.log(dadosUsuario);
+                    var usuario = new Usuario();
                     usuario.save(dadosUsuario, {
                         success: function(usuario) {
                             router.navigate('', {trigger: true});
@@ -102,6 +101,7 @@ require_template('ListaComprasView');
                     });
                     return false;
                 }
+
             });
 
             var Home = Backbone.View.extend({
@@ -187,12 +187,13 @@ require_template('ListaComprasView');
                     this.$el.html(template);
                 },
                 events: {
-                    'submit .cadastrar-usuario-form': 'atualizarUsuario',
+                    'submit .atualizar-usuario-form': 'atualizarUsuario',
                 },
                 atualizarUsuario: function(ev) {
                     var dadosUsuario = $(ev.currentTarget).serializeObject();
-                    console.log(dadosUsuario);
-                    var usuario = new Usuario();
+                    var usuario = new UsuarioLogin({id: usrLog.login});
+                    console.log(usuario);
+                    console.log(usuario.id);
                     usuario.save(dadosUsuario, {
                         success: function(usuario) {
                             router.navigate('meucadastro', {trigger: true});
