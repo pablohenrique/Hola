@@ -36,9 +36,7 @@ class UsuarioResource extends Resource {
      * @return Tonic\Response
      */
     public function atualizar($id = null) {
-        if(!(isset($this->request->data->login)
-            &&isset($this->request->data->email)
-            &&isset($this->request->data->senha)))
+        if(!(isset($this->request->data->login)))
             return new Response(Response::BADREQUEST);
 
         try {
