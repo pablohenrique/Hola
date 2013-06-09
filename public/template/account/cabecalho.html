@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span10">
+            <ul class="breadcrumb">
+                <li><a href="home.html">Home</a> <span class="divider">/</span></li>
+                <li><a href="eventos.html">Events</a> <span class="divider">/</span></li>
+                <li class="active">Create Event</a> <span class="divider">/</span></li>
+            </ul>
+            <div class="hero-unit">
+                <div class="well">
+                    <form class="atualizar-usuario-form" method="PUT">
+                        <fieldset>
+                        <legend>My Account</legend>
+                        <label>E-Mail</label>
+                        <input type="text" id="email" name="email" placeholder=""<%= htmlEncode(usrLog.email) %>>
+                        <label>Password</label>
+                        <input type="password" id="senha" name="senha" placeholder="Entre com o email…">
+                        <p><button type="submit" class="btn">Update</button></p>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- AQUI JAZ UMA AREA DE ANUNCIO! -->
+    </div>
+</div>

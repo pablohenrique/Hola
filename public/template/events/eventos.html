@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span10">
+            <ul class="breadcrumb">
+                <li><a href="home.html">Home</a> <span class="divider">/</span></li>
+                <li class="active">Events</a> <span class="divider">/</span></li>
+            </ul>
+            <div class="hero-unit">
+                <div class="well">
+                    <strong>Your Events</strong>
+                    <a href="#cadastrar"  class="btn btn-success pull-right " data-toggle="modal"><i class="livicon shadowed" data-n="plus-alt" data-s="15" data-c="white" data-hc="0" data-onparent="true"></i>Create Event</a>
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Event</th>
+                            <th>Confirmations</th>
+                            <th><i class="livicon" data-n="edit" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></th>
+                            <th><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></th>
+                            <th><i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></th>
+                        </tr>
+                        <% 
+                            _.each(eo, function(eo) {
+                                eo = eo.toJSON()
+                        %>
+                                <tr>
+                                    <td><%= htmlEncode(eo['nome']) %></td>
+                                    <td><div class="progress">
+                                            <div class="bar bar-success" style="width: 35%;"></div>
+                                            <div class="bar bar-warning" style="width: 20%;"></div>
+                                            <div class="bar bar-danger" style="width: 10%;"></div>
+                                        </div></td>
+                                    <td><i class="livicon" data-n="edit" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+                                    <td><i class="livicon" data-n="remove" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+                                    <td><i class="livicon" data-n="plus" data-s="25" data-c="#777" data-hc="#333" data-op="1"></i></td>
+                                </tr>
+                        <% }); %>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- AQUI JAZ UMA AREA DE ANUNCIO! -->
+    </div>
+</div>

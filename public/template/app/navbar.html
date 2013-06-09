@@ -1,0 +1,23 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span></button>
+        <a class="brand" href="#">Hola</a>
+        <div class="nav-collapse collapse">
+            <ul class="nav">
+                <li class="active"><a href="#/home"><i class="livicon" data-n="home" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Home</a></li>
+                <li><a href="#/eventos"><i class="livicon" data-n="rocket" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Events</a></li>
+                <li><a href="#/convites"><i class="livicon" data-n="bell" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Tickets</a></li>
+                <li><a href="#/amigos"><i class="livicon" data-n="users" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Friends</a></li>
+                <li><a href="#/listacompras"><i class="livicon" data-n="list" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>Shopping List</a></li>
+                <li><a href="#/meucadastro"><i class="livicon" data-n="user" data-s="15" data-c="#777" data-hc="white" data-op="1"></i>My Account</a></li>
+            </ul>
+            <ul class="nav pull-right">
+                <li>
+                    <form method="POST" action="logout.php">
+                        <button href="logout.php" type="submit" class="btn"><%= htmlEncode(usrLog.login) %> Logout<i class="livicon shadowed" data-n="sign-out" data-s="15" data-c="black" data-hc="0" data-onparent="true"></i> </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

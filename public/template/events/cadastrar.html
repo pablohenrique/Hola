@@ -1,0 +1,42 @@
+<div id="cadastrar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <fieldset>
+                <legend>Create Event</legend>
+                <label>Name</label>
+                <input type="text" placeholder="Entre com nome do evento…">
+                <label>Begining Date</label>
+                <input type="text" class="span2"  id="dp1" >
+                <label>Begining Time</label>
+                <div class="input-append bootstrap-timepicker">
+                    <input id="timepicker1" type="text" class="input-small">
+                    <span class="add-on"><i class="icon-time"></i></span></div>
+                <label>End Day</label>
+                <input type="text" class="span2"  id="dp2" >
+                <div class="input-append bootstrap-timepicker"></div>
+                <label>End Time</label>
+                <div class="input-append bootstrap-timepicker">
+                    <input id="timepicker2" type="text" class="input-small">
+                    <span class="add-on"><i class="icon-time"></i></span></div>
+                <label>Address Code</label>
+                <input type="text" placeholder="Entre com o CEP…">
+                <label>State</label>
+                <input type="text" placeholder="Entre com o estado…">
+                <label>City</label>
+                <input type="text" placeholder="Entre com a cidade…">
+                <label>Address</label>
+                <input type="text" placeholder="Entre com o endereço…">
+                <label>Address 2</label>
+                <input type="text" placeholder="Entre com o complemento…">
+            </fieldset>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary">Next Step</button>
+    </div>
+</div>
