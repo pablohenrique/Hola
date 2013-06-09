@@ -69,8 +69,13 @@
         <link rel="stylesheet" type="text/css" href="css/liviconpadrao.css">
     </head>
     <body>
-
         <div class="page">
+        <div class="top">
+        </div>
+        <div class="main">
+        </div>
+        <div class="extra">
+        </div>
         </div>
         <script type="text/javascript">
         try{

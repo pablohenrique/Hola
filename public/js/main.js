@@ -3,11 +3,11 @@ function htmlEncode(value){
     }
 
 
-function require_template(templateName) {
+function require_template(tmpl_dir, templateName) {
     var template = $('#template_' + templateName);
     if (template.length === 0) {
-        var tmpl_dir = 'template';
-        var tmpl_url = tmpl_dir + '/' + templateName + '.tmpl';
+        //var tmpl_dir = 'template';
+        var tmpl_url = 'template/' + tmpl_dir + '/' + templateName + '.html';
         var tmpl_string = '';
 
         $.ajax({
@@ -25,16 +25,11 @@ function require_template(templateName) {
     }
 }
 
-require_template('IndexView');
-require_template('CadastroUsuarioView');
-require_template('LoginView');
-require_template('HomeView');
-require_template('ErroLoginView');
-require_template('MeuCadastroView');
-require_template('AmigosView');
-require_template('ConvitesView');
-require_template('EventosView');
-require_template('ListaComprasView');
+require_template('index','barra');
+require_template('index','acessar');
+require_template('index','cadastrar');
+require_template('index','carrossel');
+
 
 
 
@@ -84,8 +79,12 @@ require_template('ListaComprasView');
             var CadastrarUsuario = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                    var template = _.template($('#template_CadastroUsuarioView').html(), {});
-                    this.$el.html(template);
+                    var barra = _.template($('#template_barra').html(), {});
+                    this.$el.find(".top").append(barra);
+                    var carrossel = _.template($('#template_carrossel').html(), {});
+                    this.$el.find(".main").append(carrossel);
+                    var cadastrar = _.template($('#template_cadastrar').html(), {});
+                    this.$el.find(".main").append(cadastrar);
                 },
                 events: {
                     'submit .cadastrar-usuario-form': 'salvarUsuarioNovo',
@@ -107,8 +106,11 @@ require_template('ListaComprasView');
             var Home = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                    var template = _.template($('#template_IndexView').html(), {});
-                    this.$el.html(template);
+                    var barra = _.template($('#template_barra').html(), {});
+                    this.$el.find(".top").append(barra);
+                    var carrossel = _.template($('#template_carrossel').html(), {});
+                    this.$el.find(".main").append(carrossel);
+
                 },
             });
 
@@ -231,8 +233,12 @@ require_template('ListaComprasView');
             var Logar = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                    var template = _.template($('#template_LoginView').html(), {});
-                    this.$el.html(template);
+                    var barra = _.template($('#template_barra').html(), {});
+                    this.$el.find(".top").append(barra);
+                    var carrossel = _.template($('#template_carrossel').html(), {});
+                    this.$el.find(".main").append(carrossel);
+                    var acessar = _.template($('#template_acessar').html(), {});
+                    this.$el.find(".main").append(acessar);
                 },
             });
 
