@@ -73,7 +73,14 @@
         <div class="page">
         </div>
         <script type="text/javascript">
-        var usrLog = JSON.parse(<?php if(isset($user)) echo json_encode($user); ?>);
+        try{
+            var usrLog = JSON.parse(<?php if(isset($user)) echo json_encode($user); ?>);
+        }
+        catch(Exception){
+            var usrLog = null;
+        }
+
+        
        </script>
         <script src="js/jquery-2.0.0.js" type="text/javascript"></script>
         <script src="js/underscore.js" type="text/javascript"></script>
