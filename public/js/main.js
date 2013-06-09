@@ -191,10 +191,23 @@ require_template('ListaComprasView');
                 },
                 atualizarUsuario: function(ev) {
                     var dadosUsuario = $(ev.currentTarget).serializeObject();
-                    var usuario = new UsuarioLogin({id: usrLog.login});
-                    console.log(usuario);
-                    console.log(usuario.id);
-                    usuario.save(dadosUsuario, {
+                    var usuario = new UsuarioLogin({id: usrLog.login, login: usrLog.login});
+                    var dadosCompletos = new Object();
+                    dadosCompletos.login = usrLog.login;
+                    dadosCompletos.senha = dadosUsuario.senha;
+                    dadosCompletos.email = dadosUsuario.email;
+                    dadosCompletos.celular = usrLog.celular;
+                    dadosCompletos.oauthProvider = usrLog.oauthProvider;
+                    dadosCompletos.oauthUid = usrLog.oauthUid;
+                    dadosCompletos.twitterOauthToken = usrLog.twitterOauthToken;
+                    dadosCompletos.twitterOauthTokenSecret = usrLog.twitterOauthTokenSecret;
+                    console.log(usrLog);
+                    //dadosCompletos.email = dadosUsuario.email;
+                    console.log(dadosCompletos);
+                    //console.log(usrLog);
+                    //console.log(usuario);
+                    //console.log(usuario.id);
+                    usuario.save(dadosCompletos, {
                         success: function(usuario) {
                             router.navigate('meucadastro', {trigger: true});
                         }
