@@ -29,7 +29,16 @@ require_template('index','barra');
 require_template('index','acessar');
 require_template('index','cadastrar');
 require_template('index','carrossel');
-
+require_template('account','cabecalho');
+require_template('ads','anuncio');
+require_template('app','navbar');
+require_template('app','home');
+require_template('events','cadastrar');
+require_template('events','eventos');
+require_template('friends','amigos');
+require_template('shopping','compras');
+require_template('tickets','convites');
+require_template('tickets','informacao');
 
 
 
@@ -79,6 +88,8 @@ require_template('index','carrossel');
             var CadastrarUsuario = Backbone.View.extend({
                 el: '.page',
                 render: function() {
+                    this.$el.find(".top").empty();
+                    this.$el.find(".main").empty();
                     var barra = _.template($('#template_barra').html(), {});
                     this.$el.find(".top").append(barra);
                     var carrossel = _.template($('#template_carrossel').html(), {});
@@ -117,8 +128,15 @@ require_template('index','carrossel');
             var Amigos = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                    var template = _.template($('#template_AmigosView').html(), {});
-                    this.$el.html(template);
+                    var that = this;
+                    that.$el.find(".top").empty();
+                    that.$el.find(".main").empty();
+                    var navbar = _.template($('#template_navbar').html(), {});
+                    that.$el.find(".top").append(navbar);
+                    var home = _.template($('#template_amigos').html(),  {});
+                    that.$el.find(".main").append(home);
+                    var ads = _.template($('#template_anuncio').html(),{});
+                    that.$el.find(".main").append(ads);  
                 },
             });
 
@@ -127,10 +145,16 @@ require_template('index','carrossel');
                 render: function() {
                     var ec = new EventosConvidado();
                     var that = this;
+                    that.$el.find(".top").empty();
+                    that.$el.find(".main").empty();
                     uid = usrLog.login;
                     ec.fetch({success: function() {
-                    var template = _.template($('#template_ConvitesView').html(), {ec: ec.models});
-                    that.$el.html(template);
+                   var navbar = _.template($('#template_navbar').html(), {});
+                    that.$el.find(".top").append(navbar);
+                    var home = _.template($('#template_convites').html(),  {ec: ec.models});
+                    that.$el.find(".main").append(home);
+                    var ads = _.template($('#template_anuncio').html(),{});
+                    that.$el.find(".main").append(ads);  
 
     
 }});
@@ -144,10 +168,16 @@ require_template('index','carrossel');
                 render: function() {
                     var eo = new EventosOrganizado();
                     var that = this;
+                    that.$el.find(".top").empty();
+                    that.$el.find(".main").empty();
                     uid = usrLog.login;
                     eo.fetch({success: function() {
-                    var template = _.template($('#template_EventosView').html(), {eo: eo.models});
-                    that.$el.html(template);
+                    var navbar = _.template($('#template_navbar').html(), {});
+                    that.$el.find(".top").append(navbar);
+                    var home = _.template($('#template_eventos').html(),  {eo: eo.models});
+                    that.$el.find(".main").append(home);
+                    var ads = _.template($('#template_anuncio').html(),{});
+                    that.$el.find(".main").append(ads);   
 }});
 
 
@@ -158,25 +188,38 @@ require_template('index','carrossel');
             var ListaCompras = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                    var template = _.template($('#template_ListaComprasView').html(), {});
-                    this.$el.html(template);
+                    var that = this;
+                    that.$el.find(".top").empty();
+                    that.$el.find(".main").empty();
+                    var navbar = _.template($('#template_navbar').html(), {});
+                    that.$el.find(".top").append(navbar);
+                    var home = _.template($('#template_compras').html(),  {});
+                    that.$el.find(".main").append(home);
+                    var ads = _.template($('#template_anuncio').html(),{});
+                    that.$el.find(".main").append(ads); 
                 },
             });
 
-            
 
 
-            var UsuarioLogado = Backbone.View.extend({
+
+                var UsuarioLogado = Backbone.View.extend({
                 el: '.page',
                 render: function() {
                 var ec = new EventosConvidado();
                 var eo = new EventosOrganizado();
                 var that = this;
+                that.$el.find(".top").empty();
+                that.$el.find(".main").empty();
                 uid = usrLog.login;
                 ec.fetch({success: function() {
                 eo.fetch({success: function() {
-                            var template = _.template($('#template_HomeView').html(), {ec: ec.models, eo: eo.models});
-                            that.$el.html(template);    
+                   var navbar = _.template($('#template_navbar').html(), {});
+                    that.$el.find(".top").append(navbar);
+                    var home = _.template($('#template_home').html(),  {ec: ec.models, eo: eo.models});
+                    that.$el.find(".main").append(home);
+                    var ads = _.template($('#template_anuncio').html(),{});
+                    that.$el.find(".main").append(ads);   
     }});
 }});
                 },
@@ -185,8 +228,15 @@ require_template('index','carrossel');
                 var MeuCadastro = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                    var template = _.template($('#template_MeuCadastroView').html(), {});
-                    this.$el.html(template);
+                    var that = this;
+                    that.$el.find(".top").empty();
+                    that.$el.find(".main").empty();
+                    var navbar = _.template($('#template_navbar').html(), {});
+                    that.$el.find(".top").append(navbar);
+                    var home = _.template($('#template_cabecalho').html(),  {});
+                    that.$el.find(".main").append(home);
+                    var ads = _.template($('#template_anuncio').html(),{});
+                    that.$el.find(".main").append(ads);  
                 },
                 events: {
                     'submit .atualizar-usuario-form': 'atualizarUsuario',
@@ -233,6 +283,8 @@ require_template('index','carrossel');
             var Logar = Backbone.View.extend({
                 el: '.page',
                 render: function() {
+                    this.$el.find(".top").empty();
+                    this.$el.find(".main").empty();
                     var barra = _.template($('#template_barra').html(), {});
                     this.$el.find(".top").append(barra);
                     var carrossel = _.template($('#template_carrossel').html(), {});
