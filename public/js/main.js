@@ -92,8 +92,6 @@ require_template('tickets','informacao');
                     this.$el.find(".main").empty();
                     var barra = _.template($('#template_barra').html(), {});
                     this.$el.find(".top").append(barra);
-                    var carrossel = _.template($('#template_carrossel').html(), {});
-                    this.$el.find(".main").append(carrossel);
                     var cadastrar = _.template($('#template_cadastrar').html(), {});
                     this.$el.find(".main").append(cadastrar);
                 },
@@ -287,8 +285,6 @@ require_template('tickets','informacao');
                     this.$el.find(".main").empty();
                     var barra = _.template($('#template_barra').html(), {});
                     this.$el.find(".top").append(barra);
-                    var carrossel = _.template($('#template_carrossel').html(), {});
-                    this.$el.find(".main").append(carrossel);
                     var acessar = _.template($('#template_acessar').html(), {});
                     this.$el.find(".main").append(acessar);
                 },
