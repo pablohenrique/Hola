@@ -32,7 +32,6 @@ require_template('index','carrossel');
 require_template('index','carrousselmod');
 require_template('index','carrousselmod2');
 require_template('account','cabecalho');
-require_template('ads','anuncio');
 require_template('app','navbar');
 require_template('app','home');
 require_template('events','cadastrar');
@@ -141,8 +140,6 @@ require_template('tickets','informacao');
                     that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_amigos').html(),  {});
                     that.$el.find(".main").append(home);
-                    var ads = _.template($('#template_anuncio').html(),{});
-                    that.$el.find(".main").append(ads);  
                 },
             });
 
@@ -159,8 +156,6 @@ require_template('tickets','informacao');
                     that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_convites').html(),  {ec: ec.models});
                     that.$el.find(".main").append(home);
-                    var ads = _.template($('#template_anuncio').html(),{});
-                    that.$el.find(".main").append(ads);  
 
     
 }});
@@ -181,9 +176,7 @@ require_template('tickets','informacao');
                     var navbar = _.template($('#template_navbar').html(), {});
                     that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_eventos').html(),  {eo: eo.models});
-                    that.$el.find(".main").append(home);
-                    var ads = _.template($('#template_anuncio').html(),{});
-                    that.$el.find(".main").append(ads);   
+                    that.$el.find(".main").append(home); 
 }});
 
 
@@ -200,9 +193,7 @@ require_template('tickets','informacao');
                     var navbar = _.template($('#template_navbar').html(), {});
                     that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_compras').html(),  {});
-                    that.$el.find(".main").append(home);
-                    var ads = _.template($('#template_anuncio').html(),{});
-                    that.$el.find(".main").append(ads); 
+                    that.$el.find(".main").append(home); 
                 },
             });
 
@@ -223,9 +214,7 @@ require_template('tickets','informacao');
                    var navbar = _.template($('#template_navbar').html(), {});
                     that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_home').html(),  {ec: ec.models, eo: eo.models});
-                    that.$el.find(".main").append(home);
-                    var ads = _.template($('#template_anuncio').html(),{});
-                    that.$el.find(".main").append(ads);   
+                    that.$el.find(".main").append(home); 
     }});
 }});
                 },
@@ -241,8 +230,7 @@ require_template('tickets','informacao');
                     that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_cabecalho').html(),  {});
                     that.$el.find(".main").append(home);
-                    var ads = _.template($('#template_anuncio').html(),{});
-                    that.$el.find(".main").append(ads);  
+ 
                 },
                 events: {
                     'submit .atualizar-usuario-form': 'atualizarUsuario',
