@@ -90,10 +90,10 @@ require_template('tickets','informacao');
             var CadastrarUsuario = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                    this.$el.find(".top").empty();
+                   // this.$el.find(".top").empty();
                     this.$el.find(".main").empty();
-                    var barra = _.template($('#template_barra').html(), {});
-                    this.$el.find(".top").append(barra);
+                   // var barra = _.template($('#template_barra').html(), {});
+                    //this.$el.find(".top").append(barra);
                     var cadastrar = _.template($('#template_cadastrar').html(), {});
                     this.$el.find(".main").append(cadastrar);
                     var carrossel = _.template($('#template_carrousselmod2').html(), {});
@@ -134,10 +134,10 @@ require_template('tickets','informacao');
                 el: '.page',
                 render: function() {
                     var that = this;
-                    that.$el.find(".top").empty();
+                  //  that.$el.find(".top").empty();
                     that.$el.find(".main").empty();
-                    var navbar = _.template($('#template_navbar').html(), {});
-                    that.$el.find(".top").append(navbar);
+                   // var navbar = _.template($('#template_navbar').html(), {});
+                   // that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_amigos').html(),  {});
                     that.$el.find(".main").append(home);
                 },
@@ -220,6 +220,26 @@ require_template('tickets','informacao');
                 },
             });
 
+                var homeLogado = Backbone.View.extend({
+                el: '.page',
+                render: function() {
+                var ec = new EventosConvidado();
+                var eo = new EventosOrganizado();
+                var that = this;
+               // that.$el.find(".top").empty();
+                that.$el.find(".main").empty();
+                uid = usrLog.login;
+                ec.fetch({success: function() {
+                eo.fetch({success: function() {
+                  // var navbar = _.template($('#template_navbar').html(), {});
+                //    that.$el.find(".top").append(navbar);
+                    var home = _.template($('#template_home').html(),  {ec: ec.models, eo: eo.models});
+                    that.$el.find(".main").append(home); 
+    }});
+}});
+                },
+            });
+
                 var MeuCadastro = Backbone.View.extend({
                 el: '.page',
                 render: function() {
@@ -277,10 +297,10 @@ require_template('tickets','informacao');
             var Logar = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                    this.$el.find(".top").empty();
+                 //   this.$el.find(".top").empty();
                     this.$el.find(".main").empty();
-                    var barra = _.template($('#template_barra').html(), {});
-                    this.$el.find(".top").append(barra);
+                 //   var barra = _.template($('#template_barra').html(), {});
+                 //   this.$el.find(".top").append(barra);
                     var acessar = _.template($('#template_acessar').html(), {});
                     this.$el.find(".main").append(acessar);
                     var carrossel = _.template($('#template_carrousselmod').html(), {});
@@ -295,6 +315,7 @@ require_template('tickets','informacao');
             var Router = Backbone.Router.extend({
                 routes: {
                     '': 'home',
+                    'home':'homeLogado',
                     'cadastrar': 'cadastrarUsuario',
                     'logar': 'logarUsuario',
                     'logado': 'usuarioLogado',
@@ -307,6 +328,7 @@ require_template('tickets','informacao');
 
                 }
             });
+            var homeLogado = new homeLogado();
             var cadastrarUsuario = new CadastrarUsuario();
             var logarUsuario = new Logar();
             var meucadastro = new MeuCadastro();
@@ -328,7 +350,9 @@ require_template('tickets','informacao');
                 }
             });
 
-
+            router.on('route:homeLogado', function(){
+                homeLogado.render();
+            });
             router.on('route:cadastrarUsuario', function() {
                 cadastrarUsuario.render();
             });
