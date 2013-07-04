@@ -121,10 +121,12 @@ require_template('tickets','informacao');
             var Home = Backbone.View.extend({
                 el: '.page',
                 render: function() {
+                    var that = this;
+                    that.$el.find(".main").empty();
                     var barra = _.template($('#template_barra').html(), {});
-                    this.$el.find(".top").append(barra);
+                    that.$el.find(".top").append(barra);
                     var carrossel = _.template($('#template_carrossel').html(), {});
-                    this.$el.find(".main").append(carrossel);
+                    that.$el.find(".main").append(carrossel);
 
                 },
             });
