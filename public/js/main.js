@@ -148,12 +148,12 @@ require_template('tickets','informacao');
                 render: function() {
                     var ec = new EventosConvidado();
                     var that = this;
-                    that.$el.find(".top").empty();
+              //      that.$el.find(".top").empty();
                     that.$el.find(".main").empty();
                     uid = usrLog.login;
                     ec.fetch({success: function() {
-                   var navbar = _.template($('#template_navbar').html(), {});
-                    that.$el.find(".top").append(navbar);
+                //   var navbar = _.template($('#template_navbar').html(), {});
+                  //  that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_convites').html(),  {ec: ec.models});
                     that.$el.find(".main").append(home);
 
@@ -169,12 +169,12 @@ require_template('tickets','informacao');
                 render: function() {
                     var eo = new EventosOrganizado();
                     var that = this;
-                    that.$el.find(".top").empty();
+                 //   that.$el.find(".top").empty();
                     that.$el.find(".main").empty();
                     uid = usrLog.login;
                     eo.fetch({success: function() {
-                    var navbar = _.template($('#template_navbar').html(), {});
-                    that.$el.find(".top").append(navbar);
+                 //   var navbar = _.template($('#template_navbar').html(), {});
+                 //   that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_eventos').html(),  {eo: eo.models});
                     that.$el.find(".main").append(home); 
 }});
@@ -188,10 +188,10 @@ require_template('tickets','informacao');
                 el: '.page',
                 render: function() {
                     var that = this;
-                    that.$el.find(".top").empty();
+               //     that.$el.find(".top").empty();
                     that.$el.find(".main").empty();
-                    var navbar = _.template($('#template_navbar').html(), {});
-                    that.$el.find(".top").append(navbar);
+                //    var navbar = _.template($('#template_navbar').html(), {});
+               //     that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_compras').html(),  {});
                     that.$el.find(".main").append(home); 
                 },
@@ -224,10 +224,10 @@ require_template('tickets','informacao');
                 el: '.page',
                 render: function() {
                     var that = this;
-                    that.$el.find(".top").empty();
+                   // that.$el.find(".top").empty();
                     that.$el.find(".main").empty();
-                    var navbar = _.template($('#template_navbar').html(), {});
-                    that.$el.find(".top").append(navbar);
+                    //var navbar = _.template($('#template_navbar').html(), {});
+                   // that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_cabecalho').html(),  {});
                     that.$el.find(".main").append(home);
  
@@ -361,3 +361,16 @@ require_template('tickets','informacao');
             });
 
             Backbone.history.start();
+
+             function ChangeActive (id) {
+            var obj = document.getElementById (id);
+            if (obj.setActive) {
+                obj.setActive ();
+            }
+            else {
+                if (obj.focus)
+                    obj.focus ();
+                else
+                    alert ("Navegador nao suportado!");
+            }
+        }
