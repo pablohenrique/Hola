@@ -29,6 +29,8 @@ require_template('index','barra');
 require_template('index','acessar');
 require_template('index','cadastrar');
 require_template('index','carrossel');
+require_template('index','carrousselmod');
+require_template('index','carrousselmod2');
 require_template('account','cabecalho');
 require_template('ads','anuncio');
 require_template('app','navbar');
@@ -85,6 +87,7 @@ require_template('tickets','informacao');
             });
 
 
+
             var CadastrarUsuario = Backbone.View.extend({
                 el: '.page',
                 render: function() {
@@ -94,6 +97,9 @@ require_template('tickets','informacao');
                     this.$el.find(".top").append(barra);
                     var cadastrar = _.template($('#template_cadastrar').html(), {});
                     this.$el.find(".main").append(cadastrar);
+                    var carrossel = _.template($('#template_carrousselmod2').html(), {});
+                    this.$el.find(".main").append(carrossel);
+
                 },
                 events: {
                     'submit .cadastrar-usuario-form': 'salvarUsuarioNovo',
@@ -287,6 +293,8 @@ require_template('tickets','informacao');
                     this.$el.find(".top").append(barra);
                     var acessar = _.template($('#template_acessar').html(), {});
                     this.$el.find(".main").append(acessar);
+                    var carrossel = _.template($('#template_carrousselmod').html(), {});
+                    this.$el.find(".main").append(carrossel);
                 },
             });
 
