@@ -33,7 +33,7 @@ class ConvidadoService {
 	}
 
 	public function post($sms, $email, $evento, $usuario, $twitter, $facebook, $id = null){
-		$this->dao->post(self::createObject($sms, $email, $evento, $usuario, $twitter, $facebook, $id));
+		$this->dao->post(self::createObject(Security::preventXSS($sms), Security::preventXSS($email), Security::preventXSS($evento), Security::filterCharacters(Security::preventXSS($usuario)), Security::preventXSS($twitter), Security::preventXSS($facebook), Security::filterNumbers($id)));
 		unset($this->convidado,$this->eventoservice,$this->usuarioservice);
 	}
 /*
@@ -45,20 +45,20 @@ class ConvidadoService {
 	}
 */
 	public function getEvento($input){
-		return $this->dao->read($input);
+		return $this->dao->read(Security::filterNumbers($input));
 	}
 
 	public function getUsuario($input){ // busca por usuario
-		return $this->dao->seek($input);
+		return $this->dao->seek(Security::filterCharacters(Security::preventXSS($input)));
 	}
 
 	public function update($sms, $email, $evento, $usuario, $twitter, $facebook, $id){
-		$this->dao->update(self::createObject($sms, $email, $evento, $usuario, $twitter, $facebook, $id));
+		$this->dao->update(self::createObject(Security::preventXSS($sms), Security::preventXSS($email), Security::preventXSS($evento), Security::filterCharacters(Security::preventXSS($usuario)), Security::preventXSS($twitter), Security::preventXSS($facebook), Security::filterNumbers($id)));
 		unset($this->convidado,$this->eventoservice,$this->usuarioservice);
 	}
 
 	public function delete($input){
-		$this->dao->delete($input);
+		$this->dao->delete(Security::filterNumbers($input));
 	}
 
 }

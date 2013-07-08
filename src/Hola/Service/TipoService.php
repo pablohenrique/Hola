@@ -24,26 +24,26 @@ class TipoService {
 	}
 
 	public function post($nome, $id = null){
-		$this->dao->post(self::createObject($nome, $id));
+		$this->dao->post(self::createObject(Security::preventXSS($nome), Security::filterNumbers($id)));
 		unset($this->tipo);
 	}
 
 	public function search($input = null){
 		if(is_numeric($input))
-			return $this->dao->get($input);
+			return $this->dao->get(Security::filterNumbers($input));
 		if(!is_null($input))
-			return $this->dao->read($input);
+			return $this->dao->read(Security::preventXSS($input));
 		else
 			return $this->dao->getAll();
 	}
 
 	public function update($nome, $id){
-		$this->dao->update(self::createObject($nome,$id));
+		$this->dao->update(self::createObject(Security::preventXSS($nome),Security::filterNumbers($id)));
 		unset($this->tipo);
 	}
 
 	public function delete($input){
-		$this->dao->delete($input);
+		$this->dao->delete(Security::filterNumbers($input));
 	}
 
 }
