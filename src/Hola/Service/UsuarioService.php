@@ -24,14 +24,6 @@ class UsuarioService {
 		return $this->usuario;
 	}
 
-	private function removeSpecialCharacters($input){
-		$result;
-		preg_match_all("/[a-z0-9]/i", $cobaia, $match);
-		foreach($match[0] as $value)
-			$result .= $value;
-		return $result;
-	}
-
 	public function __construct(){
 		$this->dao = Factory::getFactory(FACTORY::PGSQL)->getUsuarioDAO();
 	}
@@ -39,7 +31,7 @@ class UsuarioService {
 	public function post($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret){
 		if($login == $senha)
 			throw new Exception("Login and Password MUST be NOT equal.");
-		$this->dao->post(self::createObject(self::removeSpecialCharacters($login), self::removeSpecialCharacters($senha), $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret));
+		$this->dao->post(self::createObject(Security::filterCharacters($login), Security::filterCharacters($senha), Security::preventXSS($email), Security::preventXSS($celular), Security::preventXSS($oauth_uid), Security::preventXSS($oauth_provider), Security::preventXSS($twitter_oauth_token), Security::preventXSS($twitter_oauth_token_secret)));
 		unset($this->usuario);
 	}
 
@@ -51,7 +43,9 @@ class UsuarioService {
 	}
 
 	public function update($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret){
-		$this->dao->update(self::createObject($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret));
+		if($login == $senha)
+			throw new Exception("Login and Password MUST be NOT equal.");
+		$this->dao->update(self::createObject(Security::filterCharacters($login), Security::filterCharacters($senha), Security::preventXSS($email), Security::preventXSS($celular), Security::preventXSS($oauth_uid), Security::preventXSS($oauth_provider), Security::preventXSS($twitter_oauth_token), Security::preventXSS($twitter_oauth_token_secret)));
 		unset($this->usuario);
 	}
 
@@ -60,8 +54,8 @@ class UsuarioService {
 	}
 
 	public function login($login,$senha){
-		if($this->dao->login($login,$senha) == 1)
-			return self::search($login);
+		if($this->dao->login(Security::filterCharacters($login),Security::filterCharacters($senha)) == 1)
+			return self::search(Security::filterCharacters($login));
 		else
 			return null;
 	}
