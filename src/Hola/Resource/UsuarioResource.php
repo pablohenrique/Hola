@@ -40,7 +40,7 @@ class UsuarioResource extends Resource {
         if(!(isset($this->request->data->login)))
             return new Response(Response::BADREQUEST);
 
-        checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->login);
+        //checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->login);
         
         try {
             $this->usuarioService = new UsuarioService();
@@ -76,7 +76,7 @@ class UsuarioResource extends Resource {
         if(is_null($this->request->data->login))
             throw new Tonic\MethodNotAllowedException();
 
-        checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->login);
+        //checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->login);
 
         try {
             $this->usuarioService = new UsuarioService();
