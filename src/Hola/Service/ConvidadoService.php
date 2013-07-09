@@ -33,27 +33,20 @@ class ConvidadoService {
 	}
 
 	public function post($sms, $email, $evento, $usuario, $twitter, $facebook, $id = null){
-		$this->dao->post(self::createObject(Security::preventXSS($sms), Security::preventXSS($email), Security::preventXSS($evento), Security::filterCharacters(Security::preventXSS($usuario)), Security::preventXSS($twitter), Security::preventXSS($facebook), Security::filterNumbers($id)));
+		$this->dao->post(self::createObject(Security::preventXSS($sms), Security::preventXSS($email), Security::preventXSS($evento), Security::filterCharacters($usuario), Security::preventXSS($twitter), Security::preventXSS($facebook), Security::filterNumbers($id)));
 		unset($this->convidado,$this->eventoservice,$this->usuarioservice);
 	}
-/*
-	public function search($input = null){
-		if(is_numeric($input)) //busca por id
-			return $this->dao->get($input);
-		else //busca todos
-			return $this->dao->getAll();
-	}
-*/
+
 	public function getEvento($input){
 		return $this->dao->read(Security::filterNumbers($input));
 	}
 
-	public function getUsuario($input){ // busca por usuario
-		return $this->dao->seek(Security::filterCharacters(Security::preventXSS($input)));
+	public function getUsuario($input){
+		return $this->dao->seek(Security::filterCharacters($input));
 	}
 
 	public function update($sms, $email, $evento, $usuario, $twitter, $facebook, $id){
-		$this->dao->update(self::createObject(Security::preventXSS($sms), Security::preventXSS($email), Security::preventXSS($evento), Security::filterCharacters(Security::preventXSS($usuario)), Security::preventXSS($twitter), Security::preventXSS($facebook), Security::filterNumbers($id)));
+		$this->dao->update(self::createObject(Security::preventXSS($sms), Security::preventXSS($email), Security::preventXSS($evento), Security::filterCharacters($usuario), Security::preventXSS($twitter), Security::preventXSS($facebook), Security::filterNumbers($id)));
 		unset($this->convidado,$this->eventoservice,$this->usuarioservice);
 	}
 

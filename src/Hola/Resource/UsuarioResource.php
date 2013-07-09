@@ -4,6 +4,7 @@ namespace Hola\Resource;
 use Hola\Service\UsuarioService,
     Tonic\Resource,
     Tonic\Response;
+
 /**
  * @uri /
  * @uri /:id
@@ -39,6 +40,8 @@ class UsuarioResource extends Resource {
         if(!(isset($this->request->data->login)))
             return new Response(Response::BADREQUEST);
 
+        checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->login);
+        
         try {
             $this->usuarioService = new UsuarioService();
             $this->usuarioService->update(
@@ -70,12 +73,14 @@ class UsuarioResource extends Resource {
      * @return Tonic\Response
      */
     public function remover($id = null) {
-        if(is_null($id))
+        if(is_null($this->request->data->login))
             throw new Tonic\MethodNotAllowedException();
+
+        checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->login);
 
         try {
             $this->usuarioService = new UsuarioService();
-            $this->usuarioService->delete($id);
+            $this->usuarioService->delete($this->request->data->login);
 
             unset($this->usuarioService);
             return new Response(Response::OK);

@@ -14,7 +14,7 @@
     function checkSession(Usuario $usuario){
         if(is_null($usuario)){
             session_destroy();
-            header("Location: /hola/#/logar");
+            header("Location: /Hola/#/logar");
             exit();
         }
     }
@@ -27,8 +27,9 @@
         return $usuario;
     }
 
-    if(!is_null($_SESSION['user']))
-        validateLogin($_SESSION['user']->getLogin(),$_SESSION['user']->getSenha());
+    if(!empty($_SESSION))
+        if(is_array($_SESSION['user']))
+            validateLogin($_SESSION['user']->getLogin(),$_SESSION['user']->getSenha());
 
     if( isset($_POST['login']) && isset($_POST['senha']) ) {
         $eventoService = new EventoService();

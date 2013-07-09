@@ -50,7 +50,7 @@ class UsuarioService {
 	}
 
 	public function delete($input){
-		$this->dao->delete($input);
+		$this->dao->delete(Security::filterCharacters($input));
 	}
 
 	public function login($login,$senha){

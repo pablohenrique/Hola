@@ -38,7 +38,7 @@ class EventoService {
 	}
 
 	public function post($nome, $descricao, $data, $hora, $endereco, $complemento, $cidade, $estado, $cep, $tipo, $usuario, $id = null){
-		$this->dao->post(self::createObject(Security::preventXSS($nome), Security::preventXSS($descricao), Security::preventXSS($data), Security::preventXSS($hora), Security::preventXSS($endereco), Security::preventXSS($complemento), Security::preventXSS($cidade), Security::preventXSS($estado), Security::preventXSS($cep), Security::preventXSS($tipo), Security::preventXSS(Security::filterCharacters($usuario)), Security::filterNumbers($id)));
+		$this->dao->post(self::createObject(Security::preventXSS($nome), Security::preventXSS($descricao), Security::preventXSS($data), Security::preventXSS($hora), Security::preventXSS($endereco), Security::preventXSS($complemento), Security::preventXSS($cidade), Security::preventXSS($estado), Security::preventXSS($cep), Security::preventXSS($tipo), Security::filterCharacters($usuario), Security::filterNumbers($id)));
 		unset($this->evento,$this->usuarioservice,$this->tiposervice);
 	}
 
@@ -46,13 +46,13 @@ class EventoService {
 		if(is_null($input))
 			return $this->dao->getAll(Security::filterCharacters($usuario));
 		if(is_numeric($input))
-			return $this->dao->seek(Security::preventXSS(Security::filterCharacters($usuario)), Security::filterNumbers($input));
+			return $this->dao->seek(Security::filterCharacters($usuario), Security::filterNumbers($input));
 		if(is_string($input))
-			return $this->dao->read(Security::preventXSS(Security::filterCharacters($usuario)), Security::preventXSS($input));
+			return $this->dao->read(Security::filterCharacters($usuario), Security::preventXSS($input));
 	}
 
 	public function update($nome, $descricao, $data, $hora, $endereco, $complemento, $cidade, $estado, $cep, $tipo, $usuario, $id){
-		$this->dao->update(self::createObject(Security::preventXSS($nome), Security::preventXSS($descricao), Security::preventXSS($data), Security::preventXSS($hora), Security::preventXSS($endereco), Security::preventXSS($complemento), Security::preventXSS($cidade), Security::preventXSS($estado), Security::preventXSS($cep), Security::preventXSS($tipo), Security::preventXSS(Security::filterCharacters($usuario)), Security::filterNumbers($id)));
+		$this->dao->update(self::createObject(Security::preventXSS($nome), Security::preventXSS($descricao), Security::preventXSS($data), Security::preventXSS($hora), Security::preventXSS($endereco), Security::preventXSS($complemento), Security::preventXSS($cidade), Security::preventXSS($estado), Security::preventXSS($cep), Security::preventXSS($tipo), Security::filterCharacters($usuario), Security::filterNumbers($id)));
 		unset($this->evento,$this->usuarioservice,$this->tiposervice);
 	}
 
