@@ -1,4 +1,5 @@
 <?php
+namespace Hola\Resource;
 
 class CheckSessionUser{
 	
