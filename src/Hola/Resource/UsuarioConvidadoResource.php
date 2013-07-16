@@ -43,6 +43,8 @@ class UsuarioConvidadoResource extends Resource {
             &&isset($this->request->data->usuario)))
             return new Response(Response::BADREQUEST);
 
+        checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->usuario);
+
         try {
             $this->convidadoService = new ConvidadoService();
             $this->convidadoService->post(
@@ -73,6 +75,9 @@ class UsuarioConvidadoResource extends Resource {
     public function atualizar($id = null) {
         if(is_null($id))
             throw new Tonic\MethodNotAllowedException();
+
+        checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->usuario);
+
         try {
             $this->convidadoService = new ConvidadoService();
             $this->convidadoService->update(
@@ -106,6 +111,8 @@ class UsuarioConvidadoResource extends Resource {
     public function remover($id = null) {
         if(is_null($id))
             throw new Tonic\MethodNotAllowedException();
+
+        checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->usuario);
 
         try {
             $this->convidadoService = new ConvidadoService();

@@ -80,6 +80,7 @@ CREATE TABLE Convidado(
 	convidado_email VARCHAR(30),
 	convidado_facebook VARCHAR(30),
 	convidado_twitter VARCHAR(30),
+	--convidado_status VARCHAR(3),
 	CONSTRAINT pk_convidado_id PRIMARY KEY (convidado_id),
 	CONSTRAINT fk_convidado_evento FOREIGN KEY (convidado_evento) REFERENCES evento(evento_id)
 	ON DELETE CASCADE
@@ -184,7 +185,140 @@ $BODY$
   COST 100;
 
 
-/*INSERTS*/
+
+/*
+ *
+ * BACKUP DAS TABELAS
+ *
+ */
+
+
+CREATE OR REPLACE FUNCTION trigger_backup_evento()
+RETURNS TRIGGER AS
+$$
+	BEGIN
+		INSERT INTO BackupEvento VALUES(
+				OLD.evento_id,
+				OLD.evento_nome,
+				OLD.evento_descricao,
+				OLD.evento_data,
+				OLD.evento_hora,
+				OLD.evento_cep,
+				OLD.evento_endereco,
+				OLD.evento_complemento,
+				OLD.evento_cidade,
+				OLD.evento_uf,
+				OLD.evento_tipo,
+				OLD.evento_usuario
+				);
+		RETURN OLD;
+	END;
+$$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER trigger_backup_evento
+   BEFORE DELETE ON Evento
+   FOR EACH ROW EXECUTE PROCEDURE trigger_backup_evento();
+
+
+
+CREATE OR REPLACE FUNCTION trigger_backup_convidado()
+RETURNS TRIGGER AS
+$$
+	BEGIN
+		INSERT INTO BackupConvidado VALUES(
+				OLD.convidado_id,
+				OLD.convidado_evento,
+				OLD.convidado_status,
+				OLD.convidado_sms,
+				OLD.convidado_email,
+				OLD.convidado_facebook,
+				OLD.convidado_twitter,
+				OLD.convidado_usuario
+				);
+		RETURN OLD;
+	END;
+$$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER trigger_backup_convidado
+   BEFORE DELETE ON Convidado
+   FOR EACH ROW EXECUTE PROCEDURE trigger_backup_convidado();
+
+
+
+
+CREATE OR REPLACE FUNCTION trigger_backup_usuario()
+RETURNS TRIGGER AS
+$$
+	BEGIN
+		INSERT INTO BackupUsuario VALUES(
+				OLD.usuario_login,
+				OLD.oauth_uid,
+				OLD.oauth_provider,
+				OLD.twitter_oauth_token 
+				OLD.twitter_oauth_token_secret,
+				OLD.usuario_senha,
+				OLD.usuario_email,
+				OLD.usuario_celular
+				);
+		RETURN OLD;
+	END;
+$$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER trigger_backup_usuario
+   BEFORE DELETE ON Usuario
+   FOR EACH ROW EXECUTE PROCEDURE trigger_backup_usuario();
+
+
+
+
+CREATE OR REPLACE FUNCTION trigger_backup_item()
+RETURNS TRIGGER AS
+$$
+	BEGIN
+		INSERT INTO BackupItem VALUES(
+				OLD.item_id,
+				OLD.item_nome,
+				OLD.item_usuario
+				);
+		RETURN OLD;
+	END;
+$$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER trigger_backup_item
+   BEFORE DELETE ON Item
+   FOR EACH ROW EXECUTE PROCEDURE trigger_backup_item();
+
+
+
+
+CREATE OR REPLACE FUNCTION trigger_backup_tipo()
+RETURNS TRIGGER AS
+$$
+	BEGIN
+		INSERT INTO BackupTipo VALUES(
+				OLD.tipo_id,
+				OLD.tipo_nome
+				);
+		RETURN OLD;
+	END;
+$$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER trigger_backup_tipo
+   BEFORE DELETE ON Tipo
+   FOR EACH ROW EXECUTE PROCEDURE trigger_backup_tipo();
+
+
+
+
+
+/*
+ * INSERTS
+ */
 
 
 select * from tipoitem
