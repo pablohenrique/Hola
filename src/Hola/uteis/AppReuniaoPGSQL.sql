@@ -196,23 +196,23 @@ $BODY$
 CREATE OR REPLACE FUNCTION trigger_backup_evento()
 RETURNS TRIGGER AS
 $$
-	BEGIN
-		INSERT INTO BackupEvento VALUES(
-				OLD.evento_id,
-				OLD.evento_nome,
-				OLD.evento_descricao,
-				OLD.evento_data,
-				OLD.evento_hora,
-				OLD.evento_cep,
-				OLD.evento_endereco,
-				OLD.evento_complemento,
-				OLD.evento_cidade,
-				OLD.evento_uf,
-				OLD.evento_tipo,
-				OLD.evento_usuario
-				);
-		RETURN OLD;
-	END;
+BEGIN
+	INSERT INTO BackupEvento VALUES(
+			OLD.evento_id,
+			OLD.evento_nome,
+			OLD.evento_descricao,
+			OLD.evento_data,
+			OLD.evento_hora,
+			OLD.evento_cep,
+			OLD.evento_endereco,
+			OLD.evento_complemento,
+			OLD.evento_cidade,
+			OLD.evento_uf,
+			OLD.evento_tipo,
+			OLD.evento_usuario
+			);
+	RETURN OLD;
+END;
 $$
 LANGUAGE 'plpgsql';
 
@@ -225,19 +225,19 @@ CREATE TRIGGER trigger_backup_evento
 CREATE OR REPLACE FUNCTION trigger_backup_convidado()
 RETURNS TRIGGER AS
 $$
-	BEGIN
-		INSERT INTO BackupConvidado VALUES(
-				OLD.convidado_id,
-				OLD.convidado_evento,
-				OLD.convidado_status,
-				OLD.convidado_sms,
-				OLD.convidado_email,
-				OLD.convidado_facebook,
-				OLD.convidado_twitter,
-				OLD.convidado_usuario
-				);
-		RETURN OLD;
-	END;
+BEGIN
+	INSERT INTO BackupConvidado VALUES(
+			OLD.convidado_id,
+			OLD.convidado_evento,
+			OLD.convidado_status,
+			OLD.convidado_sms,
+			OLD.convidado_email,
+			OLD.convidado_facebook,
+			OLD.convidado_twitter,
+			OLD.convidado_usuario
+			);
+	RETURN OLD;
+END;
 $$
 LANGUAGE 'plpgsql';
 
@@ -251,19 +251,19 @@ CREATE TRIGGER trigger_backup_convidado
 CREATE OR REPLACE FUNCTION trigger_backup_usuario()
 RETURNS TRIGGER AS
 $$
-	BEGIN
-		INSERT INTO BackupUsuario VALUES(
-				OLD.usuario_login,
-				OLD.oauth_uid,
-				OLD.oauth_provider,
-				OLD.twitter_oauth_token 
-				OLD.twitter_oauth_token_secret,
-				OLD.usuario_senha,
-				OLD.usuario_email,
-				OLD.usuario_celular
-				);
-		RETURN OLD;
-	END;
+BEGIN
+	INSERT INTO BackupUsuario VALUES(
+			OLD.usuario_login,
+			OLD.oauth_uid,
+			OLD.oauth_provider,
+			OLD.twitter_oauth_token 
+			OLD.twitter_oauth_token_secret,
+			OLD.usuario_senha,
+			OLD.usuario_email,
+			OLD.usuario_celular
+			);
+	RETURN OLD;
+END;
 $$
 LANGUAGE 'plpgsql';
 
@@ -277,14 +277,14 @@ CREATE TRIGGER trigger_backup_usuario
 CREATE OR REPLACE FUNCTION trigger_backup_item()
 RETURNS TRIGGER AS
 $$
-	BEGIN
-		INSERT INTO BackupItem VALUES(
-				OLD.item_id,
-				OLD.item_nome,
-				OLD.item_usuario
-				);
-		RETURN OLD;
-	END;
+BEGIN
+	INSERT INTO BackupItem VALUES(
+			OLD.item_id,
+			OLD.item_nome,
+			OLD.item_usuario
+			);
+	RETURN OLD;
+END;
 $$
 LANGUAGE 'plpgsql';
 
@@ -298,13 +298,13 @@ CREATE TRIGGER trigger_backup_item
 CREATE OR REPLACE FUNCTION trigger_backup_tipo()
 RETURNS TRIGGER AS
 $$
-	BEGIN
-		INSERT INTO BackupTipo VALUES(
-				OLD.tipo_id,
-				OLD.tipo_nome
-				);
-		RETURN OLD;
-	END;
+BEGIN
+	INSERT INTO BackupTipo VALUES(
+			OLD.tipo_id,
+			OLD.tipo_nome
+			);
+	RETURN OLD;
+END;
 $$
 LANGUAGE 'plpgsql';
 
