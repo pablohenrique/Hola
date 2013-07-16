@@ -1,12 +1,9 @@
-/*
- * Use it only in special cases, like: resetting the database
- *
 DROP RULE rule_view_tipoitem ON TipoItem;
 DROP FUNCTION insert_or_nothing(argn VARCHAR(20), argusuario INTEGER, argselect INTEGER);
 DROP VIEW TipoItem;
 DROP TABLE IF EXISTS convidado, tipagemitem, item, evento, usuario, tipo
- *
- */
+
+
 
 SET datestyle TO 'dmy';
 
