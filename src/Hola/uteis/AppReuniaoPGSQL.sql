@@ -112,6 +112,21 @@ CREATE OR REPLACE VIEW TipoItem(
 			FROM ((tipagemitem AS ti INNER JOIN item AS i ON ti.tipagemitem_item = i.item_id) 
 			INNER JOIN tipo AS t ON t.tipo_id = ti.tipagemitem_tipo));
 
+
+
+
+
+/*
+ *
+ * FUNCTIONS TABELAS
+ *
+ */
+
+
+
+
+
+
 CREATE OR REPLACE FUNCTION insert_or_nothing(argn VARCHAR(20), argusuario VARCHAR(20), argselect INTEGER)
 RETURNS INTEGER AS
 $search_tipo$
@@ -152,6 +167,9 @@ END;
 $search_tipo$
 LANGUAGE 'plpgsql';
 
+
+
+
 CREATE OR REPLACE RULE rule_view_tipoitem AS ON INSERT
 TO TipoItem DO INSTEAD(
 	INSERT INTO item VALUES(DEFAULT,NEW.item_nome,NEW.item_usuario);
@@ -159,6 +177,9 @@ TO TipoItem DO INSTEAD(
 		insert_or_nothing(NEW.item_nome,NEW.item_usuario,0),
 		insert_or_nothing(NEW.tipo_nome,NEW.item_usuario,1)
 		));
+
+
+
 
 
 CREATE OR REPLACE FUNCTION login(arglogin character varying, argsenha character varying)
@@ -183,17 +204,171 @@ $BODY$
 
 
 
+
+
+
+
 /*
  *
- * BACKUP DAS TABELAS
+ * FUNCTIONS BACKUP DAS TABELAS
  *
  */
+
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION insert_usuario_backuptables(login VARCHAR(20))
+RETURNS VOID AS
+$$
+DECLARE
+	counter INTEGER;
+BEGIN
+	SELECT COUNT(usuario_login)
+	INTO counter
+	FROM BackupUsuario WHERE usuario_login = login;
+	
+	IF (counter = 0) THEN
+		INSERT INTO BackupUsuario VALUES(
+			SELECT * FROM Usuario WHERE usuario_login = login;
+			);
+	END IF;
+	RETURN;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+
+CREATE OR REPLACE FUNCTION insert_tipo_backuptables(id INTEGER)
+RETURNS VOID AS
+$$
+DECLARE
+	counter INTEGER;
+BEGIN
+	SELECT COUNT(tipo_id)
+	INTO counter
+	FROM BackupTipo WHERE tipo_id = id;
+	
+	IF (counter = 0) THEN
+		INSERT INTO BackupTipo VALUES(
+			SELECT * FROM tipo WHERE tipo_id = id;
+			);
+	END IF;
+	RETURN;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+
+CREATE OR REPLACE FUNCTION insert_evento_backuptables(id INTEGER)
+RETURNS VOID AS
+$$
+DECLARE
+	counter INTEGER;
+BEGIN
+	SELECT COUNT(evento_id)
+	INTO counter
+	FROM BackupEvento WHERE evento_id = id;
+	
+	IF (counter = 0) THEN
+		INSERT INTO BackupEvento VALUES(
+			SELECT * FROM evento WHERE evento_id = id;
+			);
+	END IF;
+	RETURN;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+
+CREATE OR REPLACE FUNCTION insert_item_backuptables(id INTEGER)
+RETURNS VOID AS
+$$
+DECLARE
+	counter INTEGER;
+	login VARCHAR(20);
+	aux RECORD;
+BEGIN
+	SELECT COUNT(item_id)
+	INTO counter
+	FROM BackupItem WHERE item_id = id;
+	
+	IF (counter = 0) THEN
+		SELECT *
+		INTO aux
+		FROM item WHERE item_id = id;
+		
+		SELECT item_usuario
+		INTO login
+		FROM BackupItem WHERE item_id = id;
+		IF(login <> NULL) THEN
+			insert_usuario_backuptables(aux.item_usuario);
+		END IF;
+
+		INSERT INTO BackupItem VALUES(
+			SELECT * FROM item WHERE item_id = id;
+		);
+	END IF;
+	RETURN;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+
+CREATE OR REPLACE FUNCTION insert_convidado_backuptables(id INTEGER)
+RETURNS VOID AS
+$$
+DECLARE
+	counter INTEGER;
+	counter2 INTEGER;
+	login2 VARCHAR(20);
+	aux RECORD;
+BEGIN
+	SELECT COUNT(convidado_id)
+	INTO counter
+	FROM BackupConvidado WHERE convidado_id = id;
+	
+	IF (counter = 0) THEN
+		SELECT *
+		INTO aux
+		FROM convidado WHERE convidado_id = id;
+
+		insert_usuario_backuptables(aux.convidado_usuario);
+		insert_evento_backuptables(aux.convidado_evento);
+
+		INSERT INTO BackupConvidado VALUES(
+			SELECT * FROM convidado WHERE convidado_id = id;
+		);
+	END IF;
+	RETURN;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+
+
+
+
+
+
+/*
+ *
+ * TRIGGER BACKUP DAS TABELAS
+ *
+ */
+
+
+
+
 
 
 CREATE OR REPLACE FUNCTION trigger_backup_evento()
 RETURNS TRIGGER AS
 $$
 BEGIN
+	insert_usuario_backuptables(OLD.evento_usuario);
 	INSERT INTO BackupEvento VALUES(
 			OLD.evento_id,
 			OLD.evento_nome,
@@ -223,6 +398,8 @@ CREATE OR REPLACE FUNCTION trigger_backup_convidado()
 RETURNS TRIGGER AS
 $$
 BEGIN
+	insert_evento_backuptables(OLD.convidado_evento);
+	insert_usuario_backuptables(OLD.convidado_usuario);
 	INSERT INTO BackupConvidado VALUES(
 			OLD.convidado_id,
 			OLD.convidado_evento,
@@ -275,6 +452,7 @@ CREATE OR REPLACE FUNCTION trigger_backup_item()
 RETURNS TRIGGER AS
 $$
 BEGIN
+	insert_usuario_backuptables(OLD.item_usuario);
 	INSERT INTO BackupItem VALUES(
 			OLD.item_id,
 			OLD.item_nome,
@@ -308,9 +486,6 @@ LANGUAGE 'plpgsql';
 CREATE TRIGGER trigger_backup_tipo
    BEFORE DELETE ON Tipo
    FOR EACH ROW EXECUTE PROCEDURE trigger_backup_tipo();
-
-
-
 
 
 /*
