@@ -3,15 +3,6 @@ require_once (__DIR__ . '/../../src/Hola/Autoloader.php');
 
 use Tonic\Response;
 
-session_start();
-if (isset($_SESSION["user"]))
-	$user = $_SESSION["user"];
-else {
-	$response = new Response(Response::UNAUTHORIZED, '{ERRO: "Cliente nao logado."}', array('content-type' => 'application/json'));
-	$response->output();
-	die;
-}
-
 $config = array(
     'load' => array('../../src/Hola/Resource/*.php')
 );
