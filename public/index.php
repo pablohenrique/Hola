@@ -55,7 +55,7 @@
         <script src="js/raphael.js" type="text/javascript"></script>
         <script src="js/livicons-1.1.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
-        <script src="js/main.js" type="text/javascript"></script>
+        <script src="js/main.js?random=<?php echo uniqid(); ?>"></script>
         <script type="text/javascript">
         </script>
 

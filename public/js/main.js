@@ -6,7 +6,6 @@ function htmlEncode(value){
 function require_template(tmpl_dir, templateName) {
     var template = $('#template_' + templateName);
     if (template.length === 0) {
-        //var tmpl_dir = 'template';
         var tmpl_url = 'template/' + tmpl_dir + '/' + templateName + '.html';
         var tmpl_string = '';
 
@@ -86,14 +85,11 @@ require_template('tickets','informacao');
             });
 
 
-
+            var status = "aguardando";
             var CadastrarUsuario = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                   // this.$el.find(".top").empty();
                     this.$el.find(".main").empty();
-                   // var barra = _.template($('#template_barra').html(), {});
-                    //this.$el.find(".top").append(barra);
                     var cadastrar = _.template($('#template_cadastrar').html(), {});
                     this.$el.find(".main").append(cadastrar);
                     var carrossel = _.template($('#template_carrousselmod2').html(), {});
@@ -104,6 +100,7 @@ require_template('tickets','informacao');
                     'submit .cadastrar-usuario-form': 'salvarUsuarioNovo',
                 },
                 salvarUsuarioNovo: function(ev) {
+                    status = "aguardando";
                     var dadosUsuario = $(ev.currentTarget).serializeObject();
                     console.log(dadosUsuario);
                     var usuario = new Usuario();
@@ -112,6 +109,7 @@ require_template('tickets','informacao');
                             router.navigate('', {trigger: true});
                         },
                         error: function(usuario, response) {
+                            status = "erro";
                             alert ("Dados inforamdos ja estao cadastrados!");
                         },
                     });
@@ -137,10 +135,7 @@ require_template('tickets','informacao');
                 el: '.page',
                 render: function() {
                     var that = this;
-                  // that.$el.find(".top").empty();
                     that.$el.find(".main").empty();
-                   // var navbar = _.template($('#template_navbar').html(), {});
-                   // that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_amigos').html(), {});
                     that.$el.find(".main").append(home);
                 },
@@ -151,12 +146,9 @@ require_template('tickets','informacao');
                 render: function() {
                     var ec = new EventosConvidado();
                     var that = this;
-              // that.$el.find(".top").empty();
                     that.$el.find(".main").empty();
                     uid = usrLog.login;
                     ec.fetch({success: function() {
-                // var navbar = _.template($('#template_navbar').html(), {});
-                  // that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_convites').html(), {ec: ec.models});
                     that.$el.find(".main").append(home);
 
@@ -172,12 +164,9 @@ require_template('tickets','informacao');
                 render: function() {
                     var eo = new EventosOrganizado();
                     var that = this;
-                 // that.$el.find(".top").empty();
                     that.$el.find(".main").empty();
                     uid = usrLog.login;
                     eo.fetch({success: function() {
-                 // var navbar = _.template($('#template_navbar').html(), {});
-                 // that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_eventos').html(), {eo: eo.models});
                     that.$el.find(".main").append(home);
 }});
@@ -191,10 +180,7 @@ require_template('tickets','informacao');
                 el: '.page',
                 render: function() {
                     var that = this;
-               // that.$el.find(".top").empty();
                     that.$el.find(".main").empty();
-                // var navbar = _.template($('#template_navbar').html(), {});
-               // that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_compras').html(), {});
                     that.$el.find(".main").append(home);
                 },
@@ -229,13 +215,10 @@ require_template('tickets','informacao');
                 var ec = new EventosConvidado();
                 var eo = new EventosOrganizado();
                 var that = this;
-               // that.$el.find(".top").empty();
                 that.$el.find(".main").empty();
                 uid = usrLog.login;
                 ec.fetch({success: function() {
                 eo.fetch({success: function() {
-                  // var navbar = _.template($('#template_navbar').html(), {});
-                // that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_home').html(), {ec: ec.models, eo: eo.models});
                     that.$el.find(".main").append(home);
     }});
@@ -247,10 +230,7 @@ require_template('tickets','informacao');
                 el: '.page',
                 render: function() {
                     var that = this;
-                   // that.$el.find(".top").empty();
                     that.$el.find(".main").empty();
-                    //var navbar = _.template($('#template_navbar').html(), {});
-                   // that.$el.find(".top").append(navbar);
                     var home = _.template($('#template_cabecalho').html(), {});
                     that.$el.find(".main").append(home);
  
@@ -270,16 +250,14 @@ require_template('tickets','informacao');
                     dadosCompletos.oauthUid = usrLog.oauthUid;
                     dadosCompletos.twitterOauthToken = usrLog.twitterOauthToken;
                     dadosCompletos.twitterOauthTokenSecret = usrLog.twitterOauthTokenSecret;
-                    console.log(usrLog);
-                    //dadosCompletos.email = dadosUsuario.email;
                     console.log(dadosCompletos);
-                    //console.log(usrLog);
-                    //console.log(usuario);
-                    //console.log(usuario.id);
                     usuario.save(dadosCompletos, {
-                        success: function(usuario) {
+                        success: function(usuario, response) {
                             router.navigate('meucadastro', {trigger: true});
-                        }
+                        },
+                        error: function(usuario, response) {
+                            alert ("Dados inforamdos ja estao cadastrados!");
+                        },
                     });
                     return false;
                 }
@@ -300,10 +278,7 @@ require_template('tickets','informacao');
             var Logar = Backbone.View.extend({
                 el: '.page',
                 render: function() {
-                 // this.$el.find(".top").empty();
                     this.$el.find(".main").empty();
-                 // var barra = _.template($('#template_barra').html(), {});
-                 // this.$el.find(".top").append(barra);
                     var acessar = _.template($('#template_acessar').html(), {});
                     this.$el.find(".main").append(acessar);
                     var carrossel = _.template($('#template_carrousselmod').html(), {});
