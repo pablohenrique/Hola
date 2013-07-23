@@ -10,48 +10,36 @@
         Hola\Model\Usuario;
 
     session_start();
-
-    function checkSession(Usuario $usuario){
-        if(is_null($usuario)){
-            session_destroy();
-            header("Location: /Hola/#/logar");
-            exit();
-        }
-    }
-
-    function validateLogin($login,$senha){
-        $usuarioService = new UsuarioService();
-        $usuario = $usuarioService->login($login,$senha);
-        checkSession($usuario);
-        unset($usuarioService);
-        return $usuario;
-    }
-
-    if(!empty($_SESSION))
-        if(is_array($_SESSION['user']))
-            validateLogin($_SESSION['user']->getLogin(),$_SESSION['user']->getSenha());
-
+    
     if( isset($_POST['login']) && isset($_POST['senha']) ) {
+        /*
         $eventoService = new EventoService();
         $convidadoService = new ConvidadoService();
         $tipoService = new TipoService();
         $itemService = new ItemService();
+        */
+        $usuarioService = new UsuarioService();
+        $_SESSION['user'] = $usuarioService->login($_POST['login'],$_POST['senha']);
+        if(is_null($_SESSION['user'])){
+            header("Location: /Hola/index.php?erro");
+            exit();
+        }
 
-        $usuario = validateLogin($_POST['login'],$_POST['senha']);
-
-        $_SESSION['user'] = $usuario;
+        /*
         $_SESSION['event'] = $eventoService->search($usuario->getLogin());
         $_SESSION['invitation'] = $convidadoService->getUsuario($usuario->getLogin());
         $_SESSION['type'] = $tipoService->search();
         $_SESSION['items'] = $itemService->search();
 
         unset($eventoService,$convidadoService,$tipoService,$itemService);
-
+        */
         $user = json_encode($_SESSION['user']);
+        /*
         $evento = json_encode($_SESSION['event']);
         $convidado = json_encode($_SESSION['invitation']);
         $tipo = json_encode($_SESSION['type']);
         $item = json_encode($_SESSION['items']);
+        */
     }
 
 ?>
