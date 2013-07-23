@@ -31,7 +31,9 @@ class UsuarioService {
 	public function post($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret){
 		if($login == $senha)
 			throw new Exception("Login and Password MUST be NOT equal.");
-		$this->dao->post(self::createObject(Security::filterCharacters($login), Security::filterCharacters($senha), Security::preventXSS($email), Security::preventXSS($celular), Security::preventXSS($oauth_uid), Security::preventXSS($oauth_provider), Security::preventXSS($twitter_oauth_token), Security::preventXSS($twitter_oauth_token_secret)));
+		$login = Security::filterCharacters($login);
+		$senha = Security::filterCharacters($senha);
+		$this->dao->post(self::createObject($login, Security::encrypt($senha,$login), Security::preventXSS($email), Security::preventXSS($celular), Security::preventXSS($oauth_uid), Security::preventXSS($oauth_provider), Security::preventXSS($twitter_oauth_token), Security::preventXSS($twitter_oauth_token_secret)));
 		unset($this->usuario);
 	}
 
@@ -45,7 +47,9 @@ class UsuarioService {
 	public function update($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret){
 		if($login == $senha)
 			throw new Exception("Login and Password MUST be NOT equal.");
-		$this->dao->update(self::createObject(Security::filterCharacters($login), Security::filterCharacters($senha), Security::preventXSS($email), Security::preventXSS($celular), Security::preventXSS($oauth_uid), Security::preventXSS($oauth_provider), Security::preventXSS($twitter_oauth_token), Security::preventXSS($twitter_oauth_token_secret)));
+		$login = Security::filterCharacters($login);
+		$senha = Security::filterCharacters($senha);
+		$this->dao->update(self::createObject($login, Security::encrypt($senha,$login), Security::preventXSS($email), Security::preventXSS($celular), Security::preventXSS($oauth_uid), Security::preventXSS($oauth_provider), Security::preventXSS($twitter_oauth_token), Security::preventXSS($twitter_oauth_token_secret)));
 		unset($this->usuario);
 	}
 
@@ -54,8 +58,10 @@ class UsuarioService {
 	}
 
 	public function login($login,$senha){
-		if($this->dao->login(Security::filterCharacters($login),Security::filterCharacters($senha)) == 1)
-			return self::search(Security::filterCharacters($login));
+		$login = Security::filterCharacters($login);
+		$senha = Security::filterCharacters($senha);
+		if($this->dao->login($login,Security::encrypt($senha,$login)) == 1)
+			return self::search($login);
 		else
 			return null;
 	}
