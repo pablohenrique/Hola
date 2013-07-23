@@ -84,11 +84,12 @@ require_template('tickets','informacao');
              }
             });
 
-
+            var aquilo;
             var status = "aguardando";
             var CadastrarUsuario = Backbone.View.extend({
                 el: '.page',
                 render: function() {
+                    aquilo = this;
                     this.$el.find(".main").empty();
                     var cadastrar = _.template($('#template_cadastrar').html(), {});
                     this.$el.find(".main").append(cadastrar);
@@ -110,7 +111,12 @@ require_template('tickets','informacao');
                         },
                         error: function(usuario, response) {
                             status = "erro";
-                            alert ("Dados inforamdos ja estao cadastrados!");
+                            aquilo.$el.find(".main").empty();
+                            var cadastrar = _.template($('#template_cadastrar').html(), {status:status});
+                            aquilo.$el.find(".main").append(cadastrar);
+                            var carrossel = _.template($('#template_carrousselmod2').html(), {});
+                            aquilo.$el.find(".main").append(carrossel);
+                            console.log(status);
                         },
                     });
                     return false;
