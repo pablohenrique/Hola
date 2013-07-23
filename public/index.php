@@ -1,7 +1,7 @@
 <?php
     require_once (__DIR__ . '/../src/Hola/Autoloader.php');
 
-    use Hola\Service\UsuarioService,
+    use Hola\Service\UsuarioService;
 
     session_start();
     
