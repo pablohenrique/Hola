@@ -17,7 +17,29 @@ class Evento implements JsonSerializable{
 	private $estado;
 	private $cep;
 	private $tipo;
+	private $status;
 	private $usuario;
+
+	public function __construct($id = null, $nome = null, $descricao = null, $data = null, $hora = null, $endereco = null, $complemento = null, $cidade = null, $estado = null, $cep = null, $tipo = null, $status = null, $usuario = null){
+		if(!is_null($id))
+			self::setId($id);
+		self::setNome($nome);
+		self::setDescricao($descricao);
+		self::setData($data);
+		self::setHora($hora);
+		self::setEndereco($endereco);
+		self::setComplemento($complemento);
+		self::setCidade($cidade);
+		self::setEstado($estado);
+		self::setCep($cep);
+		self::setStatus($status);
+		self::setTipo($tipo);
+		self::setUsuario($usuario);
+	}
+
+	private function converteData ($data) {
+        return implode("/", array_reverse(explode("-", $data)));
+    }
 
 	/*GETTERS*/
 	public function getId(){ return $this->id; }
@@ -31,13 +53,14 @@ class Evento implements JsonSerializable{
 	public function getEstado(){ return $this->estado; }
 	public function getCep(){ return $this->cep; }
 	public function getTipo(){ return $this->tipo; }
+	public function getStatus(){ return $this->status; }
 	public function getUsuario(){ return $this->usuario; }
 
 	/*SETTERS*/
 	public function setId($input){ $this->id = $input; }
 	public function setNome($input){ $this->nome = $input; }
 	public function setDescricao($input){ $this->descricao = $input; }
-	public function setData($input){ $this->data = $input; }
+	public function setData($input){ $this->data = self::converteData($input); }
 	public function setHora($input){ $this->hora = $input; }
 	public function setEndereco($input){ $this->endereco = $input; }
 	public function setComplemento($input){ $this->complemento = $input; }
@@ -45,6 +68,7 @@ class Evento implements JsonSerializable{
 	public function setEstado($input){ $this->estado = $input; }
 	public function setCep($input){ $this->cep = $input; }
 	public function setTipo(Tipo $input){ $this->tipo = $input; }
+	public function setStatus($input){ $this->status = $input; }
 	public function setUsuario(Usuario $input){ $this->usuario = $input; }
 
 	/*OTHERS*/
@@ -61,6 +85,7 @@ class Evento implements JsonSerializable{
             'estado' => $this->getEstado(),
             'cep' => $this->getCep(),
             'tipo' => $this->getTipo(),
+            'status' => $this->getStatus(),
             'usuario' => $this->getUsuario()
         	];
     }

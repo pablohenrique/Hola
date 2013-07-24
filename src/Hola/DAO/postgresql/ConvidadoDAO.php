@@ -18,7 +18,8 @@ class ConvidadoDAO implements IConvidadoDAO{
 					:convidado_sms,
 					:convidado_email,
 					:convidado_facebook,
-					:convidado_twitter
+					:convidado_twitter,
+					:convidado_status
 					);';
 	const SQL_GET = 'SELECT * FROM Convidado WHERE convidado_id = :convidado_id;';
 	const SQL_GETALL = 'SELECT * FROM Convidado;';
@@ -30,7 +31,8 @@ class ConvidadoDAO implements IConvidadoDAO{
 					convidado_sms = :convidado_sms,
 					convidado_email = :convidado_email,
 					convidado_facebook = :convidado_facebook,
-					convidado_twitter = :convidado_twitter
+					convidado_twitter = :convidado_twitter,
+					convidado_status = :convidado_status
 					WHERE convidado_id = :convidado_id;';
 	const SQL_DELETE = 'DELETE FROM Convidado WHERE convidado_id = :convidado_id;';
 
@@ -172,30 +174,19 @@ class ConvidadoDAO implements IConvidadoDAO{
 
 	/*FUNCTIONS*/
 	private function createObjectTemplate($resultSet){
-		$convidado = new Convidado();
-		$convidado->setId($resultSet['convidado_id']);
-		$convidado->setSms($resultSet['convidado_sms']);
-		$convidado->setEmail($resultSet['convidado_email']);
-		$convidado->setFacebook($resultSet['convidado_facebook']);
-		$convidado->setTwitter($resultSet['convidado_twitter']);
-
-		if(!is_null($resultSet['convidado_evento']))
-			$convidado->setEvento($this->eventodao->get($resultSet['convidado_evento']));
-
-		if(!is_null($resultSet['convidado_usuario']))
-			$convidado->setUsuario($this->usuariodao->get($resultSet['convidado_usuario']));
-
+		$convidado = new Convidado($resultSet['convidado_id'], $resultSet['convidado_sms'], $resultSet['convidado_email'], $resultSet['convidado_twitter'], $resultSet['convidado_facebook'], $resultSet['convidado_status'], $this->eventodao->get($resultSet['convidado_evento']), $this->usuariodao->get($resultSet['convidado_usuario']));
 		return $convidado;
 	}
 	
 	private function setObjectTemplate($input){
 		$Array = array(
 			':convidado_evento' => $input->getEvento()->getId(),
-			':convidado_usuario' => $input->getUsuario()->getId(),
+			':convidado_usuario' => $input->getUsuario()->getLogin(),
 			':convidado_sms' => $input->getSms(),
 			':convidado_email' => $input->getEmail(),
 			':convidado_facebook' => $input->getFacebook(),
-			':convidado_twitter' => $input->getTwitter()
+			':convidado_twitter' => $input->getTwitter(),
+			':convidado_status' => $input->getStatus()
 		);
 		if(!is_null($input->getId()))
 			$Array[':convidado_id'] = $input->getId();

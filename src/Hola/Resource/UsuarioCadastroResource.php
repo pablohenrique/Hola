@@ -41,7 +41,7 @@ class UsuarioCadastroResource extends Resource {
             return new Response(Response::CREATED, array('login' => $criada));
 
         } catch (RADUFU\DAO\Exception $e) {
-            throw new Tonic\Exception($e->getMessage());
+            throw new Tonic\Exception("excessao aqui  " . $e->getMessage());
         }
     }
 

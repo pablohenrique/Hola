@@ -15,6 +15,17 @@ class Usuario implements JsonSerializable{
 	private $twitter_oauth_token;
 	private $twitter_oauth_token_secret;
 
+	public function __construct($login = null, $senha = null, $email = null, $celular = null, $oauth_uid = null, $oauth_provider = null, $twitter_oauth_token = null, $twitter_oauth_token_secret = null){
+		self::setLogin($login);
+		self::setSenha($senha);
+		self::setEmail($email);
+		self::setCelular($celular);
+		self::setOauthId($oauth_uid);
+		self::setOauthProvider($oauth_provider);
+		self::setTwitterOauthToken($twitter_oauth_token);
+		self::setTwitterOauthTokenSecret($twitter_oauth_token_secret);
+	}
+
 	/*GETTERS*/
 	public function getLogin(){ return $this->login; }
 	public function getSenha(){ return $this->senha; }

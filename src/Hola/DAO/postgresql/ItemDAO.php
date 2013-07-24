@@ -11,14 +11,12 @@ use \PDO,
 class ItemDAO implements IItemDAO{
 
 	/*DEFINITIONS FOR IDAO*/
-	const SQL_POST = 'INSERT INTO Item VALUES(DEFAULT,:item_nome,:item_usuario);';
-	const SQL_GET = 'SELECT * FROM Item WHERE item_id = :item_id;';
+	const SQL_POST = 'INSERT INTO Item VALUES(:item_nome);';
+	//const SQL_GET = 'SELECT * FROM Item WHERE item_id = :item_id;';
 	const SQL_GETALL = 'SELECT * FROM Item;';
-	const SQL_READALL = 'SELECT * FROM Item WHERE item_usuario = :item_usuario;';
 	const SQL_READ = 'SELECT * FROM Item WHERE item_nome = :item_nome;';
-	const SQL_SEEK = 'SELECT * FROM Item WHERE item_nome = :item_nome AND item_usuario = :item_usuario;';
-	const SQL_UPDATE = 'UPDATE Item SET item_nome = :item_nome, item_usuario = :item_usuario WHERE item_id = :item_id;';
-	const SQL_DELETE = 'DELETE FROM Item WHERE item_id = :item_id;';
+	//const SQL_UPDATE = 'UPDATE Item SET item_nome = :item_nome, item_usuario = :item_usuario WHERE item_id = :item_id;';
+	const SQL_DELETE = 'DELETE FROM Item WHERE item_nome = :item_nome;';
 
 	/*MORE DEFINITIONS*/
 	private $usuariodao;
@@ -40,49 +38,9 @@ class ItemDAO implements IItemDAO{
         }
 	}
 
-	public function get($input){
-		try{
-			$stm = Connection::Instance()->get()->prepare(self::SQL_GET);
-			$stm->bindParam(':item_id',$input);
-			$stm->execute();
-
-			$result = $stm->fetch(PDO::FETCH_ASSOC);
-
-			$this->usuariodao = new UsuarioDAO();
-			
-			if($result)
-				return self::createObjectTemplate($result);
-
-			unset($this->usuariodao);
-			throw new NotFoundException();
-
-		} catch(PDOException $ex){
-			throw new Exception("Ao procurar [GET] Item: " . $ex->getMessage());
-		}
-	}
-
 	public function getAll(){
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_GETALL);
-			$stm->execute();
-			$Array = array();
-
-			$this->usuariodao = new UsuarioDAO();
-			while($result = $stm->fetch(PDO::FETCH_ASSOC))
-				$Array[] = self::createObjectTemplate($result);
-
-			unset($this->usuariodao);
-			return $Array;
-
-		} catch(PDOException $ex){
-			throw new Exception("Ao procurar [GETALL] Item: " . $ex->getMessage());
-		}
-	}
-
-	public function readAll($input){
-		try{
-			$stm = Connection::Instance()->get()->prepare(self::SQL_READALL);
-			$stm->bindParam(':item_usuario',$input);
 			$stm->execute();
 			$Array = array();
 
@@ -116,29 +74,7 @@ class ItemDAO implements IItemDAO{
 			throw new Exception("Ao procurar [READ] Item: " . $ex->getMessage());
 		}
 	}
-
-	public function seek($usuario, $input){
-		try{
-			$stm = Connection::Instance()->get()->prepare(self::SQL_SEEK);
-			$stm->execute(array(
-						':item_id' => $input,
-						':item_usuario' => $usuario
-						));
-
-			$result = $stm->fetch(PDO::FETCH_ASSOC);
-
-			$this->usuariodao = new UsuarioDAO();
-			if($result)
-				return self::createObjectTemplate($result);
-
-			unset($this->usuariodao);
-			throw new NotFoundException();
-
-		} catch(PDOException $ex){
-			throw new Exception("Ao procurar [READ] Item: " . $ex->getMessage());
-		}
-	}
-
+/*	
 	public function update(Item $input){
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_UPDATE);
@@ -151,11 +87,11 @@ class ItemDAO implements IItemDAO{
 			throw new Exception("Ao atualizar Item: " . $ex->getMessage());
 		}
 	}
-
+*/
 	public function delete($input){
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_DELETE);
-			$stm->bindParam(':item_id',$input);
+			$stm->bindParam(':item_nome',$input);
 			$stm->execute();
 
 			if(!$stm->rowCount() > 0)
@@ -171,23 +107,12 @@ class ItemDAO implements IItemDAO{
 
 	/*FUNCTIONS*/
 	private function createObjectTemplate($resultSet){
-		$item = new Item();
-		$item->setId($resultSet['item_id']);
-		$item->setNome($resultSet['item_nome']);
-
-		if(!is_null($resultSet['item_usuario']))
-			$item->setUsuario($this->usuariodao->get($resultSet['item_usuario']));
+		$item = new Item($resultSet['item_nome']);
 		return $item;
 	}
 
 	private function setObjectTemplate($input){
-		$Array = array(':item_nome' => $input->getNome());
-		if(!is_null($input->getUsuario()))
-			$Array[':item_usuario'] = $input->getUsuario()->getId();
-		if(!is_null($input->getId()))
-			$Array[':item_id'] = $input->getId();
-
-		return $Array;
+		return array(':item_nome' => $input->getNome());
 	}
 
 }

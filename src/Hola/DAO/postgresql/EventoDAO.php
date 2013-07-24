@@ -23,6 +23,7 @@ class EventoDAO implements IEventoDAO{
 						:evento_cidade,
 						:evento_uf,
 						:evento_tipo,
+						:evento_status,
 						:evento_usuario
 						);';
 	const SQL_GET = 'SELECT * FROM Evento WHERE evento_id = :evento_id ORDER BY evento_data DESC;';
@@ -40,6 +41,7 @@ class EventoDAO implements IEventoDAO{
 						evento_cidade = :evento_cidade,
 						evento_uf = :evento_uf,
 						evento_tipo = :evento_tipo,
+						evento_status = :evento_status,
 						evento_usuario = :evento_usuario
 						WHERE evento_id = :evento_id;';
 	const SQL_DELETE = 'DELETE FROM Evento WHERE evento_id = :evento_id;';
@@ -175,24 +177,10 @@ class EventoDAO implements IEventoDAO{
 
 	/*FUNCTIONS*/
 	private function createObjectTemplate($resultSet){
-		$evento = new Evento();
-		$evento->setId($resultSet['evento_id']);
-		$evento->setNome($resultSet['evento_nome']);
-		$evento->setDescricao($resultSet['evento_descricao']);
-		$evento->setData($resultSet['evento_data']);
-		$evento->setHora($resultSet['evento_hora']);
-		$evento->setCep($resultSet['evento_cep']);
-		$evento->setEndereco($resultSet['evento_endereco']);
-		$evento->setComplemento($resultSet['evento_complemento']);
-		$evento->setCidade($resultSet['evento_cidade']);
-		$evento->setEstado($resultSet['evento_uf']);
-		$this->tipodao = new TipoDAO();
-		$evento->setTipo($this->tipodao->get($resultSet['evento_tipo']));
 		$this->usuariodao = new UsuarioDAO();
-		$evento->setUsuario($this->usuariodao->get($resultSet['evento_usuario']));
-
+		$this->tipodao = new TipoDAO();
+		$evento = new Evento($resultSet['evento_id'], $resultSet['evento_nome'], $resultSet['evento_descricao'], $resultSet['evento_data'], $resultSet['evento_hora'], $resultSet['evento_endereco'], $resultSet['evento_complemento'], $resultSet['evento_cidade'], $resultSet['evento_uf'], $resultSet['evento_cep'], $this->tipodao->read($resultSet['evento_tipo']), $resultSet['evento_status'], $this->usuariodao->get($resultSet['evento_usuario']));
 		unset($this->tipodao, $this->usuariodao);
-
 		return $evento;
 	}
 
@@ -206,14 +194,15 @@ class EventoDAO implements IEventoDAO{
 			':evento_endereco' => $input->getEndereco(),
 			':evento_complemento' => $input->getComplemento(),
 			':evento_cidade' => $input->getCidade(),
-			':evento_uf' => $input->getEstado()
+			':evento_uf' => $input->getEstado(),
+			':evento_status' => $input->getStatus()
 		);
 		if(!is_null($input->getId()))
 			$Array[':evento_id'] = $input->getId();
 		if(!is_null($input->getTipo()))
-			$Array[':evento_tipo'] = $input->getTipo()->getId();
+			$Array[':evento_tipo'] = $input->getTipo()->getNome();
 		if(!is_null($input->getUsuario()))
-			$Array[':evento_usuario'] = $input->getUsuario()->getId();
+			$Array[':evento_usuario'] = $input->getUsuario()->getLogin();
 
 		return $Array;
 	}

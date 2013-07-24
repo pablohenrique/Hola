@@ -13,6 +13,19 @@ class Convidado implements JsonSerializable{
 	private $usuario;
 	private $twitter;
 	private $facebook;
+	private $status;
+
+ 	public function __construct($id = null, $sms = null, $email = null, $twitter = null, $facebook = null, $status = null, $evento = null, $usuario = null){
+		if(!is_null($id))
+			self::setId($id);
+		self::setSms($sms);
+		self::setEmail($email);
+		self::setTwitter($twitter);
+		self::setFacebook($facebook);
+		self::setStatus($status);
+		self::setEvento($evento);
+		self::setUsuario($usuario);
+	}
 
 	/*GETTERS*/
 	public function getId(){ return $this->id; }
@@ -22,6 +35,7 @@ class Convidado implements JsonSerializable{
 	public function getUsuario(){ return $this->usuario; }
 	public function getTwitter(){ return $this->twitter; }
 	public function getFacebook(){ return $this->facebook; }
+	public function getStatus(){ return $this->status; }
 
 	/*SETTERS*/
 	public function setId($input){ $this->id = $input; }
@@ -31,6 +45,7 @@ class Convidado implements JsonSerializable{
 	public function setUsuario(Usuario $input){ $this->usuario = $input; }
 	public function setTwitter($input){ $this->twitter = $input; }
 	public function setFacebook($input){ $this->facebook = $input; }
+	public function setStatus($input){ $this->status = $input; }
 
 	/*OTHERS*/
 	public function JsonSerialize() {
@@ -41,7 +56,8 @@ class Convidado implements JsonSerializable{
             'evento' => $this->getEvento(),
             'usuario' => $this->getUsuario(),
             'twitter' => $this->getTwitter(),
-            'facebook' => $this->getFacebook()
+            'facebook' => $this->getFacebook(),
+            'status' => $this->getStatus()
         	];
     }
 
