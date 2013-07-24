@@ -17,7 +17,7 @@ interface IItemDAO{
 	 *@param
 	 *@throws 
 	 */
-	public function get($input);
+	//public function get($input);
 
 	/**
 	 *Busca todos os objetos no banco de dados
@@ -31,7 +31,7 @@ interface IItemDAO{
 	 *@param
 	 *@throws 
 	 */
-	public function readAll($usuario);
+	//public function readAll($usuario);
 
 	/**
 	 *Busca um objeto no banco de dados
@@ -45,14 +45,14 @@ interface IItemDAO{
 	 *@param
 	 *@throws 
 	 */
-	public function seek($usuario, $input);
+	//public function seek($usuario, $input);
 
 	/**
 	 *Atualiza um objeto no banco de dados
 	 *@param
 	 *@throws 
 	 */
-	public function update(Item $input);
+	//public function update(Item $input);
 
 	/**
 	 *Deleta um objeto no banco de dados

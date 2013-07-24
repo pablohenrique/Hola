@@ -1,4 +1,7 @@
 <?php
+/*
+ * Esta parte foi parada devido a uma mudanca no Hola. Sera continuada quando sair da versao alpha.
+*/
 namespace Hola\Resource;
 
 use Hola\Service\ItemService,

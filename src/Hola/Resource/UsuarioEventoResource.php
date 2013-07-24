@@ -47,9 +47,9 @@ class UsuarioEventoResource extends Resource {
             &&isset($this->request->data->usuario)))
             return new Response(Response::BADREQUEST);
 
-        checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->usuario);
-
         try {
+            checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->usuario);
+
             $this->eventoService = new EventoService();
             $this->eventoService->post(
                     $this->request->data->nome,
@@ -84,9 +84,9 @@ class UsuarioEventoResource extends Resource {
         if(is_null($id))
             throw new Tonic\MethodNotAllowedException();
 
-        checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->usuario);
-
         try {
+            checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->usuario);
+
             $this->eventoService = new EventoService();
             $this->eventoService->update(
                     $this->request->data->nome,
@@ -124,9 +124,9 @@ class UsuarioEventoResource extends Resource {
         if(is_null($id))
             throw new Tonic\MethodNotAllowedException();
 
-        checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->usuario);
-
         try {
+            checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->usuario);
+            
             $this->eventoService = new EventoService();
             $this->eventoService->delete($id);
 

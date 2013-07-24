@@ -11,11 +11,8 @@ class TipoService {
 	private $dao;
 	private $tipo;
 
-	private function createObject($nome, $id = null){
-		$this->tipo = new Tipo();
-		$this->tipo->setNome($nome);
-		if(!is_null($id))
-			$this->tipo->setId($id);
+	private function createObject($nome){
+		$this->tipo = new Tipo($nome);
 		return $this->tipo;
 	}
 
@@ -23,22 +20,20 @@ class TipoService {
 		$this->dao = Factory::getFactory(FACTORY::PGSQL)->getTipoDAO();
 	}
 
-	public function post($nome, $id = null){
-		$this->dao->post(self::createObject(Security::preventXSS($nome), Security::filterNumbers($id)));
+	public function post($nome){
+		$this->dao->post(self::createObject(Security::preventXSS($nome)));
 		unset($this->tipo);
 	}
 
 	public function search($input = null){
-		if(is_numeric($input))
-			return $this->dao->get(Security::filterNumbers($input));
 		if(!is_null($input))
 			return $this->dao->read(Security::preventXSS($input));
 		else
 			return $this->dao->getAll();
 	}
 
-	public function update($nome, $id){
-		$this->dao->update(self::createObject(Security::preventXSS($nome),Security::filterNumbers($id)));
+	public function update($nome){
+		$this->dao->update(self::createObject(Security::preventXSS($nome)));
 		unset($this->tipo);
 	}
 

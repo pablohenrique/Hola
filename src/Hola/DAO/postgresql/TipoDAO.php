@@ -11,12 +11,11 @@ use \PDO,
 class TipoDAO implements ITipoDAO{
 
 	/*DEFINITIONS FOR IDAO*/
-	const SQL_POST = 'INSERT INTO Tipo VALUES(DEFAULT,:tipo_nome);';
-	const SQL_GET = 'SELECT * FROM Tipo WHERE tipo_id = :tipo_id;';
+	const SQL_POST = 'INSERT INTO Tipo VALUES(:tipo_nome);';
 	const SQL_GETALL = 'SELECT * FROM Tipo;';
 	const SQL_READ = 'SELECT * FROM Tipo WHERE tipo_nome = :tipo_nome;';
-	const SQL_UPDATE = 'UPDATE Tipo SET tipo_nome = :tipo_nome WHERE tipo_id = :tipo_id;';
-	const SQL_DELETE = 'DELETE FROM Tipo WHERE tipo_id = :tipo_id;';
+	//const SQL_UPDATE = 'UPDATE Tipo SET tipo_nome = :tipo_nome WHERE tipo_nome = :tipo_nome;';
+	const SQL_DELETE = 'DELETE FROM Tipo WHERE tipo_nome = :tipo_nome;';
 
 	/*FUNCTIONS FOR IDAO*/
 	public function post(Tipo $input){
@@ -35,31 +34,6 @@ class TipoDAO implements ITipoDAO{
         }
 	}
 
-	public function get($input){
-		try{
-			$stm = Connection::Instance()->get()->prepare(self::SQL_GET);
-			$stm->bindParam(':tipo_id',$input);
-			$stm->execute();
-
-			$result = $stm->fetch(PDO::FETCH_ASSOC);
-
-			if($result){
-				$tipo = new Tipo();
-				$tipo->setId($result['tipo_id']);
-				$tipo->setNome($result['tipo_nome']);
-
-				unset($stm,$result);
-				return $tipo;
-			}
-
-			unset($stm,$result);
-			throw new NotFoundException();
-
-		} catch(PDOException $ex){
-			throw new Exception("Ao procurar [GET] Tipo: " . $ex->getMessage());
-		}
-	}
-
 	public function getAll(){
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_GETALL);
@@ -67,13 +41,9 @@ class TipoDAO implements ITipoDAO{
 			$tipoArray = array();
 
 			while($result = $stm->fetch(PDO::FETCH_ASSOC)){
-				$tipo = new Tipo();
-				$tipo->setId($result['tipo_id']);
-				$tipo->setNome($result['tipo_nome']);
-
+				$tipo = new Tipo($result['tipo_nome']);
 				$tipoArray[] = $tipo;
 			}
-
 			unset($tipo,$stm,$result);
 			return $tipoArray;
 
@@ -91,10 +61,7 @@ class TipoDAO implements ITipoDAO{
 			$result = $stm->fetch(PDO::FETCH_ASSOC);
 
 			if($result){
-				$tipo = new Tipo();
-				$tipo->setId($result['tipo_id']);
-				$tipo->setNome($result['tipo_nome']);
-
+				$tipo = new Tipo($result['tipo_nome']);
 				unset($stm,$result);
 				return $tipo;
 			}
@@ -106,7 +73,7 @@ class TipoDAO implements ITipoDAO{
 			throw new Exception("Ao procurar [READ] Tipo: " . $ex->getMessage());
 		}
 	}
-
+/*
 	public function update(Tipo $input){
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_UPDATE);
@@ -122,11 +89,11 @@ class TipoDAO implements ITipoDAO{
 			throw new Exception("Ao atualizar Tipo: " . $ex->getMessage());
 		}
 	}
-
+*/
 	public function delete($input){
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_DELETE);
-			$stm->bindParam(':tipo_id',$input);
+			$stm->bindParam(':tipo_nome',$input);
 			$stm->execute();
 
 			if(!$stm->rowCount() > 0)

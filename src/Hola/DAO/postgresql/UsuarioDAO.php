@@ -133,15 +133,7 @@ class UsuarioDAO implements IUsuarioDAO{
 
 	/*FUNCTIONS*/
 	private function createObjectTemplate($resultSet){
-		$usuario = new Usuario();
-		$usuario->setLogin($resultSet['usuario_login']);
-		$usuario->setOauthId($resultSet['oauth_uid']);
-		$usuario->setOauthProvider($resultSet['oauth_provider']);
-		$usuario->setTwitterOauthToken($resultSet['twitter_oauth_token']);
-		$usuario->setTwitterOauthTokenSecret($resultSet['twitter_oauth_token_secret']);
-		$usuario->setSenha($resultSet['usuario_senha']);
-		$usuario->setEmail($resultSet['usuario_email']);
-		$usuario->setCelular($resultSet['usuario_celular']);
+		$usuario = new Usuario($resultSet['usuario_login'], $resultSet['usuario_senha'], $resultSet['usuario_email'], $resultSet['usuario_celular'], $resultSet['oauth_uid'], $resultSet['oauth_provider'], $resultSet['twitter_oauth_token'], $resultSet['twitter_oauth_token_secret']);
 		return $usuario;
 	}
 

@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * Esta parte foi parada devido a uma mudanca no Hola. Sera continuada quando sair da versao alpha.
+*/
 namespace Hola\DAO\postgresql;
 
 use \PDO,
@@ -13,8 +15,8 @@ use \PDO,
 class TipoItemDAO implements ITipoItemDAO{
 
 	/*DEFINITIONS FOR IDAO*/
-	const SQL_POST = 'INSERT INTO TipagemItem VALUES(:tipagemitem_item,:tipagemitem_tipo);';
-	const SQL_GET = 'SELECT * FROM TipoItem WHERE tipo_id = :tipo_id AND item_id = :item_id;';
+	const SQL_POST = 'INSERT INTO TipoItem VALUES(:tipoitem_item,:tipoitem_tipo);';
+	const SQL_GET = 'SELECT * FROM TipoItem WHERE tipoitem_item = :tipoitem_item AND tipoitem_tipo = :tipoitem_tipo;';
 	const SQL_GETALL = 'SELECT * FROM TipoItem;';
 	const SQL_READ = 'SELECT * FROM TipoItem WHERE tipo_nome = :tipo_nome AND item_nome = :item_nome;';
 	const SQL_SEEK = 'SELECT * FROM TipoItem WHERE item_usuario = :item_usuario;';
@@ -27,8 +29,8 @@ class TipoItemDAO implements ITipoItemDAO{
 		try {
             $stm = Connection::Instance()->get()->prepare(self::SQL_POST);
             $result = $stm->execute(array(
-            			':tipagemitem_item' => $input->getItem()->getId(),
-            			':tipagemitem_tipo' => $input->getTipo()->getId()
+            			':tipoitem_item' => $input->getItem()->getId(),
+            			':tipoitem_tipo' => $input->getTipo()->getId()
             			));
             
             if(!$result)
@@ -46,8 +48,8 @@ class TipoItemDAO implements ITipoItemDAO{
 		try{
 			$stm = Connection::Instance()->get()->prepare(self::SQL_GET);
 			$stm->execute(array(
-						':tipo_id' => $input,
-						':item_id' => $param
+						':tipoitem_item' => $input,
+						':tipoitem_tipo' => $param
 						));
 
 			$Array = array();
@@ -126,11 +128,11 @@ class TipoItemDAO implements ITipoItemDAO{
 		$tipoitem = new TipoItem();
 
 		$tipo = new Tipo();
-		$tipo->setId($resultSet['tipo_id']);
+		$tipo->setId($resultSet['tipoitem_item']);
 		$tipo->setNome($resultSet['tipo_nome']);
 
 		$item = new Item();
-		$item->setId($resultSet['item_id']);
+		$item->setId($resultSet['tipoitem_tipo']);
 		$item->setNome($resultSet['item_nome']);
 
 		if(!is_null($resultSet['item_usuario']))

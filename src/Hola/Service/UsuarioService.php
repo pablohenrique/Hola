@@ -12,15 +12,7 @@ class UsuarioService {
 	private $usuario;
 
 	private function createObject($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret){
-		$this->usuario = new Usuario();
-		$this->usuario->setLogin($login);
-		$this->usuario->setSenha($senha);
-		$this->usuario->setEmail($email);
-		$this->usuario->setCelular($celular);
-		$this->usuario->setOauthId($oauth_uid);
-		$this->usuario->setOauthProvider($oauth_provider);
-		$this->usuario->setTwitterOauthToken($twitter_oauth_token);
-		$this->usuario->setTwitterOauthTokenSecret($twitter_oauth_token_secret);
+		$this->usuario = new Usuario($login, $senha, $email, $celular, $oauth_uid, $oauth_provider, $twitter_oauth_token, $twitter_oauth_token_secret);
 		return $this->usuario;
 	}
 

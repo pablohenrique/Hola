@@ -17,7 +17,7 @@ interface ITipoDAO{
 	 *@param int $input
 	 *@throws Exception
 	 */
-	public function get($input);
+	//public function get($input);
 
 	/**
 	 *Busca todos os objetos no banco de dados
@@ -37,7 +37,7 @@ interface ITipoDAO{
 	 *@param Tipo $input
 	 *@throws Exception
 	 */
-	public function update(Tipo $input);
+	//public function update(Tipo $input);
 
 	/**
 	 *Deleta um objeto no banco de dados
