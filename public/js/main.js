@@ -103,6 +103,10 @@ require_template('tickets','informacao');
                 salvarUsuarioNovo: function(ev) {
                     status = "aguardando";
                     var dadosUsuario = $(ev.currentTarget).serializeObject();
+                    dadosUsuario.oauthUid = "";
+                    dadosUsuario.oauthProvider = "";
+                    dadosUsuario.twitterOauthToken = "";
+                    dadosUsuario.twitterOauthTokenSecret = "";
                     console.log(dadosUsuario);
                     var usuario = new Usuario();
                     usuario.save(dadosUsuario, {
