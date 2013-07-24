@@ -4,16 +4,22 @@ namespace Hola\Service;
 
 class Security{
 	public static function filterCharacters($input){
+		if(is_null($input))
+			return null;
 		preg_match_all("/[a-zA-Z0-9_!@#$^&*.]/", substr($input, 0, 20), $match);
 		return implode('', $match[0]);
 	}
 
 	public static function filterLetters($input){
+		if(is_null($input))
+			return null;
 		preg_match_all("/\w/", substr($input, 0, 20), $match);
 		return implode('', $match[0]);
 	}
 
 	public static function preventXSS($input){
+		if(is_null($input))
+			return null;
 		return htmlspecialchars(strip_tags($input), ENT_QUOTES, 'UTF-8');
 	}
 
