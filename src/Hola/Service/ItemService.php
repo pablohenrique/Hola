@@ -38,7 +38,7 @@ class ItemService {
 	}
 
 	public function delete($input){
-		$this->dao->delete(Security::filterNumbers($input));
+		$this->dao->delete(Security::filterLetters($input));
 	}
 
 }

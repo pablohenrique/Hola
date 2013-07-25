@@ -41,19 +41,20 @@ class TipoResource extends Resource {
      */
     public function criar($id = null) {
         if(!(isset($this->request->data->nome)))
-            return new Response(Response::BADREQUEST);
+            throw new Tonic\MethodNotAllowedException();
 
         try {
             $this->tipoService = new TipoService();
             $this->tipoService->post( $this->request->data->nome );
             
-            $criada = $this->tipoService->search($this->request->data->nome)->getId();
+            $criada = $this->tipoService->search($this->request->data->nome)->getNome();
 
             unset($this->tipoService);
-            return new Response(Response::CREATED, array('id' => $criada));
+            return new Response(Response::CREATED, array('nome' => $criada));
 
         } catch (RADUFU\DAO\Exception $e) {
-            throw new Tonic\Exception($e->getMessage());
+            //throw new Tonic\Exception($e->getMessage());
+            throw new Tonic\Exception("Este tipo ja existe. Tente um outro nome.");
         }
     }
 
@@ -64,14 +65,13 @@ class TipoResource extends Resource {
      * @return Tonic\Response
      */
     public function atualizar($id = null) {
-        if(is_null($id))
+        if(is_null($this->request->data->nome))
             throw new Tonic\MethodNotAllowedException();
         
         try {
             $this->tipoService = new TipoService();
             $this->tipoService->update(
-                    $this->request->data->nome,
-                    $id
+                    $this->request->data->nome
                     );
 
             unset($this->tipoService);
@@ -92,18 +92,19 @@ class TipoResource extends Resource {
      * @return Tonic\Response
      */
     public function remover($id = null) {
-        if(is_null($id))
+        if(is_null($this->request->data->nome))
             throw new Tonic\MethodNotAllowedException();
 
         try {
             $this->tipoService = new TipoService();
-            $this->tipoService->delete($id);
+            $this->tipoService->delete($this->request->data->nome);
 
             unset($this->tipoService);
             return new Response(Response::OK);
 
         } catch (RADUFU\DAO\NotFoundException $e) {
-            throw new Tonic\Exception($e->getMessage());
+            //throw new Tonic\Exception($e->getMessage());
+            throw new Tonic\Exception("Este tipo nao foi encontrado. Ele ja nao foi deletado?");
         }
     }
 

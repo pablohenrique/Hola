@@ -12,6 +12,11 @@ class UsuarioConvidadoResource extends Resource {
 
     private $convidadoService = null;
 
+    private function checkCredentials($evento, $sessionUser){
+        $evento = $convidadoService->getEvento($evento);
+        checkSessionUser::check($sessionUser,$evento->getUsuario()->getLogin());
+    }
+
     /**
      * @method GET
      * @provides application/json
@@ -38,25 +43,24 @@ class UsuarioConvidadoResource extends Resource {
      * @return Tonic\Response
      */
     public function criar($id = null) {
-        if(!(isset($this->request->data->nome)
-            &&isset($this->request->data->tipo)
+        if(!(isset($this->request->data->tipo)
             &&isset($this->request->data->usuario)))
             return new Response(Response::BADREQUEST);
 
         try {
-            checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->usuario);
+            self::checkCredentials($this->request->data->evento, $_SESSION['user']->getLogin());
 
             $this->convidadoService = new ConvidadoService();
             $this->convidadoService->post(
-                    $this->request->data->nome,
                     $this->request->data->sms,
                     $this->request->data->email,
+                    $this->request->data->evento,
+                    $this->request->data->usuario,
                     $this->request->data->twitter,
                     $this->request->data->facebook,
-                    $this->request->data->evento,
-                    $this->request->data->usuario
+                    $this->request->data->status
                     );
-            $criada = $this->convidadoService->search($this->request->data->usuario, $this->request->data->nome, $this->request->data->usuario)[0]->getId();
+            $criada = $this->convidadoService->search($this->request->data->usuario, $this->request->data->evento);
 
             unset($this->convidadoService);
             return new Response(Response::CREATED, array('id' => $criada));
@@ -77,17 +81,17 @@ class UsuarioConvidadoResource extends Resource {
             throw new Tonic\MethodNotAllowedException();
 
         try {
-            checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->usuario);
+            self::checkCredentials($this->request->data->evento, $_SESSION['user']->getLogin());
 
             $this->convidadoService = new ConvidadoService();
             $this->convidadoService->update(
-                    $this->request->data->nome,
                     $this->request->data->sms,
                     $this->request->data->email,
-                    $this->request->data->twitter,
-                    $this->request->data->facebook,
                     $this->request->data->evento,
                     $this->request->data->usuario,
+                    $this->request->data->twitter,
+                    $this->request->data->facebook,
+                    $this->request->data->status,
                     $id
                     );
 
@@ -113,7 +117,7 @@ class UsuarioConvidadoResource extends Resource {
             throw new Tonic\MethodNotAllowedException();
 
         try {
-            checkSessionUser::check($_SESSION['user']->getLogin(),$this->request->data->usuario);
+            self::checkCredentials($this->request->data->evento, $_SESSION['user']->getLogin());
             
             $this->convidadoService = new ConvidadoService();
             $this->convidadoService->delete($id);

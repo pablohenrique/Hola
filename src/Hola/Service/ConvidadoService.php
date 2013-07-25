@@ -21,7 +21,7 @@ class ConvidadoService {
 		$this->usuarioservice = new UsuarioService();
 		$this->eventoservice = new EventoService();
 		$this->convidado = new Convidado($id, $sms, $email, $twitter, $facebook, $status, $this->eventoservice->search($evento), $this->usuarioservice->search($usuario));
-		return $this->convidado
+		return $this->convidado;
 	}
 
 	public function post($sms, $email, $evento, $usuario, $twitter, $facebook, $status, $id = null){
@@ -35,6 +35,16 @@ class ConvidadoService {
 
 	public function getUsuario($input){
 		return $this->dao->seek(Security::filterCharacters($input));
+	}
+
+	public function search($usuario, $evento){
+		$evento = Security::filterNumbers($evento);
+		$usuario = Security::filterCharacters($usuario);
+		$output = self::getEvento($evento);
+		foreach ($output as $value)
+			if($value->getUsuario->getLogin() == $usuario)
+				return $value->getId();
+		return null;
 	}
 
 	public function update($sms, $email, $evento, $usuario, $twitter, $facebook, $status, $id){

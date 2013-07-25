@@ -121,12 +121,12 @@ $BODY$
  * INSERTS
  *
  */
-INSERT INTO usuario VALUES('root','ouid','oprovider','totoken','totsecret','toor','root@root.com','3443211234');
-INSERT INTO usuario VALUES('toor','ouid','oprovider','totoken','totsecret','root','toor@toor.com','3443211235');
 INSERT INTO tipo VALUES('churrasco');
 INSERT INTO tipo VALUES('jantar arabe');
 INSERT INTO tipo VALUES('jantar adams');
-INSERT INTO evento VALUES('Caiolas Bar','Abertura do Bar mais locura do universo!','2013-08-22','15:00','34567123','Na minha casa, uai','Perto das moca de pipiu','Berlandia','MG','1','root');
+INSERT INTO evento VALUES('Caiolas Bar','Abertura do Bar mais locura do universo!','2013-08-22','15:00','34567123','Na minha casa, uai','Perto das moca de pipiu','Berlandia','MG','Tipo','root');
+
+/*
 INSERT INTO item VALUES('Coca-Cola');
 INSERT INTO item VALUES('Guarana Antartica');
 INSERT INTO item VALUES('Mafufo Defumado');
@@ -136,5 +136,4 @@ INSERT INTO tipagemitem VALUES('jantar adams','Coca-Cola');
 INSERT INTO tipagemitem VALUES('jantar adams','Mafufo Defumado');
 INSERT INTO tipagemitem VALUES('churrasco','Guarana Antartica');
 INSERT INTO tipagemitem VALUES('jantar arabe','Mafufo Defumado');
-INSERT INTO convidado VALUES(DEFAULT,1,'root',(SELECT usuario_celular FROM usuario WHERE usuario_login = 'root'),(SELECT usuario_email FROM usuario WHERE usuario_login = 'root'),'','');
-INSERT INTO convidado VALUES(DEFAULT,1,'toor',(SELECT usuario_celular FROM usuario WHERE usuario_login = 'toor'),(SELECT usuario_email FROM usuario WHERE usuario_login = 'toor'),'','');
+*/

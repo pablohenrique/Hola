@@ -25,7 +25,7 @@ class EventoService {
 	}
 
 	public function post($nome, $descricao, $data, $hora, $endereco, $complemento, $cidade, $estado, $cep, $tipo, $status, $usuario, $id = null){
-		$this->dao->post(self::createObject(Security::preventXSS($nome), Security::preventXSS($descricao), Security::preventXSS($data), Security::preventXSS($hora), Security::preventXSS($endereco), Security::preventXSS($complemento), Security::preventXSS($cidade), Security::preventXSS($estado), Security::preventXSS($cep), Security::preventXSS($tipo), Security::filterNumbers($status), Security::filterCharacters($usuario), Security::filterNumbers($id)));
+		$this->dao->post(self::createObject(Security::preventXSS($nome), Security::preventXSS($descricao), Security::preventXSS($data), Security::preventXSS($hora), Security::preventXSS($endereco), Security::preventXSS($complemento), Security::preventXSS($cidade), Security::preventXSS($estado), Security::preventXSS($cep), Security::filterLetters($tipo), Security::filterNumbers($status), Security::filterCharacters($usuario), Security::filterNumbers($id)));
 		unset($this->evento,$this->usuarioservice,$this->tiposervice);
 	}
 
@@ -39,7 +39,7 @@ class EventoService {
 	}
 
 	public function update($nome, $descricao, $data, $hora, $endereco, $complemento, $cidade, $estado, $cep, $tipo, $status, $usuario, $id){
-		$this->dao->update(self::createObject(Security::preventXSS($nome), Security::preventXSS($descricao), Security::preventXSS($data), Security::preventXSS($hora), Security::preventXSS($endereco), Security::preventXSS($complemento), Security::preventXSS($cidade), Security::preventXSS($estado), Security::preventXSS($cep), Security::preventXSS($tipo), Security::filterNumbers($status), Security::filterCharacters($usuario), Security::filterNumbers($id)));
+		$this->dao->update(self::createObject(Security::preventXSS($nome), Security::preventXSS($descricao), Security::preventXSS($data), Security::preventXSS($hora), Security::preventXSS($endereco), Security::preventXSS($complemento), Security::preventXSS($cidade), Security::preventXSS($estado), Security::preventXSS($cep), Security::filterLetters($tipo), Security::filterNumbers($status), Security::filterCharacters($usuario), Security::filterNumbers($id)));
 		unset($this->evento,$this->usuarioservice,$this->tiposervice);
 	}
 
