@@ -1,0 +1,22 @@
+{
+  "name": "Hola",
+  "version": "1.0.0",
+  "description": "Reuniao",
+  "main": "/public/js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pablohenrique/Hola.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "0c3cd87ca0472b4876a8612c66019cf4b2d014cf",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+     "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-watch": "~0.4.4"
+  }
+}
