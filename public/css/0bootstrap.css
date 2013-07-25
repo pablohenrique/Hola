@@ -7,6 +7,18 @@
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
+  body {
+    padding-bottom: 40px;
+    color: #5a5a5a;
+    background: url(../img/slide-03.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/slide-03.jpg', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/slide-03.jpg', sizingMethod='scale')";  
+  }
+  
 
 .clearfix {
   *zoom: 1;

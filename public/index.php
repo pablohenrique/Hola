@@ -25,10 +25,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="stylesheet" type="text/css"href="css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css">
-        <link rel="stylesheet" type="text/css" href="css/carousel.css">
-        <link rel="stylesheet" type="text/css" href="css/liviconpadrao.css">
+        <link rel="stylesheet" type="text/css"href="css/app.min.css">
     </head>
     <body>
         <div class="page">
@@ -49,13 +46,7 @@
 
         
        </script>
-        <script src="js/ajquery-2.0.0.js" type="text/javascript"></script>
-        <script src="js/aunderscore.js" type="text/javascript"></script>
-        <script src="js/backbone.js" type="text/javascript"></script>
-        <script src="js/raphael.js" type="text/javascript"></script>
-        <script src="js/livicons-1.1.js" type="text/javascript"></script>
-        <script src="js/bootstrap.js" type="text/javascript"></script>
-        <script src="js/main.js?random=<?php echo uniqid(); ?>"></script>
+        <script src="js/app.min.js?random=<?php echo uniqid(); ?>"></script>
         <script type="text/javascript">
         </script>
 
