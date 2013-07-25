@@ -49,8 +49,8 @@
 
         
        </script>
-        <script src="js/jquery-2.0.0.js" type="text/javascript"></script>
-        <script src="js/underscore.js" type="text/javascript"></script>
+        <script src="js/ajquery-2.0.0.js" type="text/javascript"></script>
+        <script src="js/aunderscore.js" type="text/javascript"></script>
         <script src="js/backbone.js" type="text/javascript"></script>
         <script src="js/raphael.js" type="text/javascript"></script>
         <script src="js/livicons-1.1.js" type="text/javascript"></script>

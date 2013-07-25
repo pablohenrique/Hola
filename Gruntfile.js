@@ -5,9 +5,9 @@ module.exports = function(grunt) {
      
     // Define our source and build folders
     js_src_path: 'public/js',
-    js_build_path: "js",
+    js_build_path: "public/js",
     css_src_path: "public/css",
-    css_build_path: "css",
+    css_build_path: "public/css",
  
     // Grunt Tasks
     concat: {
